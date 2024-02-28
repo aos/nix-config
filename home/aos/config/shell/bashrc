@@ -1,0 +1,84 @@
+# Used for Home Manager for non-NixOS
+if ! grep --quiet 'ID=nixos' /etc/os-release; then
+  export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels
+fi
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+if [ -f ~/.bash_aliases ]; then
+  . ~/.bash_aliases
+fi
+
+if [ -f ~/.bash_functions ]; then
+  . ~/.bash_functions
+fi
+
+# enable programmable completion features
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# Setup GPG agent for Yubikey and SSH
+export GPG_TTY=$(tty)
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+gpgconf --launch gpg-agent
+
+# Prompt colors
+BRIGHT_BLUE="\[\e[34;1m\]"
+CYAN="\[\e[36m\]"
+GREEN="\[\e[32m\]"
+TEAL="\[\e[96m\]"
+YELLOW="\[\e[33m\]"
+CLEAR="\[\e[0m\]"
+
+# Show git branch
+# [Deprecated] use `__git_ps1` instead
+_show_git_branch () {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+# Show background jobs and if we are in a nix shell
+_show_nix_and_jobs () {
+  local n=""
+  if [[ -n $IN_NIX_SHELL ]]; then
+    n='N';
+  fi
+  if [[ "$1" != 0 ]]; then
+    n+="$1";
+  fi
+  [[ "$n" != "" ]] && echo -e "[${n}]" || echo "";
+}
+
+PS1="\$(_show_nix_and_jobs \j)$GREEN[\u@\h] $CYAN\w$YELLOW\$(_show_git_branch)$CLEAR \$ "
+
+# Some environment variables
+export SYSTEMD_LESS='FRXMK'; # allow journalctl to wrap long lines
+export FZF_DEFAULT_OPTS='--height 30% --multi --marker="+"'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-require-git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+if command -v fzf-share >/dev/null; then
+  source "$(fzf-share)/key-bindings.bash"
+  source "$(fzf-share)/completion.bash"
+fi
+
+# Add goto shortcut
+eval "$(gotors init)"
+# Add direnv
+eval "$(direnv hook bash)"

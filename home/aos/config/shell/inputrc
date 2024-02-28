@@ -1,0 +1,13 @@
+$include /etc/inputrc
+
+# Ignore cases when completing files
+set completion-ignore-case on
+# Show extra info when completing
+set visible-stats on
+set colored-stats on
+# Display matches for ambiguous patterns on first match
+set show-all-if-ambiguous on
+# Do not complete hidden files unless pattern explicity begins with dot
+set match-hidden-files off
+# If more than 200, ask to show them all
+set completion-query-items 200

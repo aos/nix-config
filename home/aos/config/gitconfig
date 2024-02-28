@@ -1,0 +1,38 @@
+[user]
+  name = Aos Dabbagh
+  email = 25783780+aos@users.noreply.github.com
+
+[alias]
+  s = status
+  cm = commit -m
+  cv = commit -v
+  co = checkout
+  d = diff
+  di = diff --no-index
+  ds = diff --staged
+  l = log --stat --abbrev-commit
+  lg = log --graph --date=relative --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ad)%Creset'
+  root = rev-parse --show-toplevel
+  sha = !sh -c 'git rev-parse --short ${1:-HEAD}' --
+  # For saving normal diffs to email or later: 'git patch > changes.patch'
+  patch = !git --no-pager diff --no-color
+  alias = config --get-regexp alias
+
+[status]
+  # display submodule rev change summaries in status
+  submoduleSummary = true
+  # recursively traverse untracked directories to display all contents
+  showUntrackedFiles = all
+
+[color]
+  ui = auto
+[core]
+  editor = nvim
+[diff]
+  tool = nvimdiff
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[pull]
+  ff = only
+[push]
+  default = current

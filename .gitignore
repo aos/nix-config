@@ -1,0 +1,4 @@
+secrets.nix
+result
+.terraform
+*.tfstate

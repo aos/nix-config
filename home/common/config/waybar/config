@@ -1,0 +1,79 @@
+{
+  "position": "top",
+  "layer": "top",
+  "spacing": 4,
+
+  "modules-left": ["hyprland/workspaces", "hyprland/window", "hyprland/submap"],
+  "modules-right": ["tray", "backlight", "bluetooth", "pulseaudio", "network", "battery", "cpu", "memory", "clock"],
+
+  // modules config
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "active-only": false,
+    "all-outputs": true
+  },
+  "hyprland/window": {
+      "max-length": 80
+  },
+  "hyprland/submap": {
+    "format": "[[ {} ]]",
+    "tooltip": false
+  },
+  "tray": {
+    "spacing": 10
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon} {percent}%",
+    "format-icons": ["󰃝 ", "󰃠 "]
+  },
+  "bluetooth": {
+    "format-on": "",
+    "format-disabled": "",
+    "format-connected": "",
+    "tooltip-format": "{status}",
+    "tooltip-format-enumerate-connected": "{device_alias} - {device_address}",
+    "tooltip-format-connected": "{device_enumerate}"
+  },
+  "pulseaudio": {
+    "scroll-step": 1,
+    "format": "{icon} {volume}%",
+    "format-muted": "󰖁 ",
+    "format-icons": {
+        "headphone": "󰋋 ",
+        "headset": "󰋎 ",
+        "default": ["󰕾 "]
+    },
+    "on-click": "pavucontrol"
+  },
+  "battery": {
+    "states": {
+        "critical": 20
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄  {capacity}%",
+    "format-critical": "<span foreground='#B1E3AD'>󰂃 </span> {capacity}%",
+    "format-icons": ["󰁼 ", "󰁽 ", "󰁿 ", "󰂁 ", "󰂂 "],
+    "tooltip-format": "{time}"
+  },
+  "clock": {
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": "{:%a %F %H:%M}"
+  },
+  "network": {
+    // "interface": "wlp2*", // (Optional) To force the use of this interface
+    "format-wifi": "󰖩  {essid}",
+    "format-ethernet": "󰈀 ",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
+    "tooltip-format": "{ifname} via {gwaddr} A",
+    "format-disconnected": ""
+  },
+  "memory": {
+    "format": "  {percentage}%"
+  },
+  "cpu": {
+    "format": "  {usage}%"
+  }
+}
+
+// vim: set ft=jsonc:

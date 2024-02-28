@@ -1,0 +1,12 @@
+# Colorscheme
+include ./colorscheme
+
+# Other
+set font                "monospace 12"
+set selection-clipboard "clipboard"
+
+set guioptions ""
+
+set window-title-basename     true
+set window-title-home-tilde   true
+set window-title-page         true

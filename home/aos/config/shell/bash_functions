@@ -1,0 +1,5 @@
+qr () {
+  qrencode -t ansiutf8 "${1:-/dev/stdin}"
+}
+
+# vim: set ft=sh:

@@ -1,0 +1,77 @@
+@define-color accent #383838;
+@define-color text #f8f8f8;
+@define-color invText #f8f8f8;
+/* text when background is accent */
+@define-color bg #181818;
+
+@import "./base16-default-dark.css";
+
+@define-color accent @base01;
+@define-color text @base07;
+@define-color invText @base07;
+/* text when background is accent */
+@define-color bg @base00;
+
+* {
+  font-family: Ubuntu Nerd Font;
+  font-size: 16px;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: transparent;
+  color: @text;
+  opacity: 1;
+}
+
+#workspaces {
+  background-color: transparent;
+}
+
+#workspaces button {
+  padding: 0 5px;
+  color: @text;
+}
+
+#workspaces button.active {
+  background-color: @accent;
+  color: @invText;
+}
+
+#pulseaudio,
+#cpu,
+#memory,
+#temperature,
+#battery,
+#custom-icon {
+  background-color: transparent;
+  color: @text;
+  padding: 0 3px;
+}
+
+#clock {
+  background-color: transparent;
+  color: @text;
+  margin: 0 3px;
+  padding: 0 3px;
+  padding-left: 8px;
+}
+
+#tray {
+  background-color: transparent;
+  padding-right: 10px;
+}
+
+#window {
+  color: @invText;
+  background-color: @accent;
+  padding-left: 4px;
+}
+
+.modules-left,
+.modules-right {
+  background-color: @bg;
+  padding: 0px 0px 0px 0px;
+}

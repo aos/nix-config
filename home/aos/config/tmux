@@ -1,0 +1,82 @@
+# Remap prefix from 'C-b' to 'C-a'
+unbind C-b
+set -g prefix C-a
+# Pressing C-a again will send the prefix (useful for nested sessions)
+bind-key C-a send-prefix
+
+# Start window numbering at 1
+set -g base-index 1
+
+# split panes using | and -
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+unbind c
+bind c new-window -c "#{pane_current_path}"
+unbind '"'
+unbind %
+
+# Navigate split panes the vim way
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# Enter copy mode using Prefix + [ and start copy using <Space> (q to exit)
+# Execute copy using Enter, Prefix + ] to paste
+if-shell -b '[ "${WAYLAND_DISPLAY+1}" ]' \
+  "set -g copy-command 'wl-copy'" \
+  "set -g copy-command 'xsel -sel clip -i'"
+setw -g mode-keys vi
+# Begin selection in copy mode
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+# Begin selection visual block
+bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+# Yank selection and into system clipboard
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel
+
+unbind-key -T copy-mode-vi H
+unbind-key -T copy-mode-vi L
+bind-key -T copy-mode-vi H send -X start-of-line
+bind-key -T copy-mode-vi L send -X end-of-line
+# Color highlighting in copy-mode
+setw -g mode-style "fg=black,bg=colour178"
+
+# Allow 'foot' terminal to get true-color
+set -ga terminal-overrides ",foot:Tc"
+set -ga terminal-overrides ',xterm-256color:Tc'
+# Set default terminal mode to 256 color
+set -g default-terminal "tmux-256color"
+
+# neovim in tmux causes delay when pressing ESC, let's reduce it
+set -g escape-time 0 # ms
+set -g focus-events on
+
+# Create a new window and prompt for name
+bind C command-prompt "new-window -n '%%'"
+# Don't rename windows automatically
+set -g allow-rename off
+# Re-number windows automatically
+set -g renumber-windows on
+
+# Increase the history limit scrollback buffer
+set -g history-limit 5000
+
+## Status bar
+set -g status-style bg=default
+set -g status-style fg=default
+set -g status-left "[#S] "
+set -g status-right '#{?client_prefix,#[bg=blue]#[fg=bold]^A,}#[default] (#h) %a %b %d ┆ %I:%M %p'
+
+## Window names
+setw -g window-status-format " #I| #W#F"
+setw -g window-status-current-format " #I| #W#F"
+setw -g window-status-current-style "dim"
+
+# Active window title style
+setw -g window-status-style "bg=default"
+setw -g window-status-current-style "fg=colour202, bg=default"
+setw -g window-status-activity-style "bright"
+
+## Panes
+set -g pane-border-style "fg=black"
+set -g pane-active-border-style "fg=colour39"
