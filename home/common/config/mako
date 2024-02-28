@@ -1,9 +1,17 @@
-# Colors
-
 background-color=#24273a
 text-color=#cad3f5
 border-color=#8aadf4
 progress-color=over #363a4f
+
+padding=10
+border-radius=5
+border-size=2
+
+default-timeout=8000
+group-by=summary
+
+[grouped]
+format=<b>%s</b>\n%b
 
 [urgency=high]
 border-color=#f5a97f
