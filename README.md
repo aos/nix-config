@@ -38,7 +38,3 @@ home-manager switch --flakes .#aos@tower
 nix develop
 sops secrets.enc.yaml
 ```
-
-### TODO
-
-- [ ] Alternate package sets based on host
