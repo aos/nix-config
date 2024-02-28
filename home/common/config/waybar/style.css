@@ -1,15 +1,7 @@
-@define-color accent #383838;
-@define-color text #f8f8f8;
-@define-color invText #f8f8f8;
-/* text when background is accent */
-@define-color bg #181818;
-
 @import "./base16-default-dark.css";
 
 @define-color accent @base01;
 @define-color text @base07;
-@define-color invText @base07;
-/* text when background is accent */
 @define-color bg @base00;
 
 * {
@@ -25,8 +17,12 @@ window#waybar {
   color: @text;
 }
 
-#workspaces {
-  background-color: transparent;
+#tray {
+  padding-right: 10px;
+}
+
+#window {
+  padding-left: 4px;
 }
 
 #workspaces button {
@@ -35,7 +31,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background-color: @invText;
+  background-color: @text;
   color: @accent;
 }
 
@@ -45,32 +41,22 @@ window#waybar {
 #temperature,
 #battery,
 #custom-icon {
-  background-color: transparent;
   color: @text;
   padding: 0 3px;
 }
 
+#battery.critical {
+  color: @base08;
+}
+
 #clock {
-  background-color: transparent;
   color: @text;
   margin: 0 3px;
   padding: 0 3px;
   padding-left: 8px;
 }
 
-#tray {
-  background-color: transparent;
-  padding-right: 10px;
-}
-
-#window {
-  color: @invText;
-  background-color: @accent;
-  padding-left: 4px;
-}
-
 .modules-left,
 .modules-right {
-  background-color: @bg;
   padding: 0px 0px 0px 0px;
 }

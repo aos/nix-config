@@ -48,11 +48,11 @@
   },
   "battery": {
     "states": {
-        "critical": 20
+        "critical": 15
     },
     "format": "{icon} {capacity}%",
-    "format-charging": "󰂄  {capacity}%",
-    "format-critical": "<span foreground='#B1E3AD'>󰂃 </span> {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-critical": "󰂃 {capacity}%",
     "format-icons": ["󰁼 ", "󰁽 ", "󰁿 ", "󰂁 ", "󰂂 "],
     "tooltip-format": "{time}"
   },
