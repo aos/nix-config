@@ -29,7 +29,8 @@
   },
   "bluetooth": {
     "format-on": "",
-    "format-disabled": "",
+    "format-off": "󰂲",
+    "format-disabled": "󰂲",
     "format-connected": "",
     "tooltip-format": "{status}",
     "tooltip-format-enumerate-connected": "{device_alias} - {device_address}",
@@ -50,15 +51,20 @@
     "states": {
         "critical": 15
     },
-    "format": "{icon} {capacity}%",
+    "format": "{icon}{capacity}%",
     "format-charging": "󰂄 {capacity}%",
     "format-critical": "󰂃 {capacity}%",
     "format-icons": ["󰁼 ", "󰁽 ", "󰁿 ", "󰂁 ", "󰂂 "],
     "tooltip-format": "{time}"
   },
   "clock": {
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format": "{:%a %F %H:%M}"
+    "tooltip-format": "<tt><big>{calendar}</big></tt>",
+    "format": "{:%a %F %H:%M}",
+    "calendar": {
+      "format": {
+        "today": "<span color='#dc9656'><b><u>{}</u></b></span>"
+      }
+    }
   },
   "network": {
     // "interface": "wlp2*", // (Optional) To force the use of this interface

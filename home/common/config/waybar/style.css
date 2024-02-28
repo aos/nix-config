@@ -2,7 +2,6 @@
 
 @define-color accent @base01;
 @define-color text @base07;
-@define-color bg @base00;
 
 * {
   font-family: Ubuntu Nerd Font;
@@ -33,6 +32,7 @@ window#waybar {
 #workspaces button.active {
   background-color: @text;
   color: @accent;
+  border-radius: 3px;
 }
 
 #pulseaudio,
