@@ -23,7 +23,6 @@
 window#waybar {
   background-color: transparent;
   color: @text;
-  opacity: 1;
 }
 
 #workspaces {
@@ -36,8 +35,8 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background-color: @accent;
-  color: @invText;
+  background-color: @invText;
+  color: @accent;
 }
 
 #pulseaudio,

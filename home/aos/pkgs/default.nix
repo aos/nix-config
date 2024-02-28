@@ -42,5 +42,6 @@
     mypaint
     nb
     zathura
+    yazi
   ];
 }
