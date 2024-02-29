@@ -24,7 +24,7 @@
   },
   "backlight": {
     "device": "intel_backlight",
-    "format": "{icon} {percent}%",
+    "format": "{icon}{percent}% ",
     "format-icons": ["󰃝 ", "󰃠 "]
   },
   "bluetooth": {
@@ -38,7 +38,7 @@
   },
   "pulseaudio": {
     "scroll-step": 1,
-    "format": "{icon} {volume}%",
+    "format": "{icon}{volume}%",
     "format-muted": "󰖁 ",
     "format-icons": {
         "headphone": "󰋋 ",
@@ -68,17 +68,17 @@
   },
   "network": {
     // "interface": "wlp2*", // (Optional) To force the use of this interface
-    "format-wifi": "󰖩  {essid}",
+    "format-wifi": "󰖩 {essid} ",
     "format-ethernet": "󰈀 ",
     "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
     "tooltip-format": "{ifname} via {gwaddr} A",
     "format-disconnected": ""
   },
   "memory": {
-    "format": "  {percentage}%"
+    "format": " {percentage}%"
   },
   "cpu": {
-    "format": "  {usage}%"
+    "format": " {usage}%"
   }
 }
 

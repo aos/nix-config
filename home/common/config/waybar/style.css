@@ -4,8 +4,8 @@
 @define-color text @base07;
 
 * {
-  font-family: Ubuntu Nerd Font;
-  font-size: 16px;
+  font-family: Ubuntu Nerd Font Propo;
+  font-size: 18px;
   border: none;
   border-radius: 0;
   min-height: 0;
@@ -42,7 +42,7 @@ window#waybar {
 #battery,
 #custom-icon {
   color: @text;
-  padding: 0 3px;
+  padding: 0 5px;
 }
 
 #battery.critical {
