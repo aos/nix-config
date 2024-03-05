@@ -62,7 +62,8 @@
     "format": "{:%a %F %H:%M}",
     "calendar": {
       "format": {
-        "today": "<span color='#dc9656'><b><u>{}</u></b></span>"
+        // Pango markup
+        "today": "<span background='#f8f8f8' color='#282828'><b>{}</b></span>"
       }
     }
   },
