@@ -20,12 +20,7 @@
   networking.hostName = "tower";
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "America/New_York";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -37,17 +32,6 @@
   services.xserver.xkb.options = "ctrl:nocaps";
 
   # services.printing.enable = true;
-
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  hardware.bluetooth.settings = {
-    General = {
-      Enable = "Source,Sink,Media,Socket";
-    };
-  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput = {

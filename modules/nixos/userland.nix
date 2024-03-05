@@ -13,12 +13,9 @@
     waybar
     libnotify
 
-    # Wallpaper daemon
-    # swww
-    # notification daemon
-    mako
-    # Launcher
-    fuzzel
+    # swww      # Wallpaper daemon
+    mako        # notification daemon
+    fuzzel      # Launcher
 
     swaylock
     swayidle
@@ -33,17 +30,17 @@
     # busctl --user -- set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 4000
     # busctl --user -- set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 6500
 
-    grim # screenshot
-    slurp # select region -> grim "$(slurp)" - | wl-copy
+    grim        # screenshot
+    slurp       # select region -> grim "$(slurp)" - | wl-copy
 
-    evince # document viewer
-    oculante # image viewer
-    qalculate-gtk
+    evince        # document viewer
+    oculante      # image viewer
+    qalculate-gtk # calculator
 
     qt5.qtwayland
     qt6.qtwayland
     drm_info
-    wlay # graphical output management
+    wlay          # graphical output management (maybe replace with kanshi?)
 
     firefox
   ];
@@ -68,6 +65,8 @@
 
   sound.enable = true;
   security.rtkit.enable = true;
+
+  hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -78,7 +77,16 @@
       enable = true;
     };
   };
-  hardware.pulseaudio.enable = false;
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
+  };
 
   services.greetd = {
     enable = true;
