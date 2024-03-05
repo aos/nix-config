@@ -7,11 +7,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1708759662,
-        "narHash": "sha256-0iHlfI2Bn6Mf2NwQ2wwTPLfgRriFeN6Fl0xgGYJapxU=",
+        "lastModified": 1709612183,
+        "narHash": "sha256-qRwAjqrJl15IVgL7wh91aBKKKl4jpWzMn9A49pIQijw=",
         "owner": "aos",
         "repo": "atools",
-        "rev": "2568b170c14f3aebe922e658005bf775319d3df1",
+        "rev": "c7431e0b0fb0cd4cf9bacc2248e28654f91b467b",
         "type": "github"
       },
       "original": {
