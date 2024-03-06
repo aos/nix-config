@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.35.0";
+    hyprland.url = "github:hyprwm/Hyprland/v0.36.0";
     gotors.url = "github:aos/gotors";
     atools.url = "github:aos/atools";
   };

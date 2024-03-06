@@ -25,6 +25,7 @@
 	      content = {
 		type = "luks";
 		name = "cryptkey";
+		mountpoint = "/dev/mapper/cryptkey";
 		extraFormatArgs = [ "--type luks1" ];
 		postCreateHook = ''
 		  dd if=/dev/urandom of=/dev/mapper/cryptkey count=32 bs=1024 status=progress
