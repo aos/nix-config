@@ -49,6 +49,10 @@ window#waybar {
   color: @base08;
 }
 
+#battery.charging.critical {
+  color: @text;
+}
+
 #clock {
   color: @text;
   margin: 0 3px;

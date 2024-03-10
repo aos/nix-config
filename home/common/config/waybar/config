@@ -55,7 +55,7 @@
     "format-charging": "󰂄 {capacity}%",
     "format-critical": "󰂃 {capacity}%",
     "format-icons": ["󰁼 ", "󰁽 ", "󰁿 ", "󰂁 ", "󰂂 "],
-    "tooltip-format": "{time}"
+    "tooltip-format": "{time}\n{power}W"
   },
   "clock": {
     "tooltip-format": "<tt><big>{calendar}</big></tt>",
