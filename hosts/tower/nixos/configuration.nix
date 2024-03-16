@@ -24,7 +24,8 @@
   networking.hostName = "tower";
   networking.networkmanager.enable = true;
 
-  time.timeZone = "America/New_York";
+  # time.timeZone = "America/New_York";
+  services.automatic-timezoned.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;

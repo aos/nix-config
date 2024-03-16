@@ -32,6 +32,7 @@
 
     grim        # screenshot
     slurp       # select region -> grim "$(slurp)" - | wl-copy
+    lf          # terminal file manager
 
     evince        # document viewer
     oculante      # image viewer
