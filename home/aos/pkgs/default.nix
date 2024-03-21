@@ -43,5 +43,6 @@
     nb
     zathura
     yazi
+    libreoffice
   ];
 }

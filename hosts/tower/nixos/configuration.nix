@@ -51,7 +51,6 @@
     packages = with pkgs; [
       vim
       firefox
-      thunderbird
       git
       home-manager
     ];
