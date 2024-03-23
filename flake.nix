@@ -11,12 +11,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    nix-gaming = {
+      url = "github:fufexan/nix-gaming";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     hyprland.url = "github:hyprwm/Hyprland/v0.37.1";
     gotors.url = "github:aos/gotors";
     atools.url = "github:aos/atools";
@@ -38,6 +40,12 @@
       };
     in {
     nixosConfigurations = {
+      biggie = nixpkgs.lib.nixosSystem {
+	modules = [
+	  ./hosts/biggie
+	];
+	specialArgs = {inherit inputs;};
+      };
       mei = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
