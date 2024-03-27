@@ -67,6 +67,7 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
+    # pinentryPackage = pkgs.pinetry-curses;
   };
 
   # Enable the OpenSSH daemon.
