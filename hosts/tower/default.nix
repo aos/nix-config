@@ -12,6 +12,8 @@
     ../../modules/nixos/system.nix
     ../../modules/nixos/virt.nix
     ../../modules/nixos/nfs.nix
+
+    ../../modules/nixos/steam.nix
   ];
 
 }
