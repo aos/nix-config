@@ -18,6 +18,7 @@
   home.packages = with pkgs; [
     spotify
     webcord
+    zoom-us
   ];
 
   programs.direnv.enable = true;
