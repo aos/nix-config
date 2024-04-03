@@ -33,9 +33,10 @@
     grim        # screenshot
     slurp       # select region -> grim "$(slurp)" - | wl-copy
 
-    evince        # document viewer
-    oculante      # image viewer
-    qalculate-gtk # calculator
+    evince          # document viewer
+    oculante        # image viewer
+    qalculate-gtk   # calculator
+    gnome.nautilus  # file viewer
 
     qt5.qtwayland
     qt6.qtwayland
