@@ -1,40 +1,38 @@
-set notification-error-bg       "#32302f" # bg
-set notification-error-fg       "#fb4934" # bright:red
-set notification-warning-bg     "#32302f" # bg
-set notification-warning-fg     "#fabd2f" # bright:yellow
-set notification-bg             "#32302f" # bg
-set notification-fg             "#b8bb26" # bright:green
+set default-fg                rgba(205,214,244,1)
+set default-bg 		      rgba(30,30,46,1)
 
-set completion-bg               "#504945" # bg2
-set completion-fg               "#ebdbb2" # fg
-set completion-group-bg         "#3c3836" # bg1
-set completion-group-fg         "#928374" # gray
-set completion-highlight-bg     "#83a598" # bright:blue
-set completion-highlight-fg     "#504945" # bg2
+set completion-bg	      rgba(49,50,68,1)
+set completion-fg	      rgba(205,214,244,1)
+set completion-highlight-bg   rgba(87,82,104,1)
+set completion-highlight-fg   rgba(205,214,244,1)
+set completion-group-bg	      rgba(49,50,68,1)
+set completion-group-fg	      rgba(137,180,250,1)
 
-# Define the color in index mode
-set index-bg                    "#504945" # bg2
-set index-fg                    "#ebdbb2" # fg
-set index-active-bg             "#83a598" # bright:blue
-set index-active-fg             "#504945" # bg2
+set statusbar-fg	      rgba(205,214,244,1)
+set statusbar-bg	      rgba(49,50,68,1)
 
-set inputbar-bg                 "#32302f" # bg
-set inputbar-fg                 "#ebdbb2" # fg
+set notification-bg	      rgba(49,50,68,1)
+set notification-fg	      rgba(205,214,244,1)
+set notification-error-bg     rgba(49,50,68,1)
+set notification-error-fg     rgba(243,139,168,1)
+set notification-warning-bg   rgba(49,50,68,1)
+set notification-warning-fg   rgba(250,227,176,1)
 
-set statusbar-bg                "#504945" # bg2
-set statusbar-fg                "#ebdbb2" # fg
+set inputbar-fg		      rgba(205,214,244,1)
+set inputbar-bg 	      rgba(49,50,68,1)
 
-set highlight-color             "#fabd2f" # bright:yellow
-set highlight-active-color      "#fe8019" # bright:orange
+set recolor                   "true"
+set recolor-lightcolor	      rgba(30,30,46,1)
+set recolor-darkcolor	      rgba(205,214,244,1)
 
-set default-bg                  "#32302f" # bg
-set default-fg                  "#ebdbb2" # fg
-set render-loading              true
-set render-loading-bg           "#32302f" # bg
-set render-loading-fg           "#ebdbb2" # fg
+set index-fg		      rgba(205,214,244,1)
+set index-bg		      rgba(30,30,46,1)
+set index-active-fg	      rgba(205,214,244,1)
+set index-active-bg	      rgba(49,50,68,1)
 
-# Recolor book content's color
-set recolor-lightcolor          "#32302f" # bg
-set recolor-darkcolor           "#ebdbb2" # fg
-set recolor                     "true"
-# set recolor-keephue             true      # keep original color
+set render-loading-bg	      rgba(30,30,46,1)
+set render-loading-fg	      rgba(205,214,244,1)
+
+set highlight-color	      rgba(87,82,104,0.5)
+set highlight-fg              rgba(245,194,231,0.5)
+set highlight-active-color    rgba(245,194,231,0.5)
