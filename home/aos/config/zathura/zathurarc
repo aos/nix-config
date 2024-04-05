@@ -10,3 +10,5 @@ set guioptions ""
 set window-title-basename     true
 set window-title-home-tilde   true
 set window-title-page         true
+
+set adjust-open               width
