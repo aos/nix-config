@@ -11,7 +11,7 @@
       automatic = true;
       dates = "weekly";
       # Keep the last 5 generations
-      options = "--delete-older-than 7d";
+      options = "--delete-older-than +5";
     };
 
     # Set up registry from inputs
