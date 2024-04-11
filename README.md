@@ -38,3 +38,9 @@ home-manager switch --flakes .#aos@tower
 nix develop
 sops secrets.enc.yaml
 ```
+
+### TUI view
+
+```
+nix run github:bluskript/nix-inspect -- -p .
+```
