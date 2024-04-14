@@ -19,7 +19,7 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland/v0.37.1";
+    hyprland.url = "github:hyprwm/Hyprland/v0.39.0";
     gotors.url = "github:aos/gotors";
     atools.url = "github:aos/atools";
   };
