@@ -70,6 +70,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'habamax/vim-alchemist' " Dark background
   Plug 'aos/vim-aeon' " Light background
   Plug 'aos/vim-ascetic' " monochrome
+  " Plug '~/src/vim-ascetic'
 call plug#end()
 
 if (has("termguicolors"))
@@ -130,11 +131,11 @@ vim.api.nvim_create_user_command(
   function()
     if(vim.o.background == 'dark')
     then
+      vim.g.ascetic_transparent_bg = 0
       vim.o.background = 'light'
-      vim.api.nvim_command('colorscheme aeon')
     else
+      vim.g.ascetic_transparent_bg = 1
       vim.o.background = 'dark'
-      vim.api.nvim_command('colorscheme alchemist')
     end
   end,
   {bang = true, desc = 'Toggle dark/light theme'}
