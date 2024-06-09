@@ -56,7 +56,8 @@ endif
 
 call plug#begin(stdpath('data') . '/plugged')
   Plug 'neovim/nvim-lspconfig'
-  Plug 'williamboman/nvim-lsp-installer'
+  Plug 'williamboman/mason.nvim'
+  Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'nvim-treesitter/nvim-treesitter'
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'nvim-lua/plenary.nvim'
@@ -67,8 +68,8 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-sleuth' " Set buffer options
 
-  Plug 'habamax/vim-alchemist' " Dark background
-  Plug 'aos/vim-aeon' " Light background
+  " Plug 'habamax/vim-alchemist' " Dark background
+  " Plug 'aos/vim-aeon' " Light background
   Plug 'aos/vim-ascetic' " monochrome
   " Plug '~/src/vim-ascetic'
 call plug#end()
@@ -335,14 +336,14 @@ local lsp_servers = {
   ['rust_analyzer'] = rust_analyzer_config,
   ['terraformls'] = {},
   ['gopls'] = {},
+  ['elixirls'] = {
+    cmd = { 'elixir-ls' }
+  },
 }
 
-require('nvim-lsp-installer').setup({
-  -- ensure_installed = vim.tbl_keys(lsp_servers),
-  -- automatically detect which servers to install
-  -- (based on which servers are set up via lspconfig)
-  automatic_installation = false,
-})
+require('mason').setup()
+require('mason-lspconfig').setup()
+
 local nvim_lsp = require('lspconfig')
 for server, config in pairs(lsp_servers) do
   nvim_lsp[server].setup(vim.tbl_deep_extend("force", lsp_defaults, config))
