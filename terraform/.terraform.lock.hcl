@@ -5,14 +5,22 @@ provider "registry.terraform.io/carlpett/sops" {
   version     = "1.0.0"
   constraints = "~> 1.0"
   hashes = [
-    "h1:w8uH6shBV6tRgFtRXcY0Nl+EESX93tmTfeN2/0WF2+c=",
+    "h1:bA2Lhft8IMeSFs/g+6sYaqpIcqmgo+wcoJqrgI6bIsw=",
   ]
 }
 
 provider "registry.terraform.io/digitalocean/digitalocean" {
-  version     = "2.32.0"
+  version     = "2.36.0"
   constraints = "~> 2.0"
   hashes = [
-    "h1:bOyfIrM81DsGbCoEEMNbcnGW5UYssTdxnqIY4gU+a9I=",
+    "h1:cbE2As2hObAKKuG1//P3rzQWqoGFaxPqSiQXumlQgns=",
+  ]
+}
+
+provider "registry.terraform.io/hetznercloud/hcloud" {
+  version     = "1.45.0"
+  constraints = "~> 1.45"
+  hashes = [
+    "h1:iJ1O0+PpvssMAQYTYHseEgGQg7dxmi9HMnEtEHkKjEA=",
   ]
 }

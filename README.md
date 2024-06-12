@@ -44,3 +44,9 @@ sops secrets.enc.yaml
 ```
 nix run github:bluskript/nix-inspect -- -p .
 ```
+
+### Terraform
+
+```
+nix develop .#terraform
+```
