@@ -20,6 +20,7 @@
     curl
     tree
     htop
+    age
 
     # Infra tools
     ansible
