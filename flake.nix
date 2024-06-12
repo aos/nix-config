@@ -131,11 +131,17 @@
     devShells."${system}" = {
       default = with (pkgsForSystem "x86_64-linux"); mkShell {
         buildInputs = [
-          sops
           deploy-rs.packages."${system}".deploy-rs
+          nixos-anywhere
+          sops
+          terraform-ls
+          (terraform.withPlugins (p: [
+            p.hcloud
+            p.digitalocean
+            p.sops
+          ]))
         ];
       };
-      terraform = import ./terraform/terraform.nix { pkgs = (pkgsForSystem "x86_64-linux"); };
     };
 
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
