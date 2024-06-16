@@ -35,7 +35,7 @@
     slurp       # select region -> grim "$(slurp)" - | wl-copy
 
     evince          # document viewer
-    oculante        # image viewer
+    imv             # image viewer
     qalculate-gtk   # calculator
     gnome.nautilus  # file viewer
 

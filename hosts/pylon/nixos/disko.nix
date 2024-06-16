@@ -1,30 +1,49 @@
-{ diskName }:
+{ lib, ... }:
 {
-  disk = {
-    vda = {
-      device = diskName;
-      type = "disk";
-      content = {
-        type = "gpt";
-          partitions = {
-            ESP = {
-              type = "EF00";
-              size = "500M";
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
+  disko.devices = {
+    disk = {
+      disk1 = {
+        device = lib.mkDefault "/dev/sda";
+        type = "disk";
+        content = {
+          type = "gpt";
+            partitions = {
+              ESP = {
+                type = "EF00";
+                size = "500M";
+                content = {
+                  type = "filesystem";
+                  format = "vfat";
+                  mountpoint = "/boot";
+                };
               };
-            };
-            root = {
-              size = "100%";
-              content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/";
+              root = {
+                size = "100%";
+                content = {
+                  type = "lvm_pv";
+                  vg = "pool";
+                };
               };
-            };
-         };
+           };
+        };
+      };
+    };
+    lvm_vg = {
+      pool = {
+        type = "lvm_vg";
+        lvs = {
+          root = {
+            size = "100%FREE";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/";
+              mountOptions = [
+                "defaults"
+              ];
+            };
+          };
+        };
       };
     };
   };

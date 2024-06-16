@@ -1,14 +1,11 @@
-{ config, pkgs, lib, ... }:
+{ modulesPath, config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
-  disko.devices = import ./disko.nix {
-    diskName = "/dev/vda";
-  };
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    (modulesPath + "/profiles/qemu-guest.nix")
+    ./disko.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -21,6 +18,7 @@
     packages = with pkgs; [
       curl
       vim
+      gitMinimal
     ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINFbiIMHZsQkz+LylrrR2L2MvYUilTS5ixlY5ry0/FLe turret"
