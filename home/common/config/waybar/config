@@ -3,17 +3,40 @@
   "layer": "top",
   "spacing": 4,
 
-  "modules-left": ["hyprland/workspaces", "hyprland/window", "hyprland/submap"],
-  "modules-right": ["tray", "backlight", "bluetooth", "pulseaudio", "network", "battery", "cpu", "memory", "clock"],
+  "modules-left": [
+    "hyprland/workspaces",
+    "custom/separator",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "hyprland/submap"
+  ],
+  "modules-right": [
+    "tray",
+    "custom/separator",
+    "backlight",
+    "pulseaudio",
+    "bluetooth",
+    "network",
+    "battery",
+    "cpu",
+    "memory",
+    "custom/separator",
+    "clock"
+  ],
 
   // modules config
+  "custom/separator": {
+    "exec": "echo \"|\"",
+    "format": "{}"
+  },
   "hyprland/workspaces": {
     "on-click": "activate",
     "active-only": false,
     "all-outputs": true
   },
   "hyprland/window": {
-      "max-length": 80
+    "max-length": 80
   },
   "hyprland/submap": {
     "format": "[[ {} ]]",
@@ -28,10 +51,10 @@
     "format-icons": ["󰃝 ", "󰃠 "]
   },
   "bluetooth": {
-    "format-on": "",
-    "format-off": "󰂲",
-    "format-disabled": "󰂲",
-    "format-connected": "",
+    "format-on": " ",
+    "format-off": "󰂲 ",
+    "format-disabled": "󰂲 ",
+    "format-connected": " ",
     "tooltip-format": "{status}",
     "tooltip-format-enumerate-connected": "{device_alias} - {device_address}",
     "tooltip-format-connected": "{device_enumerate}"
@@ -41,15 +64,15 @@
     "format": "{icon}{volume}%",
     "format-muted": "󰖁 ",
     "format-icons": {
-        "headphone": "󰋋 ",
-        "headset": "󰋎 ",
-        "default": ["󰕾 "]
+      "headphone": "󰋋 ",
+      "headset": "󰋎 ",
+      "default": ["󰕾 "]
     },
     "on-click": "pavucontrol"
   },
   "battery": {
     "states": {
-        "critical": 15
+      "critical": 15
     },
     "format": "{icon}{capacity}%",
     "format-charging": "󰂄 {capacity}%",

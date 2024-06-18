@@ -17,11 +17,11 @@ window#waybar {
 }
 
 #tray {
-  padding-right: 10px;
+  padding: 2px;
 }
 
 #window {
-  padding-left: 4px;
+  padding: 4px;
 }
 
 #workspaces button {
@@ -36,6 +36,7 @@ window#waybar {
 }
 
 #pulseaudio,
+#bluetooth,
 #cpu,
 #memory,
 #temperature,
@@ -57,7 +58,6 @@ window#waybar {
   color: @text;
   margin: 0 3px;
   padding: 0 3px;
-  padding-left: 8px;
 }
 
 .modules-left,
