@@ -13,6 +13,7 @@
     ../../modules/nixos/virt.nix
     ../../modules/nixos/nfs.nix
     ../../modules/nixos/steam.nix
+    ../../modules/nixos/tablet.nix
   ];
 
 }
