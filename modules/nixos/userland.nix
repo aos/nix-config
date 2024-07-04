@@ -33,6 +33,7 @@
 
     grim        # screenshot
     slurp       # select region -> grim "$(slurp)" - | wl-copy
+    swappy      # grim -g "$(slurp)" - | swappy -f -
 
     evince          # document viewer
     imv             # image viewer
