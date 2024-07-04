@@ -4,7 +4,7 @@
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = false;
+    dedicatedServer.openFirewall = true;
     gamescopeSession.enable = true;
 
     extraCompatPackages = [

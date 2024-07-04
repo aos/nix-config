@@ -33,11 +33,10 @@
 
   services = {
     desktopManager.plasma6.enable = true;
+    displayManager.sddm.enable = true;
 
     xserver = {
       enable = true;
-      displayManager.sddm.enable = true;
-
       xkb = {
 	layout = "us";
 	variant = "";
@@ -88,6 +87,9 @@
   };
 
   services.openssh.enable = true;
+
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
