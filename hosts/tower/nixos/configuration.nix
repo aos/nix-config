@@ -5,11 +5,11 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./disko-luks-btrfs.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./disko-luks-btrfs.nix
+  ];
 
   hardware.enableAllFirmware = true;
 
@@ -47,7 +47,11 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.aos = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "storage" "lp" ];
+    extraGroups = [
+      "wheel"
+      "storage"
+      "lp"
+    ];
     packages = with pkgs; [
       vim
       firefox

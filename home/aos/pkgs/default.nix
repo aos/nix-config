@@ -1,9 +1,12 @@
-{ pkgs, inputs, home, ... }:
+{
+  pkgs,
+  inputs,
+  home,
+  ...
+}:
 
 {
-  imports = [
-    ./python.nix
-  ];
+  imports = [ ./python.nix ];
 
   # Packages to install
   home.packages = with pkgs; [
@@ -21,6 +24,7 @@
     tree
     htop
     age
+    delta
 
     # Infra tools
     ansible

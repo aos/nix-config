@@ -1,10 +1,16 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
 
 let
   cfg = config.aos.fish;
-in {
+in
+{
   options.aos.fish.enable = mkEnableOption "fish config";
 
   config = mkIf cfg.enable {

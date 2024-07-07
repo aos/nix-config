@@ -6,23 +6,26 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, nixos-generators, ... }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixos-generators,
+      ...
+    }:
     let
       forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" ];
-    in {
+    in
+    {
       packages = forAllSystems (system: {
         iso = nixos-generators.nixosGenerate {
           inherit system;
 
-          modules = [
-            ./configuration.nix
-          ];
+          modules = [ ./configuration.nix ];
 
           customFormats = {
             install-iso-minimal = {
-              imports = [
-                "${toString nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-              ];
+              imports = [ "${toString nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" ];
               isoImage.squashfsCompression = "zstd -Xcompression-level 6";
               formatAttr = "isoImage";
             };
@@ -32,9 +35,7 @@
         do-iso = nixos-generators.nixosGenerate {
           inherit system;
 
-          modules = [
-            ./configuration.nix
-          ];
+          modules = [ ./configuration.nix ];
 
           format = "do";
         };

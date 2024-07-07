@@ -10,15 +10,16 @@
         variant = "macchiato";
         size = "compact";
         accents = [ "blue" ];
-        tweaks = [ "rimless" "black" ];
+        tweaks = [
+          "rimless"
+          "black"
+        ];
       };
     };
 
     iconTheme = {
       name = "Papirus-Catppuccin";
-      package = pkgs.catppuccin-papirus-folders.override {
-        flavor = "macchiato";
-      };
+      package = pkgs.catppuccin-papirus-folders.override { flavor = "macchiato"; };
     };
   };
 

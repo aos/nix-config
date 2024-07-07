@@ -5,11 +5,11 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./disko-config.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./disko-config.nix
+  ];
 
   hardware.enableAllFirmware = true;
 
@@ -38,11 +38,9 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = false;
   services.xserver.desktopManager.gnome.enable = false;
-
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
@@ -112,4 +110,3 @@
   system.stateVersion = "22.05"; # Did you read the comment?
 
 }
-

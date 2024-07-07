@@ -1,4 +1,5 @@
-{ disks, ... }: {
+{ disks, ... }:
+{
   disk = {
     v = {
       type = "disk";
@@ -22,7 +23,7 @@
               type = "luks";
               name = "cryptkey";
               askPassword = true;
-              extraFormatArgs = ["--type luks1"];
+              extraFormatArgs = [ "--type luks1" ];
               content = {
                 type = "filesystem";
                 format = "ext4";
@@ -35,7 +36,7 @@
             content = {
               type = "luks";
               name = "cryptswap";
-              extraFormatArgs = ["--type luks1"];
+              extraFormatArgs = [ "--type luks1" ];
               settings = {
                 keyFile = "/dev/mapper/cryptkey";
                 keyFileSize = 8192;
@@ -52,7 +53,7 @@
               type = "luks";
               name = "cryptroot";
               askPassword = true;
-              extraOpenArgs = ["--allow-discards"];
+              extraOpenArgs = [ "--allow-discards" ];
               settings = {
                 keyFile = "/dev/mapper/cryptkey";
                 keyFileSize = 8192;

@@ -24,126 +24,134 @@
     atools.url = "github:aos/atools";
   };
 
-  outputs = { self, nixpkgs, home-manager, deploy-rs, ... } @ inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      deploy-rs,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
-      pkgsForSystem = system: import nixpkgs {
-        inherit system;
-        # overlays = [ inputs.gotors.overlays.default ];
-        config.allowUnfree = true;
-      };
-      mkHomeConfiguration = { system, modules }: home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgsForSystem system;
-        extraSpecialArgs = { inherit inputs outputs; };
-        inherit modules;
-      };
-    in {
-    nixosConfigurations = {
-      biggie = nixpkgs.lib.nixosSystem {
-	modules = [
-	  ./hosts/biggie
-	];
-	specialArgs = {inherit inputs;};
-      };
-      mei = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/mei
-        ];
-        specialArgs = { inherit inputs; };
-      };
-
-      synth = nixpkgs.lib.nixosSystem {
-	system = "x86_64-linux";
-	modules = [
-	  ./hosts/synth
-	];
-	specialArgs = { inherit inputs; };
-      };
-
-      tower = nixpkgs.lib.nixosSystem {
-	system = "x86_64-linux";
-	modules = [
-	  ./hosts/tower
-	];
-	specialArgs = { inherit inputs; };
-      };
-
-      # TODO
-      # pylon = nixpkgs.lib.nixosSystem {
-      #   system = "x86_64-linux";
-      #   modules = [
-      #   ];
-      # };
-    };
-
-    homeConfigurations = {
-      aos = mkHomeConfiguration {
-        system = "x86_64-linux";
-
-        modules = [
-          ./home/aos/home.nix
-        ];
-      };
-
-      "aos@synth" = mkHomeConfiguration {
-        system = "x86_64-linux";
-
-        modules = [
-          ./home/aos/synth.nix
-        ];
-      };
-
-      "aos@tower" = mkHomeConfiguration {
-        system = "x86_64-linux";
-
-        modules = [
-          ./home/aos/tower.nix
-        ];
-      };
-
-      mei = mkHomeConfiguration {
-        system = "x86_64-linux";
-
-        modules = [
-          ./home/mei/home.nix
-        ];
-      };
-    };
-
-    deploy.nodes.mei = {
-      hostname = "192.168.122.142";
-      profiles = {
-        system = {
-          sshUser = "mei";
-          user = "root";
-          path = deploy-rs.lib."${system}".activate.nixos self.nixosConfigurations.mei;
+      pkgsForSystem =
+        system:
+        import nixpkgs {
+          inherit system;
+          # overlays = [ inputs.gotors.overlays.default ];
+          config.allowUnfree = true;
         };
-        hm = {
-          sshUser = "mei";
-          user = "mei";
-          path = deploy-rs.lib."${system}".activate.home-manager self.homeConfigurations.mei;
+      mkHomeConfiguration =
+        { system, modules }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgsForSystem system;
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
+          inherit modules;
+        };
+    in
+    {
+      nixosConfigurations = {
+        biggie = nixpkgs.lib.nixosSystem {
+          modules = [ ./hosts/biggie ];
+          specialArgs = {
+            inherit inputs;
+          };
+        };
+        mei = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/mei ];
+          specialArgs = {
+            inherit inputs;
+          };
+        };
+
+        synth = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/synth ];
+          specialArgs = {
+            inherit inputs;
+          };
+        };
+
+        tower = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/tower ];
+          specialArgs = {
+            inherit inputs;
+          };
+        };
+
+        # TODO
+        # pylon = nixpkgs.lib.nixosSystem {
+        #   system = "x86_64-linux";
+        #   modules = [
+        #   ];
+        # };
+      };
+
+      homeConfigurations = {
+        aos = mkHomeConfiguration {
+          system = "x86_64-linux";
+
+          modules = [ ./home/aos/home.nix ];
+        };
+
+        "aos@synth" = mkHomeConfiguration {
+          system = "x86_64-linux";
+
+          modules = [ ./home/aos/synth.nix ];
+        };
+
+        "aos@tower" = mkHomeConfiguration {
+          system = "x86_64-linux";
+
+          modules = [ ./home/aos/tower.nix ];
+        };
+
+        mei = mkHomeConfiguration {
+          system = "x86_64-linux";
+
+          modules = [ ./home/mei/home.nix ];
         };
       };
-    };
 
-    devShells."${system}" = {
-      default = with (pkgsForSystem "x86_64-linux"); mkShell {
-        buildInputs = [
-          deploy-rs.packages."${system}".deploy-rs
-          nixos-anywhere
-          sops
-          terraform-ls
-          (terraform.withPlugins (p: [
-            p.hcloud
-            p.digitalocean
-            p.sops
-          ]))
-        ];
+      deploy.nodes.mei = {
+        hostname = "192.168.122.142";
+        profiles = {
+          system = {
+            sshUser = "mei";
+            user = "root";
+            path = deploy-rs.lib."${system}".activate.nixos self.nixosConfigurations.mei;
+          };
+          hm = {
+            sshUser = "mei";
+            user = "mei";
+            path = deploy-rs.lib."${system}".activate.home-manager self.homeConfigurations.mei;
+          };
+        };
       };
-    };
 
-    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
-  };
+      devShells."${system}" = {
+        default =
+          with (pkgsForSystem "x86_64-linux");
+          mkShell {
+            buildInputs = [
+              deploy-rs.packages."${system}".deploy-rs
+              nixos-anywhere
+              sops
+              terraform-ls
+              (terraform.withPlugins (p: [
+                p.hcloud
+                p.digitalocean
+                p.sops
+              ]))
+            ];
+          };
+      };
+
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+    };
 }

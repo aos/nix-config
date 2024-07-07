@@ -1,4 +1,10 @@
-{ config, pkgs, inputs, lib, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
 {
   programs.hyprland = {
@@ -15,8 +21,8 @@
     libnotify
 
     # swww      # Wallpaper daemon
-    mako        # notification daemon
-    fuzzel      # Launcher
+    mako # notification daemon
+    fuzzel # Launcher
 
     swaylock
     swayidle
@@ -31,19 +37,19 @@
     # busctl --user -- set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 4000
     # busctl --user -- set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 6500
 
-    grim        # screenshot
-    slurp       # select region -> grim "$(slurp)" - | wl-copy
-    swappy      # grim -g "$(slurp)" - | swappy -f -
+    grim # screenshot
+    slurp # select region -> grim "$(slurp)" - | wl-copy
+    swappy # grim -g "$(slurp)" - | swappy -f -
 
-    evince          # document viewer
-    imv             # image viewer
-    qalculate-gtk   # calculator
-    gnome.nautilus  # file viewer
+    evince # document viewer
+    imv # image viewer
+    qalculate-gtk # calculator
+    gnome.nautilus # file viewer
 
     qt5.qtwayland
     qt6.qtwayland
     drm_info
-    wlay          # graphical output management (maybe replace with kanshi?)
+    wlay # graphical output management (maybe replace with kanshi?)
 
     firefox
   ];
@@ -62,7 +68,11 @@
     font-awesome
     noto-fonts-emoji
     (nerdfonts.override {
-      fonts = [ "Inconsolata" "Ubuntu" "Noto" ];
+      fonts = [
+        "Inconsolata"
+        "Ubuntu"
+        "Noto"
+      ];
     })
   ];
 

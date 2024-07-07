@@ -1,9 +1,12 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -38,8 +41,8 @@
     xserver = {
       enable = true;
       xkb = {
-	layout = "us";
-	variant = "";
+        layout = "us";
+        variant = "";
       };
     };
   };
@@ -54,7 +57,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    
+
     # lowLatency.enable = true;
   };
 
@@ -63,7 +66,10 @@
   users.users.aos = {
     isNormalUser = true;
     description = "aos";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       firefox
       vim

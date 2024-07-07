@@ -1,14 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
-  disko.devices = import ./disko-luks-btrfs.nix {
-    disks = [ "/dev/vda" ];
-  };
+  disko.devices = import ./disko-luks-btrfs.nix { disks = [ "/dev/vda" ]; };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -18,13 +21,13 @@
     ssh = {
       enable = true;
       port = 2222;
-      authorizedKeys = with lib; concatLists (
-        mapAttrsToList (name: user:
-          if elem "wheel" user.extraGroups
-          then user.openssh.authorizedKeys.keys else []
-        )
-        config.users.users
-      );
+      authorizedKeys =
+        with lib;
+        concatLists (
+          mapAttrsToList (
+            name: user: if elem "wheel" user.extraGroups then user.openssh.authorizedKeys.keys else [ ]
+          ) config.users.users
+        );
       hostKeys = [ "/boot/host_ed25519_key" ];
     };
     postCommands = ''
@@ -50,10 +53,10 @@
   services.openssh.enable = true;
   security.sudo.wheelNeedsPassword = false;
 
-# Copy the NixOS configuration file and link it from the resulting system
-# (/run/current-system/configuration.nix). This is useful in case you
-# accidentally delete configuration.nix.
-# system.copySystemConfiguration = true;
+  # Copy the NixOS configuration file and link it from the resulting system
+  # (/run/current-system/configuration.nix). This is useful in case you
+  # accidentally delete configuration.nix.
+  # system.copySystemConfiguration = true;
 
   system.stateVersion = "23.05"; # Did you read the comment?
 }

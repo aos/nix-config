@@ -2,9 +2,11 @@
 
 {
   home.packages = [
-    (pkgs.python311.withPackages (ps: with ps; [
-      pynvim
-      python-lsp-server
-    ]))
+    (pkgs.python311.withPackages (
+      ps: with ps; [
+        pynvim
+        python-lsp-server
+      ]
+    ))
   ];
 }

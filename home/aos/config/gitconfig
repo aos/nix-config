@@ -28,11 +28,17 @@
   ui = auto
 [core]
   editor = nvim
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
 [diff]
-  tool = nvimdiff
-[difftool "nvimdiff"]
-  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+  colorMoved = default
 [pull]
   ff = only
 [push]
   default = current
+[merge]
+  conflictstyle = diff3
+
+[delta]
+  navigate = true
