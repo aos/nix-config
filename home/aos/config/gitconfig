@@ -42,3 +42,5 @@
 
 [delta]
   navigate = true
+  line-numbers = true
+  syntax-theme = Nord

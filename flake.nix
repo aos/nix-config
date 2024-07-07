@@ -152,6 +152,7 @@
           };
       };
 
+      formatter."${system}" = (pkgsForSystem "x86_64-linux").nixfmt-rfc-style;
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }
