@@ -7,7 +7,7 @@ padding=10
 border-radius=5
 border-size=2
 
-default-timeout=8000
+default-timeout=5000
 group-by=summary
 
 [grouped]

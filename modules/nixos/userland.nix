@@ -11,7 +11,8 @@
     enable = true;
     xwayland.enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    portalPackage = pkgs.xdg-desktop-portal-hyprland;
+    # portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   };
 
   environment.systemPackages = with pkgs; [
@@ -59,9 +60,14 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  # Enabled by hyprland
-  # xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+      # inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+    ];
+  };
 
   fonts.packages = with pkgs; [
     cantarell-fonts
