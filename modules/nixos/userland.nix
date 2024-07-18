@@ -11,8 +11,7 @@
     enable = true;
     xwayland.enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    portalPackage = pkgs.xdg-desktop-portal-hyprland;
-    # portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   };
 
   environment.systemPackages = with pkgs; [
@@ -64,8 +63,7 @@
     enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
-      # inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+      inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
     ];
   };
 
