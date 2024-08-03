@@ -1,6 +1,21 @@
+keys:
+  - &yk_pgp 5962486144B0FAE0B535FC9BFF404ABD083C84EC
+  - &tower age19dy6xgjsm2fvkyvqvstv83dzjp7nwzd093cgd6cm3tzanh35sq7qr35zh9
+  - &pylon age1lgkch86vqgwszsnsvl8lcdmvyfcrked50wrsuwj3adza8nxh7geqhtyr5q
+
 creation_rules:
-  - key_groups:
+  - path_regex: general/secrets.enc.yaml$
+    # Make sure to only create a single list to go around shamir_threshold
+    key_groups:
     - pgp:
-        - 5962486144B0FAE0B535FC9BFF404ABD083C84EC
+        - *yk_pgp
       age:
-        - age19dy6xgjsm2fvkyvqvstv83dzjp7nwzd093cgd6cm3tzanh35sq7qr35zh9
+        - *tower
+
+  - path_regex: pylon/secrets.enc.yaml$
+    key_groups:
+    - pgp:
+        - *yk_pgp
+      age:
+        - *pylon
+        - *tower

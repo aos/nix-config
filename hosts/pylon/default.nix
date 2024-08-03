@@ -7,10 +7,7 @@
 
 {
   imports = [
-    inputs.disko.nixosModules.disko
+    ../../modules/nixos/server.nix
     ./nixos/configuration.nix
-
-    ../../modules/nixos/nix.nix
-    ../../modules/nixos/system.nix
   ];
 }

@@ -23,6 +23,10 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    srvos = {
+      url = "github:nix-community/srvos";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hyprland.url = "github:hyprwm/Hyprland/v0.40.0";
     gotors.url = "github:aos/gotors";
     atools.url = "github:aos/atools";
@@ -91,8 +95,7 @@
         # TODO
         # pylon = nixpkgs.lib.nixosSystem {
         #   system = "x86_64-linux";
-        #   modules = [
-        #   ];
+        #   modules = [ ./hosts/pylon ];
         # };
       };
 
