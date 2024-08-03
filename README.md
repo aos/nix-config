@@ -36,7 +36,12 @@ home-manager switch --flakes .#aos@tower
 
 ```
 nix develop
-sops secrets.enc.yaml
+sops sops/general/secrets.enc.yaml
+```
+
+> If you want to edit with the SSH host key, you must generate a temporary age secret key
+```
+SOPS_AGE_KEY=$(ssh-to-age -private-key -i ~/.ssh/id_ed25519) sops sops/general/secrets.enc.yaml
 ```
 
 ### TUI view

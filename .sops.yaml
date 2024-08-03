@@ -1,4 +1,6 @@
 creation_rules:
   - key_groups:
     - pgp:
-      - 5962486144B0FAE0B535FC9BFF404ABD083C84EC
+        - 5962486144B0FAE0B535FC9BFF404ABD083C84EC
+      age:
+        - age19dy6xgjsm2fvkyvqvstv83dzjp7nwzd093cgd6cm3tzanh35sq7qr35zh9

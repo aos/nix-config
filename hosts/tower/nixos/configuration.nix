@@ -11,6 +11,10 @@
     ./disko-luks-btrfs.nix
   ];
 
+  sops = {
+    age.sshKeyPaths = [ "${config.users.users."aos".home}/.ssh/id_ed25519" ];
+  };
+
   hardware.enableAllFirmware = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -43,6 +47,12 @@
     enable = true;
     touchpad.tapping = false;
   };
+
+  # Increase the size of the /run/user/<UID>/ directory
+  # Defaults to 10% of RAM
+  # services.logind.extraConfig = ''
+  #   RuntimeDirectorySize=16G
+  # '';
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.aos = {
