@@ -5,5 +5,5 @@
   sops.defaultSopsFormat = "yaml";
 
   # Some defaults
-  sops.secrets.nextdns_id = {};
+  sops.secrets.nextdns_config = {};
 }
