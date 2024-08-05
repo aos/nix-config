@@ -2,3 +2,4 @@ secrets.nix
 result
 .terraform
 *.tfstate
+*.tfstate.backup

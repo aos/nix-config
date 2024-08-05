@@ -1,8 +1,4 @@
-{
-  inputs,
-  pkgs,
-  ...
-}:
+{ inputs, pkgs, ... }:
 
 {
   imports = [
@@ -10,8 +6,12 @@
     ./disko.nix
   ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+  };
+
   networking.hostName = "pylon";
   time.timeZone = "America/New_York";
 
@@ -25,15 +25,12 @@
       vim
       gitMinimal
     ];
-    openssh.authorizedKeys.keyFiles = [
-      ../../../sops/keys/aos/authorized_keys
-    ];
+    openssh.authorizedKeys.keyFiles = [ ../../../sops/keys/aos/authorized_keys ];
   };
 
-  #systemd.network.networks."10-uplink".networkConfig.Address = "";
+  networking.firewall.allowedTCPPorts = [ 22 80 443 ];
 
-  services.openssh.enable = true;
-  security.sudo.wheelNeedsPassword = false;
+  systemd.network.networks."10-uplink".networkConfig.Address = "2a01:4ff:f0:d641::1";
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "23.05";
 }

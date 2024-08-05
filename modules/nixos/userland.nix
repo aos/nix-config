@@ -44,7 +44,7 @@
     evince # document viewer
     imv # image viewer
     qalculate-gtk # calculator
-    gnome.nautilus # file viewer
+    nautilus # file viewer
 
     qt5.qtwayland
     qt6.qtwayland
@@ -80,7 +80,6 @@
     })
   ];
 
-  sound.enable = true;
   security.rtkit.enable = true;
 
   hardware.pulseaudio.enable = false;

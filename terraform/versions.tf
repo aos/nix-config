@@ -26,5 +26,6 @@ provider "hcloud" {
 }
 
 locals {
-  yk_ssh_pub_key = file("${path.module}/../sops/general/ssh_id_rsa_yk.pub")
+  tower_ssh_pub_key = file("${path.module}/../sops/keys/aos/ssh_tower_ed25519.pub")
+  yk_ssh_pub_key = file("${path.module}/../sops/keys/aos/ssh_yubikey_rsa.pub")
 }

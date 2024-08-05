@@ -93,10 +93,13 @@
         };
 
         # TODO
-        # pylon = nixpkgs.lib.nixosSystem {
-        #   system = "x86_64-linux";
-        #   modules = [ ./hosts/pylon ];
-        # };
+        pylon = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/pylon ];
+          specialArgs = {
+            inherit inputs;
+          };
+        };
       };
 
       homeConfigurations = {
@@ -148,6 +151,7 @@
             buildInputs = [
               deploy-rs.packages."${system}".deploy-rs
               nixos-anywhere
+              nix-inspect # Run with: nix-inspect -p .
               sops
               age
               ssh-to-age

@@ -6,6 +6,14 @@ resource "hcloud_ssh_key" "yk" {
   }
 }
 
+resource "hcloud_ssh_key" "tower" {
+  name       = "TOWER_SSH"
+  public_key = local.tower_ssh_pub_key
+  labels = {
+    "Owner" : "A"
+  }
+}
+
 resource "hcloud_firewall" "firewall" {
   name = "firewall"
   rule {
@@ -37,6 +45,8 @@ resource "hcloud_firewall" "firewall" {
     ]
   }
 
+  # All outbound traffic is allowed
+
   labels = {
     "Owner" : "A"
   }
@@ -55,10 +65,13 @@ resource "hcloud_primary_ip" "primary_ip_1" {
 
 resource "hcloud_server" "pylon" {
   name         = "pylon"
-  image        = "debian-12"
+  image        = "ubuntu-22.04"
   datacenter   = "ash-dc1"
   server_type  = "cpx11"
-  ssh_keys     = [hcloud_ssh_key.yk.id]
+  ssh_keys     = [
+    hcloud_ssh_key.yk.id,
+    hcloud_ssh_key.tower.id
+  ]
   firewall_ids = [hcloud_firewall.firewall.id]
 
   public_net {
