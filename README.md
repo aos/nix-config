@@ -55,3 +55,9 @@ nix run github:bluskript/nix-inspect -- -p .
 ```
 nix develop .#terraform
 ```
+
+### Deploy
+
+```
+nixos-rebuild --flake .#pylon --target-host <host> switch
+```
