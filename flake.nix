@@ -42,7 +42,7 @@
     }@inputs:
     let
       inherit (self) outputs;
-      system = "x86_64-linux";
+      defaultSystem = "x86_64-linux";
       pkgsForSystem =
         system:
         import nixpkgs {
@@ -63,11 +63,13 @@
     {
       nixosConfigurations = {
         biggie = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
           modules = [ ./hosts/biggie ];
           specialArgs = {
             inherit inputs;
           };
         };
+
         mei = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./hosts/mei ];
@@ -134,22 +136,22 @@
           system = {
             sshUser = "mei";
             user = "root";
-            path = deploy-rs.lib."${system}".activate.nixos self.nixosConfigurations.mei;
+            path = deploy-rs.lib."${defaultSystem}".activate.nixos self.nixosConfigurations.mei;
           };
           hm = {
             sshUser = "mei";
             user = "mei";
-            path = deploy-rs.lib."${system}".activate.home-manager self.homeConfigurations.mei;
+            path = deploy-rs.lib."${defaultSystem}".activate.home-manager self.homeConfigurations.mei;
           };
         };
       };
 
-      devShells."${system}" = {
+      devShells."${defaultSystem}" = {
         default =
-          with (pkgsForSystem "x86_64-linux");
+          with (pkgsForSystem defaultSystem);
           mkShell {
             buildInputs = [
-              deploy-rs.packages."${system}".deploy-rs
+              deploy-rs.packages."${defaultSystem}".deploy-rs
               nixos-anywhere
               nix-inspect # Run with: nix-inspect -p .
               sops
@@ -165,7 +167,7 @@
           };
       };
 
-      formatter."${system}" = (pkgsForSystem "x86_64-linux").nixfmt-rfc-style;
+      formatter."${defaultSystem}" = (pkgsForSystem defaultSystem).nixfmt-rfc-style;
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }

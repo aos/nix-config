@@ -1,9 +1,4 @@
-{
-  inputs,
-  pkgs,
-  configs,
-  ...
-}:
+{ inputs, pkgs, ... }:
 
 {
   imports = [
@@ -13,4 +8,14 @@
   ];
 
   users.users.root.openssh.authorizedKeys.keyFiles = [ ../../sops/keys/aos/authorized_keys ];
+  users.users.mei = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+    packages = with pkgs; [
+      curl
+      vim
+      gitMinimal
+    ];
+    openssh.authorizedKeys.keyFiles = [ ../../sops/keys/aos/authorized_keys ];
+  };
 }
