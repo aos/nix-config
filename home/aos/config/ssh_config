@@ -1,19 +1,4 @@
-Match host * exec "gpg-connect-agent UPDATESTARTUPTTY /bye"
-
-Host devserver
-  HostName 157.245.253.239
-  Port 65123
-  ForwardAgent yes
-  ForwardX11 yes
-  # Forward yubikey
-  RemoteForward /run/user/1000/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent
-
-Host irc
-  User irssi
-  RequestTTY force
-  RemoteCommand tmux a
-
-Host temple
-  HostName temple.lan
-  ForwardX11 yes
+Host pylon
+  HostName 5.161.242.182
+  Port 22
   ForwardAgent yes
