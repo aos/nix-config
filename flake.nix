@@ -28,6 +28,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland/v0.40.0";
+    catppuccin.url = "github:catppuccin/nix";
     gotors.url = "github:aos/gotors";
     atools.url = "github:aos/atools";
   };
@@ -107,25 +108,21 @@
       homeConfigurations = {
         aos = mkHomeConfiguration {
           system = "x86_64-linux";
-
           modules = [ ./home/aos/home.nix ];
         };
 
         "aos@synth" = mkHomeConfiguration {
           system = "x86_64-linux";
-
           modules = [ ./home/aos/synth.nix ];
         };
 
         "aos@tower" = mkHomeConfiguration {
           system = "x86_64-linux";
-
           modules = [ ./home/aos/tower.nix ];
         };
 
         mei = mkHomeConfiguration {
           system = "x86_64-linux";
-
           modules = [ ./home/mei/home.nix ];
         };
       };

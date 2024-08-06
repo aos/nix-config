@@ -1,25 +1,30 @@
-{ pkgs, home, ... }:
+{
+  inputs,
+  pkgs,
+  home,
+  ...
+}:
 
 {
+  imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
+
+  catppuccin = {
+    enable = true;
+    flavor = "macchiato";
+    accent = "blue";
+  };
+
   gtk = {
     enable = true;
 
-    theme = {
-      name = "Catppuccin-Macchiato-Compact-Blue-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        variant = "macchiato";
-        size = "compact";
-        accents = [ "blue" ];
-        tweaks = [
-          "rimless"
-          "black"
-        ];
-      };
-    };
+    catppuccin = {
+      enable = true;
+      flavor = "macchiato";
+      accent = "blue";
+      size = "compact";
+      tweaks = [ "black" ];
 
-    iconTheme = {
-      name = "Papirus-Catppuccin";
-      package = pkgs.catppuccin-papirus-folders.override { flavor = "macchiato"; };
+      icon.enable = true;
     };
   };
 
