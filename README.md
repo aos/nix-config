@@ -47,13 +47,8 @@ SOPS_AGE_KEY=$(ssh-to-age -private-key -i ~/.ssh/id_ed25519) sops sops/general/s
 ### TUI view
 
 ```
-nix run github:bluskript/nix-inspect -- -p .
-```
-
-### Terraform
-
-```
-nix develop .#terraform
+nix develop
+nix-inspect -p .
 ```
 
 ### Deploy
