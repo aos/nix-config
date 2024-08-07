@@ -22,6 +22,7 @@
     ../../modules/nixos/userland.nix
     ../../modules/nixos/virt.nix
     ../../modules/nixos/sops.nix
+    ../../modules/nixos/upgrade-diff.nix
   ];
 
 }
