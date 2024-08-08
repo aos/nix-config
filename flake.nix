@@ -2,6 +2,7 @@
   description = "Server nixos configurations";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-zoom.url = "github:NixOS/nixpkgs/06031e8a5d9d5293c725a50acf01242193635022";
     nixos-hardware.url = "github:/NixOS/nixos-hardware/master";
     disko = {
       url = "github:nix-community/disko";
@@ -95,7 +96,6 @@
           };
         };
 
-        # TODO
         pylon = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./hosts/pylon ];
