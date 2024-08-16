@@ -12,3 +12,6 @@ set window-title-home-tilde   true
 set window-title-page         true
 
 set adjust-open               width
+
+# Remove dual page view, action: `toggle_page_mode`
+unmap d

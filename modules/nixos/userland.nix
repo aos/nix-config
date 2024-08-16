@@ -76,6 +76,7 @@
         "Inconsolata"
         "Ubuntu"
         "Noto"
+        "CascadiaCode"
       ];
     })
   ];
