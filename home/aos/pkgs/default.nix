@@ -9,14 +9,17 @@ let
   llm-claude-3 = pkgs.python3Packages.callPackage ./llm-claude-3.nix { };
 in
 {
-  imports = [ ./python.nix ];
+  imports = [
+    ./python.nix
+    ./elixir.nix
+  ];
 
   # Packages to install
   home.packages = with pkgs; [
     foot
     (pass.withExtensions (ext: with ext; [ pass-otp ]))
 
-    nixpkgs-fmt
+    nixfmt-rfc-style 
 
     jless
     jq
