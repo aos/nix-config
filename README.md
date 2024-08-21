@@ -56,3 +56,9 @@ nix-inspect -p .
 ```
 nixos-rebuild --flake .#pylon --target-host <host> switch
 ```
+
+### Generating an ISO
+
+```
+nix build ./hosts/minimal-iso#iso
+```
