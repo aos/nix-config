@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "flake:nixpkgs/nixos-unstable";
+    nixos-images.url = "github:nix-community/nixos-images";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,6 +11,7 @@
     {
       self,
       nixpkgs,
+      nixos-images,
       nixos-generators,
       ...
     }:
@@ -32,6 +34,7 @@
           };
           format = "install-iso-minimal";
         };
+        # iso-installer = nixos-images.
         do-iso = nixos-generators.nixosGenerate {
           inherit system;
 

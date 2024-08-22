@@ -15,10 +15,7 @@
     age.sshKeyPaths = [ "${config.users.users."aos".home}/.ssh/id_ed25519" ];
   };
 
-  hardware.enableAllFirmware = true;
-
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
   services.fstrim = {
     enable = true;
@@ -69,13 +66,6 @@
       home-manager
     ];
   };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-  ];
 
   # programs.mtr.enable = true;
   programs.gnupg.agent = {
