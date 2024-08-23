@@ -29,6 +29,7 @@ in
   home.packages = with pkgs; [
     spotify
     webcord
+    # zoom-us
     nixpkgsZoom.zoom-us
   ];
 

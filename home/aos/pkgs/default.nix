@@ -51,7 +51,7 @@ in
     inputs.atools.packages.${pkgs.system}.default
 
     # etc
-    mypaint
+    # mypaint
     nb
     zathura
     yazi
