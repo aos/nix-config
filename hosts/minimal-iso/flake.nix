@@ -32,9 +32,16 @@
               formatAttr = "isoImage";
             };
           };
-          format = "install-iso-minimal";
+          format = "install-iso";
         };
-        # iso-installer = nixos-images.
+        iso-installer = nixos-generators.nixosGenerate {
+          inherit system;
+          modules = [
+            nixos-images.nixosModules.image-installer
+            ./configuration.nix
+          ];
+          format = "install-iso";
+        };
         do-iso = nixos-generators.nixosGenerate {
           inherit system;
 

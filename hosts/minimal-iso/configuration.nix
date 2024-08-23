@@ -7,11 +7,6 @@
   users.users.nixos = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      curl
-      wget
-      vim
-    ];
   };
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINFbiIMHZsQkz+LylrrR2L2MvYUilTS5ixlY5ry0/FLe turret"
@@ -30,11 +25,4 @@
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
-  system.stateVersion = "23.11"; # Did you read the comment?
 }
