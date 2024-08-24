@@ -19,7 +19,7 @@ in
     foot
     (pass.withExtensions (ext: with ext; [ pass-otp ]))
 
-    nixfmt-rfc-style 
+    nixfmt-rfc-style
 
     jless
     jq

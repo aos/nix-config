@@ -19,3 +19,10 @@ creation_rules:
       age:
         - *pylon
         - *tower
+
+  - path_regex: samira/secrets.enc.yaml$
+    key_groups:
+    - pgp:
+        - *yk_pgp
+      age:
+        - *tower

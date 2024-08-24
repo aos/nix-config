@@ -1,9 +1,9 @@
-{ config, ... }:
+{ inputs, lib, ... }:
 
 {
-  sops.defaultSopsFile = ../../sops/general/secrets.enc.yaml;
-  sops.defaultSopsFormat = "yaml";
+  imports = [
+    inputs.sops-nix.nixosModules.default
+  ];
 
-  # Some defaults
-  sops.secrets.nextdns_config = { };
+  sops.defaultSopsFormat = "yaml";
 }

@@ -9,9 +9,6 @@
   imports = [
     inputs.disko.nixosModules.disko
     inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
-    inputs.sops-nix.nixosModules.sops
-
-    ./nixos/configuration.nix
 
     ../../modules/nixos/network.nix
     ../../modules/nixos/nfs.nix
@@ -23,6 +20,7 @@
     ../../modules/nixos/virt.nix
     ../../modules/nixos/sops.nix
     ../../modules/nixos/upgrade-diff.nix
-  ];
 
+    ./nixos/configuration.nix
+  ];
 }

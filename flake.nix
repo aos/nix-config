@@ -20,10 +20,6 @@
       url = "github:fufexan/nix-gaming";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     srvos = {
       url = "github:nix-community/srvos";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,7 +35,6 @@
       self,
       nixpkgs,
       home-manager,
-      deploy-rs,
       ...
     }@inputs:
     let
@@ -49,7 +44,6 @@
         system:
         import nixpkgs {
           inherit system;
-          # overlays = [ inputs.gotors.overlays.default ];
           config.allowUnfree = true;
         };
       mkHomeConfiguration =
@@ -103,6 +97,14 @@
             inherit inputs;
           };
         };
+
+        samira = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/samira ];
+          specialArgs = {
+            inherit inputs;
+          };
+        };
       };
 
       homeConfigurations = {
@@ -127,28 +129,11 @@
         };
       };
 
-      deploy.nodes.mei = {
-        hostname = "192.168.122.142";
-        profiles = {
-          system = {
-            sshUser = "mei";
-            user = "root";
-            path = deploy-rs.lib."${defaultSystem}".activate.nixos self.nixosConfigurations.mei;
-          };
-          hm = {
-            sshUser = "mei";
-            user = "mei";
-            path = deploy-rs.lib."${defaultSystem}".activate.home-manager self.homeConfigurations.mei;
-          };
-        };
-      };
-
       devShells."${defaultSystem}" = {
         default =
           with (pkgsForSystem defaultSystem);
           mkShell {
             buildInputs = [
-              deploy-rs.packages."${defaultSystem}".deploy-rs
               nixos-anywhere
               nix-inspect # Run with: nix-inspect -p .
               sops
@@ -165,6 +150,5 @@
       };
 
       formatter."${defaultSystem}" = (pkgsForSystem defaultSystem).nixfmt-rfc-style;
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }

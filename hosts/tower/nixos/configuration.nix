@@ -13,7 +13,21 @@
 
   sops = {
     age.sshKeyPaths = [ "${config.users.users."aos".home}/.ssh/id_ed25519" ];
+    defaultSopsFile = ../../../sops/general/secrets.enc.yaml;
+
+    secrets.nextdns_config = { };
   };
+
+  services.nextdns = {
+    enable = true;
+    arguments = [
+      "-config-file"
+      "${config.sops.secrets."nextdns_config".path}"
+    ];
+  };
+
+  services.avahi.enable = true;
+  services.avahi.nssmdns4 = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.loader.efi.canTouchEfiVariables = true;

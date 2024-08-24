@@ -6,14 +6,6 @@
 }:
 
 {
-  services.nextdns = {
-    enable = true;
-    arguments = [
-      "-config-file"
-      "${config.sops.secrets."nextdns_config".path}"
-    ];
-  };
-
   networking.nameservers = [
     "127.0.0.1"
     "::1"
@@ -22,7 +14,4 @@
   ];
 
   services.tailscale.enable = true;
-
-  services.avahi.enable = true;
-  services.avahi.nssmdns4 = true;
 }
