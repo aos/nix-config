@@ -24,6 +24,12 @@
       url = "github:nix-community/srvos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    clan-core = {
+      url = "git+https://git.clan.lol/clan/clan-core";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.sops-nix.follows = "sops-nix";
+      inputs.disko.follows = "disko";
+    };
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     catppuccin.url = "github:catppuccin/nix";
     gotors.url = "github:aos/gotors";
@@ -35,6 +41,7 @@
       self,
       nixpkgs,
       home-manager,
+      clan-core,
       ...
     }@inputs:
     let
@@ -55,6 +62,19 @@
           };
           inherit modules;
         };
+      clan = clan-core.lib.buildClan {
+        meta.name = "floofs";
+        directory = ./.;
+        specialArgs = {
+          inherit inputs;
+        };
+        machines = {
+          samira = {
+            nixpkgs.pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+            imports = [ ./hosts/samira ];
+          };
+        };
+      };
     in
     {
       nixosConfigurations = {
@@ -97,15 +117,9 @@
             inherit inputs;
           };
         };
+      } // clan.nixosConfigurations;
 
-        samira = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ ./hosts/samira ];
-          specialArgs = {
-            inherit inputs;
-          };
-        };
-      };
+      inherit (clan) clanInternals;
 
       homeConfigurations = {
         aos = mkHomeConfiguration {
@@ -135,6 +149,7 @@
           mkShell {
             buildInputs = [
               nixos-anywhere
+              inputs.clan-core.packages.${system}.clan-cli
               nix-inspect # Run with: nix-inspect -p .
               sops
               age

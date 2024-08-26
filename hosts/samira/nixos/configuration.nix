@@ -1,4 +1,4 @@
-{ inputs, lib, ... }:
+{ inputs, config, lib, ... }:
 
 {
   imports = [
@@ -11,6 +11,7 @@
   sops.defaultSopsFile = lib.mkForce ../../../sops/samira/secrets.enc.yaml;
 
   networking.hostName = "samira";
+  clan.core.networking.targetHost = "root@${config.networking.hostName}";
 
   networking.useDHCP = true;
   systemd.network.enable = true;
