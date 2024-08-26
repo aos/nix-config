@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 
 {
   imports = [
@@ -6,4 +6,7 @@
 
     ./nixos/configuration.nix
   ];
+
+  clan.core.networking.targetHost = "root@${config.networking.hostName}";
+  clan.core.deployment.requireExplicitUpdate = true;
 }

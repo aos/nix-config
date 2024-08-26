@@ -62,6 +62,7 @@
           };
           inherit modules;
         };
+
       clan = clan-core.lib.buildClan {
         meta.name = "floofs";
         directory = ./.;
@@ -72,6 +73,11 @@
           samira = {
             nixpkgs.pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
             imports = [ ./hosts/samira ];
+          };
+
+          pylon = {
+            nixpkgs.pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+            imports = [ ./hosts/pylon ];
           };
         };
       };
@@ -109,14 +115,6 @@
             inherit inputs;
           };
         };
-
-        pylon = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ ./hosts/pylon ];
-          specialArgs = {
-            inherit inputs;
-          };
-        };
       } // clan.nixosConfigurations;
 
       inherit (clan) clanInternals;
@@ -149,7 +147,7 @@
           mkShell {
             buildInputs = [
               nixos-anywhere
-              inputs.clan-core.packages.${system}.clan-cli
+              inputs.clan-core.packages.${defaultSystem}.clan-cli
               nix-inspect # Run with: nix-inspect -p .
               sops
               age
