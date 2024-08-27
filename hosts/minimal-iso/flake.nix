@@ -20,20 +20,6 @@
     in
     {
       packages = forAllSystems (system: {
-        iso = nixos-generators.nixosGenerate {
-          inherit system;
-
-          modules = [ ./configuration.nix ];
-
-          customFormats = {
-            install-iso-minimal = {
-              imports = [ "${toString nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" ];
-              isoImage.squashfsCompression = "zstd -Xcompression-level 6";
-              formatAttr = "isoImage";
-            };
-          };
-          format = "install-iso";
-        };
         iso-installer = nixos-generators.nixosGenerate {
           inherit system;
           modules = [
