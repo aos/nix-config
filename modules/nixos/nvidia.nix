@@ -2,10 +2,9 @@
 
 {
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
     extraPackages = with pkgs; [ nvidia-vaapi-driver ];
   };
 
