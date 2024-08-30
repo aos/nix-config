@@ -75,6 +75,16 @@
             imports = [ ./hosts/samira ];
           };
 
+          soraya = {
+            nixpkgs.pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+            imports = [ ./hosts/soraya ];
+          };
+
+          sakina = {
+            nixpkgs.pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+            imports = [ ./hosts/sakina ];
+          };
+
           pylon = {
             nixpkgs.pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
             imports = [ ./hosts/pylon ];
