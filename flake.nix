@@ -90,7 +90,7 @@
           };
 
           biggie = {
-            nixpkgs.pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+            nixpkgs.pkgs = pkgsForSystem defaultSystem;
             imports = [ ./hosts/biggie ];
           };
 
