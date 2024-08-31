@@ -8,7 +8,6 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -49,18 +48,13 @@
 
   services.printing.enable = true;
 
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-
-    # lowLatency.enable = true;
   };
-
-  nixpkgs.config.allowUnfree = true;
 
   users.users.aos = {
     isNormalUser = true;
@@ -78,12 +72,6 @@
       webcord
     ];
   };
-
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    curl
-  ];
 
   programs.mtr.enable = true;
   programs.gnupg.agent = {

@@ -16,10 +16,6 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-gaming = {
-      url = "github:fufexan/nix-gaming";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     srvos = {
       url = "github:nix-community/srvos";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -72,7 +68,15 @@
         machines = {
           samira = {
             nixpkgs.pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-            imports = [ ./hosts/samira ];
+            imports = [
+              ./hosts/samira
+              {
+                clan.core.networking.zerotier.controller = {
+                  enable = true;
+                  public = true;
+                };
+              }
+            ];
           };
 
           soraya = {
@@ -85,6 +89,11 @@
             imports = [ ./hosts/sakina ];
           };
 
+          biggie = {
+            nixpkgs.pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+            imports = [ ./hosts/biggie ];
+          };
+
           pylon = {
             nixpkgs.pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
             imports = [ ./hosts/pylon ];
@@ -94,14 +103,6 @@
     in
     {
       nixosConfigurations = {
-        biggie = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ ./hosts/biggie ];
-          specialArgs = {
-            inherit inputs;
-          };
-        };
-
         mei = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./hosts/mei ];
