@@ -44,6 +44,4 @@
     # Set up registry from inputs
     # registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
   };
-
-  nixpkgs.config.allowUnfree = true;
 }
