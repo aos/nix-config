@@ -8,9 +8,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ];
   };
-  users.users.root.openssh.authorizedKeys.keyFiles = [
-    ../../sops/keys/aos/authorized_keys
-  ];
+  users.users.root.openssh.authorizedKeys.keyFiles = [ ../../sops/keys/aos/authorized_keys ];
 
   environment.systemPackages = with pkgs; [
     vim

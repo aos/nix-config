@@ -1,8 +1,9 @@
-{ config, ... }:
+{ inputs, config, ... }:
 
 {
   imports = [
-    ../../modules/nixos/server.nix
+    inputs.srvos.nixosModules.desktop
+
     ../../modules/nixos/network.nix
 
     ../../modules/nixos/nvidia.nix
@@ -11,6 +12,6 @@
     ./nixos/configuration.nix
   ];
 
-  clan.core.networking.targetHost = "aos@${config.networking.hostName}";
+  clan.core.networking.targetHost = "root@${config.networking.hostName}.local";
   clan.core.deployment.requireExplicitUpdate = true;
 }

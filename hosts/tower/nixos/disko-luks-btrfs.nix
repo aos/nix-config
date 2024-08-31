@@ -1,3 +1,10 @@
+# This is LUKS with a small partition containing a key falling back on password
+# The root volume is BTRFS with 3 subvolumes:
+#    (name  ->  mountpoint)
+# 1. /root  -> /
+# 2. /home  -> /home
+# 3. /nix   -> /nix
+# This allows us to snapshot /home since that's potentially the only meaningful subvolume
 {
   disko.devices = {
     disk = {

@@ -3,8 +3,8 @@
 {
   disko.devices = {
     disk = {
-      main = {
-        device = lib.mkDefault "/dev/disk/by-id/wwn-0x5002538f3115e804";
+      main_ssd = {
+        device = "/dev/disk/by-id/wwn-0x5002538f3115e804";
         type = "disk";
         content = {
           type = "gpt";
@@ -27,9 +27,58 @@
             root = {
               size = "100%";
               content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/";
+                type = "btrfs";
+                extraArgs = [ "-f" ]; # Override existing partition
+                subvolumes = {
+                  "/rootfs" = {
+                    mountpoint = "/";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "/home" = {
+                    mountpoint = "/home";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "/nix" = {
+                    mountpoint = "/nix";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "/swap" = {
+                    mountpoint = "/.swapvol";
+                    swap = {
+                      swapfile.size = "8G";
+                    };
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
+      secondary_hdd = {
+        device = "/dev/disk/by-id/wwn-0x5000c500a208a879";
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            root = {
+              size = "100%";
+              content = {
+                type = "btrfs";
+                extraArgs = [ "-f" ]; # Override existing partition
+                mountpoint = "/data";
+                mountOptions = [
+                  "compress=zstd"
+                  "noatime"
+                ];
               };
             };
           };

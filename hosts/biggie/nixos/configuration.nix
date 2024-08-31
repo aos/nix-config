@@ -16,6 +16,7 @@
   '';
 
   networking.hostName = "biggie";
+  users.users.root.openssh.authorizedKeys.keyFiles = [ ../../../sops/keys/aos/authorized_keys ];
 
   networking.networkmanager.enable = true;
   time.timeZone = "America/New_York";

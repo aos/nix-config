@@ -3,11 +3,9 @@
 {
   disko.devices = {
     disk = {
-      main = {
-        device = lib.mkDefault "/dev/disk/by-id/ata-Samsung_SSD_870_EVO_1TB_S625NJ0R107819W";
+      main_ssd = {
+        device = "/dev/disk/by-id/ata-Samsung_SSD_870_EVO_1TB_S625NJ0R107819W";
         type = "disk";
-        # Set the following in flake.nix for each maschine:
-        # device = <uuid>;
         content = {
           type = "gpt";
           partitions = {
@@ -23,17 +21,64 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "nofail" ];
+                mountOptions = [ "defaults" ];
               };
             };
             root = {
               size = "100%";
               content = {
-                type = "filesystem";
-                format = "ext4";
-                # format = "btrfs";
-                # format = "bcachefs";
-                mountpoint = "/";
+                type = "btrfs";
+                extraArgs = [ "-f" ]; # Override existing partition
+                subvolumes = {
+                  "/rootfs" = {
+                    mountpoint = "/";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "/home" = {
+                    mountpoint = "/home";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "/nix" = {
+                    mountpoint = "/nix";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "/swap" = {
+                    mountpoint = "/.swapvol";
+                    swap = {
+                      swapfile.size = "8G";
+                    };
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
+      secondary_hdd = {
+        device = "/dev/disk/by-id/wwn-0x5000c5006c8733de";
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            root = {
+              size = "100%";
+              content = {
+                type = "btrfs";
+                extraArgs = [ "-f" ]; # Override existing partition
+                mountpoint = "/data";
+                mountOptions = [
+                  "compress=zstd"
+                  "noatime"
+                ];
               };
             };
           };

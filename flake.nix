@@ -67,25 +67,17 @@
         };
         machines = {
           samira = {
-            nixpkgs.pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-            imports = [
-              ./hosts/samira
-              {
-                clan.core.networking.zerotier.controller = {
-                  enable = true;
-                  public = true;
-                };
-              }
-            ];
+            nixpkgs.pkgs = pkgsForSystem defaultSystem;
+            imports = [ ./hosts/samira ];
           };
 
           soraya = {
-            nixpkgs.pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+            nixpkgs.pkgs = pkgsForSystem defaultSystem;
             imports = [ ./hosts/soraya ];
           };
 
           sakina = {
-            nixpkgs.pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+            nixpkgs.pkgs = pkgsForSystem defaultSystem;
             imports = [ ./hosts/sakina ];
           };
 
@@ -95,7 +87,7 @@
           };
 
           pylon = {
-            nixpkgs.pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+            nixpkgs.pkgs = pkgsForSystem defaultSystem;
             imports = [ ./hosts/pylon ];
           };
         };
