@@ -47,6 +47,10 @@
         system:
         import nixpkgs {
           inherit system;
+          overlays = [
+            inputs.gotors.overlays.default
+            inputs.atools.overlays.default
+          ];
           config.allowUnfree = true;
         };
       mkHomeConfiguration =

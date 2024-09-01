@@ -11,8 +11,10 @@
     ./disko-luks-btrfs.nix
   ];
 
+  nixpkgs.config.allowUnfree = true;
+
   sops = {
-    age.sshKeyPaths = [ "${config.users.users."aos".home}/.ssh/id_ed25519" ];
+    age.sshKeyPaths = [ "${config.users.users."aos".home}/.ssh/id_tower" ];
     defaultSopsFile = ../../../sops/general/secrets.enc.yaml;
 
     secrets.nextdns_config = { };

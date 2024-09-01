@@ -47,8 +47,8 @@ in
     kubectl
     kubernetes-helm
 
-    inputs.gotors.packages.${pkgs.system}.default
-    inputs.atools.packages.${pkgs.system}.default
+    gotors
+    atools
 
     # etc
     # mypaint
