@@ -15,8 +15,6 @@
   networking.hostName = "pylon";
   time.timeZone = "America/New_York";
 
-  nixpkgs.hostPlatform = "x86_64-linux";
-
   networking.firewall.allowedTCPPorts = [
     80
     443
