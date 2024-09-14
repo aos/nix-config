@@ -2,6 +2,8 @@
 
 {
   virtualisation = {
+    libvirtd.enable = true;
+
     podman = {
       enable = true;
 
@@ -12,4 +14,6 @@
       defaultNetwork.settings.dns_enabled = true;
     };
   };
+
+  programs.virt-manager.enable = true;
 }

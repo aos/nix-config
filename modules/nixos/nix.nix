@@ -11,6 +11,7 @@
       experimental-features = [
         "nix-command"
         "flakes"
+        "repl-flake"
       ];
 
       log-lines = lib.mkDefault 25;
