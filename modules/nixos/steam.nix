@@ -2,6 +2,7 @@
 
 {
   environment.systemPackages = [ pkgs.gamemode ];
+  users.groups.gamemode = { };
 
   programs.steam = {
     enable = true;

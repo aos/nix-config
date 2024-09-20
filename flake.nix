@@ -86,7 +86,13 @@
           };
 
           biggie = {
-            nixpkgs.pkgs = pkgsForSystem defaultSystem;
+            nixpkgs.pkgs = import nixpkgs {
+              system = defaultSystem;
+              config = {
+                allowUnfree = true;
+                cudaSupport = true;
+              };
+            };
             imports = [ ./hosts/biggie ];
           };
 

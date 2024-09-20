@@ -6,8 +6,11 @@
 
     ../../modules/nixos/network.nix
 
+    ../../modules/nixos/virt.nix
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/steam.nix
+
+    # ../../modules/nixos/ml.nix
 
     ./nixos/configuration.nix
   ];

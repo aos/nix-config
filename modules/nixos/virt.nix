@@ -15,5 +15,7 @@
     };
   };
 
+  users.users.aos.extraGroups = [ "libvirtd" ];
+
   programs.virt-manager.enable = true;
 }

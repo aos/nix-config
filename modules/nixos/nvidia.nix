@@ -16,6 +16,8 @@
     "i2c-nvidia_gpu"
   ];
 
+  hardware.nvidia-container-toolkit.enable = true;
+
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
