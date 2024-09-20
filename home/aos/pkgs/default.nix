@@ -6,7 +6,6 @@
 }:
 
 let
-  llm-claude-3 = pkgs.python3Packages.callPackage ./llm-claude-3.nix { };
 in
 {
   imports = [
@@ -56,6 +55,5 @@ in
     zathura
     yazi
     libreoffice
-    (llm.withPlugins [ llm-claude-3 ])
   ];
 }

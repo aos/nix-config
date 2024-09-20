@@ -15,6 +15,16 @@
     ./nixos/configuration.nix
   ];
 
+  virtualisation.oci-containers.containers.livebook = {
+    image = "ghcr.io/livebook-dev/livebook:0.14.2-cuda12";
+    ports = [ "8080:8080" "8081:8081" ];
+    extraOptions = [ "--device=nvidia.com/gpu=all" ];
+    volumes = [ "/root/test_docker/train:/data" ];
+    environment = {
+      LIVEBOOK_TOKEN_ENABLED = "false";
+    };
+  };
+
   clan.core.networking.targetHost = "root@${config.networking.hostName}.local";
   clan.core.deployment.requireExplicitUpdate = true;
 }
