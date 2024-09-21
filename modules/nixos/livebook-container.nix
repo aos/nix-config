@@ -1,7 +1,8 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.services.livebook-container;
-  # defaultPorts = [ 8080 8081 ];
+  defaultUser = "livebook";
+  defaultGroup = defaultUser;
   defaultDataDir = "/var/lib/livebook";
   nvidiaOption = "--device=nvidia.com/gpu=all";
 in
@@ -31,7 +32,7 @@ in
     exposeDefaultPorts = lib.mkOption {
       type = lib.types.bool;
       default = true;
-      example = false; 
+      example = false;
       description = ''
         Whether to expose ports 8080, 8081 from the container to the system.
       '';
@@ -66,7 +67,7 @@ in
     };
 
     environmentFile = lib.mkOption {
-      type = lib.types.path;
+      type = with lib.types; nullOr path;
       default = null;
       description = ''
         Additional environment file as defined in {manpage}`systemd.exec(5)`.
@@ -92,8 +93,8 @@ in
       example = "/var/lib/livebook.env";
     };
 
-    mountedDataDir = lib.mkOption {
-      type = lib.types.str
+    dataDir = lib.mkOption {
+      type = lib.types.str;
       default = defaultDataDir;
       description = ''
         Directory to attach as a volume to the container's /data directory
@@ -101,7 +102,7 @@ in
       example = "/home/myUser/train";
     };
 
-    enableNvidiaSupport = lib.mkOption {
+    nvidiaSupport = lib.mkOption {
       type = lib.types.bool;
       default = false;
       description = ''
@@ -112,29 +113,68 @@ in
     };
 
     extraOptions = lib.mkOption {
-      type = with lib.types; listOf str; 
+      type = with lib.types; listOf str;
       default = [ ];
       description = ''
         Extra options to pass into the container.
       '';
       example = [ "--network=host" ];
     };
+
+    user = lib.mkOption {
+      type = lib.types.str;
+      default = defaultUser;
+      example = "yourUser";
+      description = ''
+        The user for the data directory.
+        By default, a user named `${defaultUser}` will be created whose home
+        directory is [dataDir](#opt-services.livebook.dataDir).
+      '';
+    };
+
+    group = lib.mkOption {
+      type = lib.types.str;
+      default = defaultGroup;
+      example = "yourGroup";
+      description = ''
+        The group to run Livebook under.
+        By default, a group named `${defaultGroup}` will be created.
+      '';
+    };
   };
 
   ### Implementation
   config = lib.mkIf cfg.enable {
-    services.livebook-container = {
-      virtualisation.oci-containers.livebook = {
-        image = "${cfg.imageName}:${cfg.ImageTag}";
-        ports = lib.mkIf cfg.exposeDefaultPorts [ "8080:8080" "8081:8081" ];
-        extraOptions = lib.filter (o: o != nvidiaOption) cfg.extraOptions
-          ++ lib.optional cfg.enableNvidiaSupport nvidiaOption;
-        volumes = [ "${cfg.mountedDataDir}:/data" ];
-        environment = lib.mapAttrs (name: value:
-          if lib.isBool value then lib.boolToString value else toString value)
-          cfg.environment;
-        environmentFiles = [ cfg.environmentFile ];
-      };
+    users.users = lib.mkIf (cfg.user == defaultUser) {
+      ${defaultUser} =
+        {
+          group = cfg.group;
+          home  = cfg.dataDir;
+          createHome = true;
+          description = "Livebook user";
+          isNormalUser = true;
+        };
+    };
+
+    users.groups = lib.mkIf (cfg.group == defaultGroup) {
+      ${defaultGroup} = { };
+    };
+
+    virtualisation.oci-containers.containers.livebook = {
+      image = "${cfg.imageName}:${cfg.imageTag}";
+
+      ports = lib.mkIf cfg.exposeDefaultPorts [ "8080:8080" "8081:8081" ];
+
+      extraOptions = lib.filter (o: o != nvidiaOption) cfg.extraOptions
+        ++ lib.optional cfg.nvidiaSupport nvidiaOption;
+
+      volumes = [ "${cfg.dataDir}:/data" ];
+
+      environment = lib.mapAttrs (name: value:
+        if lib.isBool value then lib.boolToString value else toString value)
+        cfg.environment;
+
+      environmentFiles = lib.mkIf (cfg.environmentFile != null) [ cfg.environmentFile ];
     };
   };
 }
