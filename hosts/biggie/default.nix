@@ -16,7 +16,7 @@
   ];
 
   virtualisation.oci-containers.containers.livebook = {
-    image = "ghcr.io/livebook-dev/livebook:0.14.2-cuda12";
+    image = "ghcr.io/livebook-dev/livebook:0.13.3-cuda12.1";
     ports = [ "8080:8080" "8081:8081" ];
     extraOptions = [ "--device=nvidia.com/gpu=all" ];
     volumes = [ "/root/test_docker/train:/data" ];
