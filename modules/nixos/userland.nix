@@ -23,6 +23,8 @@
     # swww      # Wallpaper daemon
     mako # notification daemon
     fuzzel # Launcher
+    # raffi # fuzzel dmenu launcher
+    # TODO: wait until this hits 0.5.1: https://nixpk.gs/pr-tracker.html?pr=342392
 
     swaylock
     swayidle
