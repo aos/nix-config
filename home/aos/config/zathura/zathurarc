@@ -13,5 +13,9 @@ set window-title-page         true
 
 set adjust-open               width
 
-# Remove dual page view, action: `toggle_page_mode`
+# Remap dual page view, action: `toggle_page_mode`
 unmap d
+map <A-P> toggle_page_mode
+
+# Rebind dark mode (recolor) to the same as Dark Reader: Alt + Shift + D
+map <A-D> recolor
