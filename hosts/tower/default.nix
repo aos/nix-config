@@ -23,4 +23,12 @@
 
     ./nixos/configuration.nix
   ];
+
+  services.resolved = {
+    enable = true;
+    fallbackDns = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
+  };
 }

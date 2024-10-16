@@ -10,6 +10,10 @@ let
     inherit (pkgs.stdenv.hostPlatform) system;
     inherit (config.nixpkgs) config;
   };
+  nixpkgsStable = import inputs.nixpkgs-stable {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    inherit (config.nixpkgs) config;
+  };
 in
 {
   home.stateVersion = "22.05";
@@ -31,6 +35,7 @@ in
     webcord
     # zoom-us
     nixpkgsZoom.zoom-us
+    nixpkgsStable.mypaint
   ];
 
   programs.direnv.enable = true;

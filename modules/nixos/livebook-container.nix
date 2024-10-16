@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.services.livebook-container;
   defaultUser = "livebook";
@@ -39,7 +44,15 @@ in
     };
 
     environment = lib.mkOption {
-      type = with lib.types; attrsOf (nullOr (oneOf [ bool int str ]));
+      type =
+        with lib.types;
+        attrsOf (
+          nullOr (oneOf [
+            bool
+            int
+            str
+          ])
+        );
       default = { };
       description = ''
         Environment variables to set.
@@ -146,33 +159,44 @@ in
   ### Implementation
   config = lib.mkIf cfg.enable {
     users.users = lib.mkIf (cfg.user == defaultUser) {
-      ${defaultUser} =
-        {
-          group = cfg.group;
-          home  = cfg.dataDir;
-          createHome = true;
-          description = "Livebook user";
-          isNormalUser = true;
-        };
+      ${defaultUser} = {
+        group = cfg.group;
+        home = cfg.dataDir;
+        createHome = true;
+        description = "Livebook user";
+        isNormalUser = true;
+      };
     };
 
     users.groups = lib.mkIf (cfg.group == defaultGroup) {
       ${defaultGroup} = { };
     };
 
+    assertions = [
+      { assertion = cfg.nvidiaSupport -> config.hardware.nvidia-container-toolkit.enable;
+        message = ''
+          Option nvidiaSupport requires `hardware.nvidia-container-toolkit` to be enabled.
+        '';
+      }
+    ];
+
     virtualisation.oci-containers.containers.livebook = {
       image = "${cfg.imageName}:${cfg.imageTag}";
 
-      ports = lib.mkIf cfg.exposeDefaultPorts [ "8080:8080" "8081:8081" ];
+      ports = lib.mkIf cfg.exposeDefaultPorts [
+        "8080:8080"
+        "8081:8081"
+      ];
 
-      extraOptions = lib.filter (o: o != nvidiaOption) cfg.extraOptions
+      extraOptions =
+        lib.filter (o: o != nvidiaOption) cfg.extraOptions
         ++ lib.optional cfg.nvidiaSupport nvidiaOption;
 
       volumes = [ "${cfg.dataDir}:/data" ];
 
-      environment = lib.mapAttrs (name: value:
-        if lib.isBool value then lib.boolToString value else toString value)
-        cfg.environment;
+      environment = lib.mapAttrs (
+        name: value: if lib.isBool value then lib.boolToString value else toString value
+      ) cfg.environment;
 
       environmentFiles = lib.mkIf (cfg.environmentFile != null) [ cfg.environmentFile ];
     };

@@ -2,6 +2,7 @@
   description = "Server nixos configurations";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-zoom.url = "github:NixOS/nixpkgs/06031e8a5d9d5293c725a50acf01242193635022";
     nixos-hardware.url = "github:/NixOS/nixos-hardware/master";
     disko = {
@@ -105,14 +106,6 @@
     in
     {
       nixosConfigurations = {
-        mei = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ ./hosts/mei ];
-          specialArgs = {
-            inherit inputs;
-          };
-        };
-
         synth = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./hosts/synth ];
@@ -123,6 +116,7 @@
 
         tower = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          pkgs = pkgsForSystem "x86_64-linux";
           modules = [ ./hosts/tower ];
           specialArgs = {
             inherit inputs;
@@ -146,11 +140,6 @@
         "aos@tower" = mkHomeConfiguration {
           system = "x86_64-linux";
           modules = [ ./home/aos/tower.nix ];
-        };
-
-        mei = mkHomeConfiguration {
-          system = "x86_64-linux";
-          modules = [ ./home/mei/home.nix ];
         };
       };
 
