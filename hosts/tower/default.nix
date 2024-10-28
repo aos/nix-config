@@ -17,6 +17,7 @@
     ../../modules/nixos/system.nix
     ../../modules/nixos/tablet.nix
     ../../modules/nixos/userland.nix
+    ../../modules/nixos/bluetooth.nix
     ../../modules/nixos/virt.nix
     ../../modules/nixos/sops.nix
     ../../modules/nixos/upgrade-diff.nix

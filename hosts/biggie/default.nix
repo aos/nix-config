@@ -9,6 +9,7 @@
     ../../modules/nixos/virt.nix
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/steam.nix
+    ../../modules/nixos/bluetooth.nix
 
     ../../modules/nixos/ml.nix
 
