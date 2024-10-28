@@ -37,15 +37,6 @@
   # time.timeZone = "America/New_York";
   services.automatic-timezoned.enable = true;
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = false;
-  services.xserver.desktopManager.gnome.enable = false;
-
-  services.xserver.xkb.layout = "us";
-  services.xserver.xkb.options = "ctrl:nocaps";
-
   # services.printing.enable = true;
   services.libinput = {
     enable = true;

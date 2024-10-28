@@ -32,4 +32,9 @@
       "1.0.0.1"
     ];
   };
+
+  networking.extraHosts = ''
+    127.0.0.1 conduit.example
+    127.0.0.1 test.conduit.example
+  '';
 }

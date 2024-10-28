@@ -95,6 +95,13 @@
     };
   };
 
+  services.xserver.enable = true;
+  services.xserver.displayManager.gdm.enable = false;
+  services.xserver.desktopManager.gnome.enable = false;
+
+  services.xserver.xkb.layout = "us";
+  services.xserver.xkb.options = "ctrl:nocaps";
+
   services.greetd = {
     enable = true;
     settings = {

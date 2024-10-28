@@ -14,11 +14,6 @@
     "2606:4700:4700::1111"
   ];
 
-  networking.extraHosts = lib.mkIf (config.networking.hostName == "tower") ''
-    127.0.0.1 conduit.example
-    127.0.0.1 test.conduit.example
-  '';
-
   services.tailscale.enable = true;
 
   # https://github.com/systemd/systemd/blob/e1b45a756f71deac8c1aa9a008bd0dab47f64777/NEWS#L13
