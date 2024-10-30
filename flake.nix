@@ -122,6 +122,15 @@
             inherit inputs;
           };
         };
+
+        thalamus = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          pkgs = pkgsForSystem "x86_64-linux";
+          modules = [ ./hosts/thalamus ];
+          specialArgs = {
+            inherit inputs;
+          };
+        };
       } // clan.nixosConfigurations;
 
       inherit (clan) clanInternals;
@@ -138,6 +147,11 @@
         };
 
         "aos@tower" = mkHomeConfiguration {
+          system = "x86_64-linux";
+          modules = [ ./home/aos/tower.nix ];
+        };
+
+        "aos@thalamus" = mkHomeConfiguration {
           system = "x86_64-linux";
           modules = [ ./home/aos/tower.nix ];
         };
