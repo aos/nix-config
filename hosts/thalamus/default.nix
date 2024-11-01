@@ -2,6 +2,7 @@
   pkgs,
   configs,
   inputs,
+  lib,
   ...
 }:
 
@@ -29,8 +30,5 @@
     ];
   };
 
-  networking.extraHosts = ''
-    127.0.0.1 conduit.example
-    127.0.0.1 test.conduit.example
-  '';
+  services.tailscale.enable = false;
 }

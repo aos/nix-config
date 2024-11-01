@@ -20,4 +20,14 @@
       ".config/swappy/config".source = ./config/swappy;
     };
   };
+
+  # xdg.configFile."hypr/hyprland.conf".text = ''
+  # '' + builtins.readFile ./config/hypr/hyprland.conf;
+
+  # xdg.configFile.hypr.source = ./config/hypr;
+
+  xdg.configFile."electron-flags.conf".text = ''
+    --enable-features=UseOzonePlatform
+    --ozone-platform=wayland
+  '';
 }

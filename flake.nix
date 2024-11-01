@@ -153,7 +153,7 @@
 
         "aos@thalamus" = mkHomeConfiguration {
           system = "x86_64-linux";
-          modules = [ ./home/aos/tower.nix ];
+          modules = [ ./home/aos/thalamus.nix ];
         };
       };
 

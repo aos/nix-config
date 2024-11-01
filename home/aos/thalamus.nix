@@ -1,19 +1,23 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   ...
 }:
 
 let
-  nixpkgsZoom = import inputs.nixpkgs-zoom {
-    inherit (pkgs.stdenv.hostPlatform) system;
-    inherit (config.nixpkgs) config;
-  };
   nixpkgsStable = import inputs.nixpkgs-stable {
     inherit (pkgs.stdenv.hostPlatform) system;
     inherit (config.nixpkgs) config;
   };
+  latestZoom = pkgs.zoom-us.overrideAttrs (final: prev: {
+    src = pkgs.fetchurl {
+      url = "https://zoom.us/client/6.2.5.2440/zoom_x86_64.pkg.tar.xz";
+      hash = "sha256-h+kt+Im0xv1zoLTvE+Ac9sfw1VyoAnvqFThf5/MwjHU=";
+    };
+  });
+  openfortivpn-webview = pkgs.callPackage ./pkgs/openfortivpn-webview.nix { };
 in
 {
   home.stateVersion = "22.05";
@@ -33,9 +37,12 @@ in
   home.packages = with pkgs; [
     spotify
     webcord
-    # zoom-us
-    nixpkgsZoom.zoom-us
+    slack
+    latestZoom
     nixpkgsStable.mypaint
+
+    openfortivpn
+    openfortivpn-webview
   ];
 
   programs.direnv.enable = true;

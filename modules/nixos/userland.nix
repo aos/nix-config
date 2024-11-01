@@ -6,13 +6,18 @@
   ...
 }:
 
+let
+  hyprlandPackages = inputs.hyprland.packages.${pkgs.system};
+in
 {
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    package = hyprlandPackages.hyprland;
+    portalPackage = hyprlandPackages.xdg-desktop-portal-hyprland;
   };
+
+  programs.dconf.enable = true;
 
   environment.systemPackages = with pkgs; [
     exfatprogs
@@ -69,7 +74,7 @@
     };
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+      hyprlandPackages.xdg-desktop-portal-hyprland
     ];
     xdgOpenUsePortal = true;
   };
@@ -108,11 +113,16 @@
   services.xserver.xkb.layout = "us";
   services.xserver.xkb.options = "ctrl:nocaps";
 
+  services.dbus = {
+    enable = true;
+    packages = [ pkgs.dconf ];
+  };
+
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --cmd Hyprland";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --cmd ${hyprlandPackages.hyprland}/bin/Hyprland";
       };
     };
   };
