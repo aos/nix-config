@@ -64,7 +64,10 @@
         default = [ "hyprland" ];
       };
       hyprland = {
-        default = [ "gtk" "hyprland" ];
+        default = [
+          "gtk"
+          "hyprland"
+        ];
       };
     };
     extraPortals = [

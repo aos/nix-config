@@ -44,7 +44,7 @@
     ];
 
     openssh.authorizedKeys.keyFiles = [
-        ../../../sops/keys/aos/authorized_keys
+      ../../../sops/keys/aos/authorized_keys
     ];
   };
 

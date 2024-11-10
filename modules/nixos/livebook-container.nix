@@ -173,7 +173,8 @@ in
     };
 
     assertions = [
-      { assertion = cfg.nvidiaSupport -> config.hardware.nvidia-container-toolkit.enable;
+      {
+        assertion = cfg.nvidiaSupport -> config.hardware.nvidia-container-toolkit.enable;
         message = ''
           Option nvidiaSupport requires `hardware.nvidia-container-toolkit` to be enabled.
         '';

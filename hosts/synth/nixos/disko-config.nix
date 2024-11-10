@@ -4,7 +4,7 @@
       nvme0n1 = {
         type = "disk";
         # device = "/dev/disk/by-id/nvme-Micron_2200S_NVMe_256GB_________1921223D8017";
-        device = "/dev/disk/by-id/mmc-SS16G_0xb89e2638"
+        device = "/dev/disk/by-id/mmc-SS16G_0xb89e2638";
         content = {
           type = "gpt";
           partitions = {

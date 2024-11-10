@@ -1,6 +1,7 @@
 {
   pkgs,
   configs,
+  lib,
   inputs,
   ...
 }:
@@ -37,4 +38,25 @@
     127.0.0.1 conduit.example
     127.0.0.1 test.conduit.example
   '';
+
+  # Turn off some things that cause instant wakeup after suspend
+  services.udev.extraRules =
+    let
+      devs = [
+        {
+          vendor = "0x8086";
+          device = "0xa0ed";
+        }
+        {
+          vendor = "0x8086";
+          device = "0x9a13";
+        }
+      ];
+    in
+    lib.concatStringsSep "\n" (
+      map (devs: ''
+        # Turn off wakeup for some devices that causes poor suspend behavior
+        ACTION=="add" SUBSYSTEM=="pci" ATTR{vendor}=="${devs.vendor}" ATTR{device}=="${devs.device}" ATTR{power/wakeup}="disabled"
+      '') devs
+    );
 }
