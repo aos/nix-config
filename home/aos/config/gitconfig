@@ -44,3 +44,6 @@
   navigate = true
   line-numbers = true
   syntax-theme = Nord
+
+[include]
+  path = ~/.gitconfig_custom

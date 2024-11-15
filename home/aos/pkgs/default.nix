@@ -38,6 +38,7 @@ in
     docker-compose
     packer
     terraform
+    terraform-ls
     vagrant
 
     # k8s
@@ -54,6 +55,5 @@ in
     nb
     zathura
     yazi
-    libreoffice
   ];
 }

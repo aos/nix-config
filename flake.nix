@@ -141,6 +141,11 @@
           modules = [ ./home/aos/home.nix ];
         };
 
+        tao = mkHomeConfiguration {
+          system = "x86_64-linux";
+          modules = [ ./home/aos/tao.nix ];
+        };
+
         "aos@synth" = mkHomeConfiguration {
           system = "x86_64-linux";
           modules = [ ./home/aos/synth.nix ];
