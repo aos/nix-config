@@ -12,19 +12,22 @@
     inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
 
     ../../modules/nixos/network.nix
-    ../../modules/nixos/nfs.nix
     ../../modules/nixos/nix.nix
     ../../modules/nixos/steam.nix
     ../../modules/nixos/system.nix
-    ../../modules/nixos/tablet.nix
+
     ../../modules/nixos/userland.nix
     ../../modules/nixos/bluetooth.nix
     ../../modules/nixos/virt.nix
     ../../modules/nixos/sops.nix
     ../../modules/nixos/upgrade-diff.nix
 
+    ../../modules/nixos/nfs.nix
+
     ./nixos/configuration.nix
   ];
+
+  floofs.nfs.enable = true;
 
   services.resolved = {
     enable = true;

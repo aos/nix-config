@@ -6,10 +6,6 @@
 }:
 
 let
-  nixpkgsZoom = import inputs.nixpkgs-zoom {
-    inherit (pkgs.stdenv.hostPlatform) system;
-    inherit (config.nixpkgs) config;
-  };
   nixpkgsStable = import inputs.nixpkgs-stable {
     inherit (pkgs.stdenv.hostPlatform) system;
     inherit (config.nixpkgs) config;
@@ -33,8 +29,7 @@ in
   home.packages = with pkgs; [
     spotify
     webcord
-    # zoom-us
-    nixpkgsZoom.zoom-us
+    zoom-us
     nixpkgsStable.mypaint
   ];
 

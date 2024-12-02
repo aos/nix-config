@@ -82,14 +82,10 @@
     font-awesome
     noto-fonts-emoji
     material-design-icons
-    (nerdfonts.override {
-      fonts = [
-        "Inconsolata"
-        "Ubuntu"
-        "Noto"
-        "CascadiaCode"
-      ];
-    })
+    nerd-fonts.ubuntu
+    nerd-fonts.noto
+    nerd-fonts.caskaydia-mono
+    nerd-fonts.inconsolata
   ];
 
   security.rtkit.enable = true;

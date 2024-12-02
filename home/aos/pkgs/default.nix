@@ -39,7 +39,8 @@ in
     packer
     terraform
     terraform-ls
-    vagrant
+    # This is broken I guess
+    # vagrant
 
     # k8s
     k9s

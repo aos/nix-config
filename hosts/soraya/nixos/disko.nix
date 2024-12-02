@@ -72,13 +72,9 @@
             root = {
               size = "100%";
               content = {
-                type = "btrfs";
-                extraArgs = [ "-f" ];
+                type = "filesystem";
+                format = "xfs";
                 mountpoint = "/data";
-                mountOptions = [
-                  "compress=zstd"
-                  "noatime"
-                ];
               };
             };
           };
