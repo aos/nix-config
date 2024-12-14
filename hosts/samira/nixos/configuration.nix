@@ -13,7 +13,7 @@
     ./disko.nix
   ];
 
-  sops.defaultSopsFile = lib.mkForce ../../../sops/samira/secrets.enc.yaml;
+  sops.defaultSopsFile = ../../../sops/samira/secrets.enc.yaml;
 
   networking.hostName = "samira";
 

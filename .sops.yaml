@@ -2,6 +2,7 @@ keys:
   - &yk_pgp 5962486144B0FAE0B535FC9BFF404ABD083C84EC
   - &tower age19dy6xgjsm2fvkyvqvstv83dzjp7nwzd093cgd6cm3tzanh35sq7qr35zh9
   - &pylon age1lgkch86vqgwszsnsvl8lcdmvyfcrked50wrsuwj3adza8nxh7geqhtyr5q
+  - &samira age1g2xaldhxyt4cmy2lwv24urdyqkw9xzq528fc7amg2hrjz2e0xdcqw66z7a
 
 creation_rules:
   - path_regex: general/secrets.enc.yaml$
@@ -25,4 +26,13 @@ creation_rules:
     - pgp:
         - *yk_pgp
       age:
+        - *samira
+        - *tower
+
+  - path_regex: k3s/secrets.enc.yaml$
+    key_groups:
+    - pgp:
+        - *yk_pgp
+      age:
+        - *samira
         - *tower

@@ -7,7 +7,7 @@
     # ../../modules/nixos/calibre.nix
 
     ../../modules/nixos/nfs.nix
-    ../../modules/nixos/rke2.nix
+    ../../modules/nixos/k3s.nix
 
     ./nixos/configuration.nix
   ];
@@ -16,6 +16,11 @@
     enable = true;
     folderName = "k8s_storage";
     mountpoint = "/mnt/nas";
+  };
+
+  floofs.k3s = {
+    enable = true;
+    clusterInit = true;
   };
 
   clan.core.networking.targetHost = "root@${config.networking.hostName}";

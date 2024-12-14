@@ -31,6 +31,7 @@ in
     webcord
     zoom-us
     nixpkgsStable.mypaint
+    slack
   ];
 
   programs.direnv.enable = true;
