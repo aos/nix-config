@@ -7,7 +7,7 @@
     # ../../modules/nixos/calibre.nix
 
     ../../modules/nixos/nfs.nix
-    ../../modules/nixos/k3s.nix
+    ../../modules/nixos/k3s
 
     ./nixos/configuration.nix
   ];
@@ -20,7 +20,7 @@
 
   floofs.k3s = {
     enable = true;
-    clusterInit = true;
+    masterNode = true;
   };
 
   clan.core.networking.targetHost = "root@${config.networking.hostName}";

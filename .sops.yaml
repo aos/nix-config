@@ -3,6 +3,8 @@ keys:
   - &tower age19dy6xgjsm2fvkyvqvstv83dzjp7nwzd093cgd6cm3tzanh35sq7qr35zh9
   - &pylon age1lgkch86vqgwszsnsvl8lcdmvyfcrked50wrsuwj3adza8nxh7geqhtyr5q
   - &samira age1g2xaldhxyt4cmy2lwv24urdyqkw9xzq528fc7amg2hrjz2e0xdcqw66z7a
+  - &soraya age1zwsj98d9rhf30trxng3vy739v5vvs6y5kgkp24jlelg26yluqy8sqpu2u6
+  - &sakina age1cdc2cpsxul9lqr5pesxdc42xytsn5kwwmpekchgwwuh97e4drykqwzeva0
 
 creation_rules:
   - path_regex: general/secrets.enc.yaml$
@@ -35,4 +37,6 @@ creation_rules:
         - *yk_pgp
       age:
         - *samira
+        - *soraya
+        - *sakina
         - *tower
