@@ -7,7 +7,10 @@
     ./nixos/configuration.nix
   ];
 
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    extraSetFlags = [ "--accept-routes" ];
+  };
 
   clan.core.networking.targetHost = "root@${config.networking.hostName}";
   clan.core.deployment.requireExplicitUpdate = true;

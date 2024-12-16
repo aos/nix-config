@@ -9,6 +9,7 @@
 let
   cfg = config.floofs.k3s;
   vipControlplane = "192.168.10.2";
+  loadbalancerCidr = "192.168.10.4/30"; # 4-7
 in
 {
   imports = [
@@ -37,6 +38,15 @@ in
       };
     };
 
+    services.tailscale = lib.mkIf config.services.tailscale.enable {
+      useRoutingFeatures = "server";
+      # use subnet router to advertise the kube-vip control plane
+      # and Service LoadBalancer via kube-vip cloud controller
+      extraSetFlags = [
+        "--advertise-routes=${vipControlplane}/32,${loadbalancerCidr}"
+      ];
+    };
+
     services.k3s = {
       enable = cfg.enable;
       role = "server";
@@ -57,6 +67,18 @@ in
             "@VIP_CONTROLPLANE@"
             vipControlplane
           ];
+        };
+        kube-vip-cloud-controller.source = ./kube-vip-cloud-controller.yaml;
+        kube-vip-cloud-controller-cm.content = {
+          apiVersion = "v1";
+          kind = "ConfigMap";
+          metadata = {
+            name = "kubevip";
+            namespace = "kube-system";
+          };
+          data = {
+            cidr-global = loadbalancerCidr;
+          };
         };
       };
     };

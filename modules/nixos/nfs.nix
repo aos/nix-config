@@ -40,7 +40,7 @@ in
           Options = "noatime";
         };
         what = "${cfg.nfsLocation}:/volume1/${cfg.folderName}";
-        where = "${cfg.mountpoint}";
+        where = cfg.mountpoint;
       }
     ];
 
@@ -50,7 +50,7 @@ in
         automountConfig = {
           TimeoutIdleSec = "600";
         };
-        where = "${cfg.mountpoint}";
+        where = cfg.mountpoint;
       }
     ];
   };
