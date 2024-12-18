@@ -161,11 +161,20 @@
         };
       };
 
+      # Helper script to make updating sops easier
+      packages."${defaultSystem}".sops-local =
+        pkgs.writeShellScriptBin "sops-local" ''
+          export SOPS_AGE_KEY=$(ssh-to-age -private-key -i ~/.ssh/id_tower)
+          ${pkgs.lib.getExe pkgs.sops} $@
+        '';
+
       devShells."${defaultSystem}" = {
         default =
           with (pkgsForSystem defaultSystem);
           mkShell {
             buildInputs = [
+              self.packages.${system}.sops-local
+
               nixos-anywhere
               inputs.clan-core.packages.${defaultSystem}.clan-cli
               nix-inspect # Run with: nix-inspect -p .
