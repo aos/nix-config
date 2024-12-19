@@ -1,4 +1,4 @@
-{ inputs, config, ... }:
+{ inputs, config, lib, ... }:
 
 {
   imports = [
@@ -15,6 +15,11 @@
 
     ./nixos/configuration.nix
   ];
+
+  systemd.network.networks."99-ethernet-default-dhcp".networkConfig.MulticastDNS = lib.mkForce false;
+  systemd.network.networks."99-wireless-client-dhcp".networkConfig.MulticastDNS = lib.mkForce false;
+  # services.avahi.enable = false;
+  # services.tailscale.extraSetFlags = [ "--advertise-exit-node" ];
 
   clan.core.networking.targetHost = "root@${config.networking.hostName}";
   clan.core.deployment.requireExplicitUpdate = true;

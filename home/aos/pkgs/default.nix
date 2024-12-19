@@ -34,8 +34,6 @@ in
 
     # Infra tools
     ansible
-    awscli2
-    docker-compose
     packer
     terraform
     terraform-ls

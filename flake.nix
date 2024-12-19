@@ -43,7 +43,7 @@
     let
       inherit (self) outputs;
       defaultSystem = "x86_64-linux";
-      pkgsForSystem =
+      pkgsFor =
         system:
         import nixpkgs {
           inherit system;
@@ -53,10 +53,11 @@
           ];
           config.allowUnfree = true;
         };
+      defaultPackages = pkgsFor defaultSystem;
       mkHomeConfiguration =
         { system, modules }:
         home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgsForSystem system;
+          pkgs = pkgsFor system;
           extraSpecialArgs = {
             inherit inputs outputs;
           };
@@ -71,17 +72,17 @@
         };
         machines = {
           samira = {
-            nixpkgs.pkgs = pkgsForSystem defaultSystem;
+            nixpkgs.pkgs = defaultPackages;
             imports = [ ./hosts/samira ];
           };
 
           soraya = {
-            nixpkgs.pkgs = pkgsForSystem defaultSystem;
+            nixpkgs.pkgs = defaultPackages;
             imports = [ ./hosts/soraya ];
           };
 
           sakina = {
-            nixpkgs.pkgs = pkgsForSystem defaultSystem;
+            nixpkgs.pkgs = defaultPackages;
             imports = [ ./hosts/sakina ];
           };
 
@@ -97,7 +98,7 @@
           };
 
           pylon = {
-            nixpkgs.pkgs = pkgsForSystem defaultSystem;
+            nixpkgs.pkgs = defaultPackages;
             imports = [ ./hosts/pylon ];
           };
         };
@@ -115,7 +116,7 @@
 
         tower = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          pkgs = pkgsForSystem "x86_64-linux";
+          pkgs = pkgsFor "x86_64-linux";
           modules = [ ./hosts/tower ];
           specialArgs = {
             inherit inputs;
@@ -124,7 +125,7 @@
 
         thalamus = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          pkgs = pkgsForSystem "x86_64-linux";
+          pkgs = pkgsFor "x86_64-linux";
           modules = [ ./hosts/thalamus ];
           specialArgs = {
             inherit inputs;
@@ -163,17 +164,18 @@
 
       # Helper script to make updating sops easier
       packages."${defaultSystem}".sops-local =
-        pkgs.writeShellScriptBin "sops-local" ''
+        with defaultPackages;
+        writeShellScriptBin "sops-local" ''
           export SOPS_AGE_KEY=$(ssh-to-age -private-key -i ~/.ssh/id_tower)
-          ${pkgs.lib.getExe pkgs.sops} $@
+          ${lib.getExe pkgs.sops} $@
         '';
 
       devShells."${defaultSystem}" = {
         default =
-          with (pkgsForSystem defaultSystem);
+          with defaultPackages;
           mkShell {
             buildInputs = [
-              self.packages.${system}.sops-local
+              self.packages.${defaultSystem}.sops-local
 
               nixos-anywhere
               inputs.clan-core.packages.${defaultSystem}.clan-cli
@@ -191,6 +193,6 @@
           };
       };
 
-      formatter."${defaultSystem}" = (pkgsForSystem defaultSystem).nixfmt-rfc-style;
+      formatter."${defaultSystem}" = defaultPackages.nixfmt-rfc-style;
     };
 }
