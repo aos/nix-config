@@ -50,6 +50,11 @@
           overlays = [
             inputs.gotors.overlays.default
             inputs.atools.overlays.default
+
+            # Custom packages overlay
+            (_final: prev: {
+              caddy-with-plugins = prev.callPackage ./pkgs/caddy-with-plugins { };
+            })
           ];
           config.allowUnfree = true;
         };

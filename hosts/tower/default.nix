@@ -29,6 +29,8 @@
 
   floofs.nfs.enable = true;
 
+  services.tailscale.extraSetFlags = [ "--accept-routes" ];
+
   services.resolved = {
     enable = true;
     fallbackDns = [
