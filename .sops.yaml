@@ -31,12 +31,28 @@ creation_rules:
         - *samira
         - *tower
 
+  - path_regex: soraya/secrets.enc.yaml$
+    key_groups:
+    - pgp:
+        - *yk_pgp
+      age:
+        - *soraya
+        - *tower
+
+  - path_regex: sakina/secrets.enc.yaml$
+    key_groups:
+    - pgp:
+        - *yk_pgp
+      age:
+        - *sakina
+        - *tower
+
   - path_regex: k3s/secrets.enc.yaml$
     key_groups:
     - pgp:
         - *yk_pgp
       age:
+        - *tower
         - *samira
         - *soraya
         - *sakina
-        - *tower
