@@ -45,6 +45,16 @@ resource "hcloud_firewall" "firewall" {
     ]
   }
 
+  rule {
+    direction = "in"
+    protocol  = "tcp"
+    port      = "80"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0",
+    ]
+  }
+
   # All outbound traffic is allowed
 
   labels = {

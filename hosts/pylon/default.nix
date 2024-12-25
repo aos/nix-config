@@ -3,9 +3,23 @@
 {
   imports = [
     ../../modules/nixos/server.nix
+    ../../modules/nixos/sops.nix
 
     ./nixos/configuration.nix
   ];
+
+  sops = {
+    defaultSopsFile = ../../sops/pylon/secrets.enc.yaml;
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
+    secrets.cf_floofs_api_token = { };
+    secrets.ingress_lb_ip = { };
+
+    templates.caddy_env.content = ''
+      CF_DNS_API_TOKEN=${config.sops.placeholder.cf_floofs_api_token}
+      INGRESS_LOADBALANCER_IP=${config.sops.placeholder.ingress_lb_ip}
+    '';
+  };
 
   services.tailscale = {
     enable = true;
@@ -18,9 +32,14 @@
       plugins = [ "github.com/caddy-dns/cloudflare@v0.0.0-20240703190432-89f16b99c18e" ];
       hash = "sha256-Aqu2st8blQr/Ekia2KrH1AP/2BVZIN4jOJpdLc1Rr4g=";
     };
-    virtualHosts."floofs.club".extraConfig = ''
-      respond "Hello world!"
+    virtualHosts."*.floofs.club".extraConfig = ''
+      tls {
+        dns cloudflare {env.CF_DNS_API_TOKEN}
+      }
+
+      reverse_proxy http://{$INGRESS_LOADBALANCER_IP}
     '';
+    environmentFile = config.sops.templates.caddy_env.path;
   };
 
   clan.core.networking.buildHost = "root@biggie";
