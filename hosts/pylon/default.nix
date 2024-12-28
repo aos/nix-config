@@ -37,6 +37,8 @@
         dns cloudflare {env.CF_DNS_API_TOKEN}
       }
 
+      header_up Host {upstream_hostport}
+
       reverse_proxy http://{$INGRESS_LOADBALANCER_IP}
     '';
     environmentFile = config.sops.templates.caddy_env.path;
