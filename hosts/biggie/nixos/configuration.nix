@@ -8,6 +8,12 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
+  fileSystems."/data" = {
+    options = [ "defaults" "pquota" ];
+    device = "/dev/disk/by-partlabel/disk-secondary_hdd-root";
+    fsType = "xfs";
+  };
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -25,6 +31,7 @@
     jq
     unzip
     vim
+    xfsprogs
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";
