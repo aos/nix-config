@@ -1,4 +1,4 @@
-{ inputs, config, lib, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 {
   imports = [
@@ -23,6 +23,19 @@
     useRoutingFeatures = "server";
     extraSetFlags = [ "--advertise-exit-node" ];
   };
+
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_16;
+    dataDir = "/data/postgresql/16";
+    enableTCPIP = true;
+    # Trust with password, all databases
+    authentication = ''
+    host  all all 192.168.10.1/24 md5
+    '';
+  };
+
+  networking.firewall.allowedTCPPorts = [ 5432 443 22 ];
 
   clan.core.networking.targetHost = "root@${config.networking.hostName}";
   clan.core.deployment.requireExplicitUpdate = true;
