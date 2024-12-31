@@ -5,6 +5,7 @@
     inputs.srvos.nixosModules.desktop
 
     ../../modules/nixos/network.nix
+    ../../modules/nixos/sops.nix
 
     ../../modules/nixos/virt.nix
     ../../modules/nixos/nvidia.nix
@@ -32,7 +33,15 @@
     # Trust with password, all databases
     authentication = ''
     host  all all 192.168.10.1/24 md5
+    host  all all 100.64.0.0/10   md5
     '';
+  };
+
+  services.postgresqlBackup = {
+    enable = true;
+    compression = "zstd";
+    # We trigger this through restic
+    startAt = [ ];
   };
 
   networking.firewall.allowedTCPPorts = [ 5432 443 22 ];
