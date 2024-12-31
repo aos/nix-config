@@ -28,18 +28,29 @@
 
   services.caddy = {
     enable = true;
-    package = pkgs.caddy-with-plugins.withPlugins {
-      plugins = [ "github.com/caddy-dns/cloudflare@v0.0.0-20240703190432-89f16b99c18e" ];
-      hash = "sha256-Aqu2st8blQr/Ekia2KrH1AP/2BVZIN4jOJpdLc1Rr4g=";
+    package = pkgs.caddy.withPlugins {
+      plugins = [
+        "github.com/caddy-dns/cloudflare@v0.0.0-20240703190432-89f16b99c18e"
+        "github.com/WeidiDeng/caddy-cloudflare-ip@v0.0.0-20231130002422-f53b62aa13cb"
+      ];
+      hash = "sha256-H4dbfBlBZDBOUuFzh3DRB/Pw2j+j1kHw1gIO4PK7Qfg=";
     };
+    globalConfig = ''
+      servers {
+        trusted_proxies cloudflare {
+          interval 24h
+          timeout 15s
+        }
+      }
+    '';
     virtualHosts."*.floofs.club".extraConfig = ''
       tls {
         dns cloudflare {env.CF_DNS_API_TOKEN}
       }
 
-      header_up Host {upstream_hostport}
-
-      reverse_proxy http://{$INGRESS_LOADBALANCER_IP}
+      reverse_proxy http://{$INGRESS_LOADBALANCER_IP} {
+        header_up X-Forwarded-Proto https
+      }
     '';
     environmentFile = config.sops.templates.caddy_env.path;
   };
