@@ -15,6 +15,7 @@ creation_rules:
         - *yk_pgp
       age:
         - *tower
+        - *biggie
 
   - path_regex: pylon/secrets.enc.yaml$
     key_groups:
