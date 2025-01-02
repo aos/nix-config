@@ -24,6 +24,7 @@
   '';
 
   home.packages = with pkgs; [
+    gh
     cloudflared
     (google-cloud-sdk.withExtraComponents
       ([google-cloud-sdk.components.gke-gcloud-auth-plugin]))
