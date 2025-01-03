@@ -31,6 +31,7 @@ in
     htop
     age
     delta
+    _1password-cli
 
     # Infra tools
     ansible
