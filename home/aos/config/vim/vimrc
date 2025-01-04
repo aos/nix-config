@@ -60,6 +60,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'zschreur/telescope-jj.nvim'
   Plug 'justinmk/vim-dirvish'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-surround'
@@ -150,7 +151,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Telescope
-require('telescope').setup {
+local telescope = require('telescope')
+local telescope_builtin = require('telescope.builtin')
+
+telescope.setup {
   defaults = {
     layout_strategy = 'flex',
     layout_config = {
@@ -176,15 +180,27 @@ require('telescope').setup {
     }
   },
 }
+telescope.load_extension('jj')
+local vcs_picker = function(opts)
+  local jj_pick_status, jj_res = pcall(telescope.extensions.jj.files, opts)
+  if jj_pick_status then
+    return
+  end
+
+  local git_files_status, git_res = pcall(telescope_builtin.git_files, opts)
+  if not git_files_status then
+      error("Could not launch jj/git files: \n" .. jj_res .. "\n" .. git_res)
+  end
+end
 
 --Add telescope shortcuts
 local tele_opts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap('n', '<Tab>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], tele_opts)
--- vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], tele_opts)
-vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').git_files()<CR>]], tele_opts)
-vim.api.nvim_set_keymap('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], tele_opts)
-vim.api.nvim_set_keymap('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').git_commits()<CR>]], tele_opts)
-vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require('telescope.builtin').git_bcommits()<CR>]], tele_opts)
+vim.keymap.set('n', '<Tab>', telescope_builtin.buffers, tele_opts)
+-- vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, tele_opts)
+vim.keymap.set('n', '<leader>ff', vcs_picker, tele_opts)
+vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, tele_opts)
+vim.keymap.set('n', '<leader>fc', telescope_builtin.git_commits, tele_opts)
+vim.keymap.set('n', '<leader>fb', telescope_builtin.git_bcommits, tele_opts)
 
 -- Treesitter configs
 require('nvim-treesitter.configs').setup {
