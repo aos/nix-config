@@ -1,0 +1,18 @@
+[user]
+name = "Aos Dabbagh"
+email = "25783780+aos@users.noreply.github.com"
+
+[aliases]
+d = ["diff"]
+
+[ui]
+pager = "delta"
+default-command = ["log"]
+
+[ui.diff]
+format = "git"
+
+[signing]
+sign-all = true
+backend = "ssh"
+key = "~/.ssh/id_git.pub"

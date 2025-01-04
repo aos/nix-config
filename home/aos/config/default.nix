@@ -14,6 +14,7 @@
 
   home.file.".tmux.conf".source = ./tmux;
 
+  home.file.".config/jj/config.toml".source = ./jj_config.toml;
   home.file.".gitconfig".source = ./gitconfig;
   home.file.".ignore".source = ./rg_ignore;
   home.file.".config/foot/foot.ini".source = ./terminal/foot.ini;
