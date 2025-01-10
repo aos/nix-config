@@ -4,10 +4,11 @@ email = "25783780+aos@users.noreply.github.com"
 
 [aliases]
 d = ["diff"]
+l = ["log"]
 
 [ui]
 pager = "delta"
-default-command = ["log"]
+default-command = ["log", "-T", "builtin_log_oneline"]
 
 [ui.diff]
 format = "git"

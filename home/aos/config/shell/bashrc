@@ -45,10 +45,28 @@ TEAL="\[\e[96m\]"
 YELLOW="\[\e[33m\]"
 CLEAR="\[\e[0m\]"
 
-# Show git branch
-# [Deprecated] use `__git_ps1` instead
-_show_git_branch () {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+# Print Git or jj repository information
+_jjgit_prompt() {
+  # echo "jj" or "git" if either is found in $PWD or its parent directories
+  # using the shell is much faster than `git rev-parse --git-dir` or `jj root`#
+  pwd_in_jjgit() {
+    local D="/$PWD"
+    while test -n "$D" ; do
+      test -e "$D/.jj" && { echo jj ; return; }
+      test -e "$D/.git" && { echo git ; return; }
+      D="${D%/*}"
+    done
+  }
+  local jjgit="$(pwd_in_jjgit)"  # results in "jj", "git" or ""
+  if test "$jjgit" = jj ; then
+    # --ignore-working-copy: avoid inspecting $PWD and concurrent snapshotting which could create divergent commits
+    jj --ignore-working-copy --no-pager log --no-graph --color=always -r @ -T \
+       ' "(@ " ++ concat( separate(" ", format_short_change_id_with_hidden_and_divergent_info(self), format_short_commit_id(commit_id),
+       				   bookmarks, if(conflict, label("conflict", "conflict")) ) ) ++ ")\n" ' 2>/dev/null
+  elif test "$jjgit" = git ; then
+    local gitprompt=$(git branch --show-current)
+    echo "(${gitprompt/HEAD/})"
+  fi
 }
 
 # Show background jobs and if we are in a nix shell
@@ -63,7 +81,7 @@ _show_nix_and_jobs () {
   [[ "$n" != "" ]] && echo -e "[${n}]" || echo "";
 }
 
-PS1="\$(_show_nix_and_jobs \j)$GREEN[\u@\h] $CYAN\w$YELLOW\$(_show_git_branch)$CLEAR \$ "
+PS1="\$(_show_nix_and_jobs \j)$GREEN[\u@\h] $CYAN\w$YELLOW \$(_jjgit_prompt)$CLEAR \$ "
 
 # Some environment variables
 export SYSTEMD_LESS='FRXMK'; # allow journalctl to wrap long lines
