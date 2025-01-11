@@ -23,7 +23,7 @@ in
     ./config
 
     ../common/hyprland.nix
-    ../common/gtk.nix
+    ../common/theme.nix
   ];
 
   home.packages = with pkgs; [

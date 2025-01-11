@@ -18,7 +18,7 @@
 
   imports = [
     ../common/colors.nix
-    ../common/gtk.nix
+    ../common/theme.nix
   ];
 
   nixpkgs = {

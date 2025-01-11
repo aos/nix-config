@@ -17,7 +17,7 @@
     ./config
 
     ../common/hyprland.nix
-    ../common/gtk.nix
+    ../common/theme.nix
   ];
 
   programs.direnv.enable = true;
