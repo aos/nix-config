@@ -12,21 +12,30 @@
     enable = true;
     flavor = "macchiato";
     accent = "blue";
-  };
 
-  gtk = {
-    enable = true;
-
-    catppuccin = {
+    gtk = {
       enable = true;
       flavor = "macchiato";
       accent = "blue";
       size = "compact";
       tweaks = [ "black" ];
-
       icon.enable = true;
     };
   };
+
+  # gtk = {
+  #   enable = true;
+
+  #   catppuccin = {
+  #     enable = true;
+  #     flavor = "macchiato";
+  #     accent = "blue";
+  #     size = "compact";
+  #     tweaks = [ "black" ];
+
+  #     icon.enable = true;
+  #   };
+  # };
 
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";
