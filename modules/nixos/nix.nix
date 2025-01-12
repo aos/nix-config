@@ -20,9 +20,9 @@
       connect-timeout = 5;
 
       substituters = [
+        "https://hyprland.cachix.org"
         "https://cache.nixos.org?priority=10"
         "https://nix-community.cachix.org"
-        "https://hyprland.cachix.org"
       ];
 
       trusted-public-keys = [

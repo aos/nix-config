@@ -25,7 +25,7 @@
         "github.com/caddy-dns/cloudflare@v0.0.0-20240703190432-89f16b99c18e"
         "github.com/WeidiDeng/caddy-cloudflare-ip@v0.0.0-20231130002422-f53b62aa13cb"
       ];
-      hash = "sha256-X3SNPfianAWLXnE0hpQpgaaCqIqHm0jgyp1clnQKmUg=";
+      hash = "sha256-XcQDNbirIqG1/8zIPuUCuSe7IXzzH/EW60pjjssNbLw=";
     };
     globalConfig = ''
       servers {

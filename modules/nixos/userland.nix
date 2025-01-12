@@ -9,6 +9,8 @@
 {
   programs.hyprland = {
     enable = true;
+    # https://wiki.hyprland.org/Useful-Utilities/Systemd-start/#uwsm
+    withUWSM = true;
     xwayland.enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
@@ -111,7 +113,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --cmd Hyprland";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd 'uwsm start hyprland-uwsm.desktop'";
       };
     };
   };
