@@ -16,6 +16,9 @@ creation_rules:
       age:
         - *tower
         - *biggie
+        - *samira
+        - *soraya
+        - *sakina
 
   - path_regex: pylon/secrets.enc.yaml$
     key_groups:
