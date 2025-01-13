@@ -12,8 +12,3 @@ default-command = ["log", "-T", "builtin_log_oneline"]
 
 [ui.diff]
 format = "git"
-
-[signing]
-sign-all = true
-backend = "ssh"
-key = "~/.ssh/id_git.pub"

@@ -23,6 +23,12 @@
     gpgsign = true
   '';
 
+  programs.jujutsu.settings.signing = {
+    sign-all = true;
+    backend = "ssh";
+    key = "~/.ssh/id_ed25519.pub";
+  };
+
   home.packages = with pkgs; [
     gh
     cloudflared

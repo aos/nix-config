@@ -6,6 +6,24 @@
     ./shell
   ];
 
+  programs.jujutsu = {
+    enable = true;
+    settings = {
+      user = {
+        name = "Aos Dabbagh";
+        email = "25783780+aos@users.noreply.github.com";
+      };
+      aliases = {
+        d = ["diff"];
+      };
+      ui = {
+        pager = "delta";
+        default-command = ["log"];
+        diff.format = "git";
+      };
+    };
+  };
+
   # program configs
   home.file.".ssh/id_rsa_yk.pub".source = ./ssh_id_rsa_yk.pub;
   home.file.".ssh/config".source = ./ssh_config;
@@ -14,7 +32,7 @@
 
   home.file.".tmux.conf".source = ./tmux;
 
-  home.file.".config/jj/config.toml".source = ./jj_config.toml;
+  # home.file.".config/jj/config.toml".source = ./jj_config.toml;
   home.file.".gitconfig".source = ./gitconfig;
   home.file.".ignore".source = ./rg_ignore;
   home.file.".config/foot/foot.ini".source = ./terminal/foot.ini;
