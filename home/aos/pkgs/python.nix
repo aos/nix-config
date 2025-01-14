@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  llm-claude-3 = pkgs.python3Packages.callPackage ./llm-claude-3.nix { };
+  llm-anthropic = pkgs.python3Packages.callPackage ./llm-anthropic.nix { };
 in
 {
   home.packages = [
@@ -10,7 +10,7 @@ in
         pynvim
         python-lsp-server
         llm
-        llm-claude-3
+        llm-anthropic
       ]
     ))
   ];

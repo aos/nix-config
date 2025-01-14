@@ -38,35 +38,50 @@ export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 gpgconf --launch gpg-agent
 
 # Prompt colors
-BRIGHT_BLUE="\[\e[34;1m\]"
-CYAN="\[\e[36m\]"
-GREEN="\[\e[32m\]"
-TEAL="\[\e[96m\]"
-YELLOW="\[\e[33m\]"
-CLEAR="\[\e[0m\]"
+BRIGHT_BLUE="\001\033[34;1m\002"
+CYAN="\001\033[36m\002"
+GREEN="\001\033[32m\002"
+TEAL="\001\033[96m\002"
+YELLOW="\001\033[33m\002"
+CLEAR="\001\033[0m\002"
 
 # Print Git or jj repository information
-_jjgit_prompt() {
-  # echo "jj" or "git" if either is found in $PWD or its parent directories
-  # using the shell is much faster than `git rev-parse --git-dir` or `jj root`#
-  pwd_in_jjgit() {
-    local D="/$PWD"
-    while test -n "$D" ; do
-      test -e "$D/.jj" && { echo jj ; return; }
-      test -e "$D/.git" && { echo git ; return; }
-      D="${D%/*}"
-    done
-  }
-  local jjgit="$(pwd_in_jjgit)"  # results in "jj", "git" or ""
-  if test "$jjgit" = jj ; then
-    # --ignore-working-copy: avoid inspecting $PWD and concurrent snapshotting which could create divergent commits
-    jj --ignore-working-copy --no-pager log --no-graph --color=always -r @ -T \
-       ' "(@ " ++ concat( separate(" ", format_short_change_id_with_hidden_and_divergent_info(self), format_short_commit_id(commit_id),
-       				   bookmarks, if(conflict, label("conflict", "conflict")) ) ) ++ ")\n" ' 2>/dev/null
-  elif test "$jjgit" = git ; then
-    local gitprompt=$(git branch --show-current)
-    echo "(${gitprompt/HEAD/})"
-  fi
+__jj_ps1() {
+  local ret="$(jj --ignore-working-copy --color never log -l1 -r @ --no-graph --config-toml "
+  [template-aliases]
+  'colored(color, txt)' = '''
+    surround('\x01\e[' ++ color ++ 'm\x02', '\x01\e[0m\x02', txt)
+  '''
+  'red(txt)'     = '''colored('31', txt)'''
+  'yellow(txt)'  = '''colored('33', txt)'''
+  'magenta(txt)' = '''colored('35', txt)'''
+  'cyan(txt)'    = '''colored('36', txt)'''
+  " -T '
+  concat(
+    yellow("(@"),
+    surround(" ", " ", yellow(bookmarks)),
+    surround("", " -> ",
+      if(!description,  yellow(separate("+",
+        parents.map(|c| coalesce(
+        c.tags(), c.branches(), c.change_id().shortest())
+        ))))),
+    if(empty,
+      magenta(change_id.shortest()),
+      magenta(change_id.shortest() ++ "*")),
+    surround(":", "", concat(
+      if(divergent, cyan("Y")),
+      if(conflict,  red("X")),
+    )),
+    yellow(")"),
+  )' 2>/dev/null)"
+  [[ $ret ]] && echo -e "$ret"
+}
+
+__vcs_ps1() {
+  local jj_ps1="$(__jj_ps1)"
+  [[ $jj_ps1 ]] &&
+    echo "$jj_ps1" ||
+    __git_ps1 '\001\033[33m\002(%s)\001\033[0m\002'
 }
 
 # Show background jobs and if we are in a nix shell
@@ -81,7 +96,9 @@ _show_nix_and_jobs () {
   [[ "$n" != "" ]] && echo -e "[${n}]" || echo "";
 }
 
-PS1="\$(_show_nix_and_jobs \j)$GREEN[\u@\h] $CYAN\w$YELLOW \$(_jjgit_prompt)$CLEAR \$ "
+# Only retain the last directory
+PROMPT_DIRTRIM=1
+PS1="\$(_show_nix_and_jobs \j)$GREEN[\u@\h] $CYAN\w $CLEAR\$(__vcs_ps1) $CLEAR\$ "
 
 # Some environment variables
 export SYSTEMD_LESS='FRXMK'; # allow journalctl to wrap long lines
