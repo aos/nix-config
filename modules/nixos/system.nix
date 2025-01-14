@@ -16,6 +16,10 @@
     tree
     htop
     unzip
-    gitMinimal
   ];
+
+  programs.git = {
+    enable = true;
+    prompt.enable = true;
+  };
 }
