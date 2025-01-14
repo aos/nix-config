@@ -30,10 +30,10 @@
         "magenta(txt)" = "colored('35', txt)";
         "cyan(txt)"    = "colored('36', txt)";
         "ps1_repo_info" = ''concat(
-          yellow("(@"),
-          surround(" ", " ", yellow(bookmarks)),
+          yellow("(@ "),
+          surround("", " ", yellow(bookmarks)),
           surround("", " -> ",
-            if(!description,  yellow(separate("+",
+            if(!description,  magenta(separate("+",
               parents.map(|c| coalesce(
               c.tags(), c.bookmarks(), c.change_id().shortest())
               ))))),
