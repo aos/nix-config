@@ -95,6 +95,8 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Set preview window to bottom
 set splitbelow
+" Set preview window to right
+set splitright
 " Autoclose preview window when done selecting
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | silent! pclose | endif
 
@@ -194,7 +196,6 @@ end
 --Add telescope shortcuts
 local tele_opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<Tab>', telescope_builtin.buffers, tele_opts)
--- vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, tele_opts)
 vim.keymap.set('n', '<leader>ff', vcs_picker, tele_opts)
 vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, tele_opts)
 vim.keymap.set('n', '<leader>fc', telescope_builtin.git_commits, tele_opts)
