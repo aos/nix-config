@@ -23,7 +23,10 @@
 
   services.tailscale = {
     useRoutingFeatures = "server";
-    extraSetFlags = [ "--advertise-exit-node" ];
+    extraSetFlags = [
+      "--advertise-exit-node"
+      "--advertise-routes=192.168.8.0/24"
+    ];
   };
 
   networking.firewall.allowedTCPPorts = [ 443 ];
