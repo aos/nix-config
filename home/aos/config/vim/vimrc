@@ -64,6 +64,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-sleuth' " Set buffer options
+  Plug '9seconds/repolink.nvim'
 
   " Plug 'habamax/vim-alchemist' " Dark background
   " Plug 'aos/vim-aeon' " Light background
@@ -112,18 +113,8 @@ noremap <expr> <Leader><Space> &foldlevel ? 'zM' : 'zR'
 
 lua << EOF
 
--- If argument passed in, insert into buffer in a new line
-vim.api.nvim_create_user_command(
-  'Notes',
-  function(opts)
-    if (opts.args) then
-      vim.cmd(string.format("normal! Go%s", opts.args))
-    else
-      vim.cmd("normal! G")
-    end
-  end,
-  {nargs = '?'}
-)
+-- :RepoLink
+require("repolink").setup{}
 
 -- :Theme
 vim.api.nvim_create_user_command(
