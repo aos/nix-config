@@ -38,12 +38,10 @@ in
     packer
     terraform
     terraform-ls
-    # This is broken I guess
-    # vagrant
+    vagrant
 
     # k8s
     k9s
-    kind
     kubectl
     kubernetes-helm
 

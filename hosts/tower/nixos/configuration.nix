@@ -6,6 +6,9 @@
     ./disko-luks-btrfs.nix
   ];
 
+  # This is broken
+  hardware.framework.enableKmod = false;
+
   sops = {
     age.sshKeyPaths = [ "${config.users.users."aos".home}/.ssh/id_tower" ];
     defaultSopsFile = ../../../sops/general/secrets.enc.yaml;
