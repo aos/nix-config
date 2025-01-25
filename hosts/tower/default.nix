@@ -27,6 +27,8 @@
     ./nixos/configuration.nix
   ];
 
+  programs.fish.enable = true;
+
   floofs.nfs.enable = true;
 
   services.tailscale.extraSetFlags = [ "--accept-routes" ];
