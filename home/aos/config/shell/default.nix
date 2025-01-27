@@ -7,7 +7,7 @@
     ripgrep
     wl-clipboard
 
-    gotors
+    gotoz
     # direnv
     # atuin
   ];
@@ -19,6 +19,8 @@
     };
     interactiveShellInit = ''
       ${lib.getExe pkgs.nix-your-shell} fish | source
+      ${lib.getExe pkgs.gotoz} --init fish | source
+
       set -U fish_greeting # Disable greeting
     '';
     functions = {
@@ -36,8 +38,6 @@
     # bashrcExtra = ''
     #   . ${builtins.toString ./bashrc}
 
-    #   # Add goto shortcut
-    #   eval "''$(${lib.getExe pkgs.gotors} init)"
     #   # Add direnv
     #   eval "''$(${lib.getExe pkgs.direnv} hook bash)"
     # '';
@@ -53,12 +53,12 @@
 
   home.file = {
     "bash_aliases" = {
-      source = ./bash_aliases;
+      source = ./bash/bash_aliases;
       target = ".bash_aliases";
     };
 
     "bash_functions" = {
-      source = ./bash_functions;
+      source = ./bash/bash_functions;
       target = ".bash_functions";
     };
 

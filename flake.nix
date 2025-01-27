@@ -28,7 +28,7 @@
     };
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     catppuccin.url = "github:catppuccin/nix";
-    gotors.url = "github:aos/gotors";
+    gotoz.url = "git+https://git.sr.ht/~aos/gotoz";
     atools.url = "github:aos/atools";
   };
 
@@ -48,7 +48,7 @@
         import nixpkgs {
           inherit system;
           overlays = [
-            inputs.gotors.overlays.default
+            inputs.gotoz.overlays.default
             inputs.atools.overlays.default
           ];
           config.allowUnfree = true;

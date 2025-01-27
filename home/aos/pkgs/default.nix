@@ -45,7 +45,6 @@ in
     kubectl
     kubernetes-helm
 
-    gotors
     atools
 
     # etc
