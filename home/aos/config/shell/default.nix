@@ -2,13 +2,11 @@
 
 {
   home.packages = with pkgs; [
-    # required for shell initialization
     fzf
     ripgrep
     wl-clipboard
 
     gotoz
-    # direnv
     # atuin
   ];
 
@@ -16,7 +14,11 @@
     enable = true;
     shellAliases = {
       vim = "nvim";
+      k = "kubectl";
     };
+    shellInit = ''
+      fish_config theme choose "Mono Smoke"
+    '';
     interactiveShellInit = ''
       ${lib.getExe pkgs.nix-your-shell} fish | source
       ${lib.getExe pkgs.gotoz} --init fish | source
@@ -25,6 +27,7 @@
     '';
     functions = {
       qr = "${lib.getExe pkgs.qrencode} -t ansiutf8 ''$argv";
+      qq = ''llm -t q "''$argv"'';
     };
   };
 
@@ -34,14 +37,6 @@
   # allow home-manager to manage shell
   programs.bash = {
     enable = true;
-    # import my bashrc
-    # bashrcExtra = ''
-    #   . ${builtins.toString ./bashrc}
-
-    #   # Add direnv
-    #   eval "''$(${lib.getExe pkgs.direnv} hook bash)"
-    # '';
-
     initExtra = lib.mkBefore ''
       if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
       then

@@ -244,11 +244,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1737996582,
-        "narHash": "sha256-lC1OnduSlJfK46jr0Z67BIzY6eUh1HSNgtgflkDAbgM=",
+        "lastModified": 1738034955,
+        "narHash": "sha256-VCBb72aoMdpZf4zHTFBPr1xUSw8R5Kmb2j9sAiniz7s=",
         "ref": "refs/heads/main",
-        "rev": "4dc14f39eeff90d06a93ddc20b24455889da73d1",
-        "revCount": 7,
+        "rev": "52bef9e95279845f0bf6e15a7a76b52c6d6a1cc6",
+        "revCount": 10,
         "type": "git",
         "url": "https://git.sr.ht/~aos/gotoz"
       },

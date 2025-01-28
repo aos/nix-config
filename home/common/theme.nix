@@ -12,6 +12,8 @@
     enable = true;
     flavor = "macchiato";
     accent = "blue";
+
+    fish.enable = false;
   };
 
   gtk = {

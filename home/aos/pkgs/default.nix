@@ -22,7 +22,6 @@ in
 
     jless
     jq
-    jujutsu
     qrencode
     tealdeer
     tmux
