@@ -2,8 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    fzf
-    ripgrep
     wl-clipboard
 
     gotoz
@@ -31,17 +29,25 @@
     };
   };
 
-  home.file.".config/fish/functions/fish_vcs_prompt.fish".source = ./fish/fish_vcs_prompt.fish;
-  home.file.".config/fish/functions/fish_prompt.fish".source = ./fish/fish_prompt.fish;
+  home.file = {
+    fish_vcs_prompt = {
+      source = ./fish/fish_vcs_prompt.fish;
+      target = ".config/fish/functions/fish_vcs_prompt.fish";
+    };
+    fish_prompt = {
+      source = ./fish/fish_prompt.fish;
+      target = ".config/fish/functions/fish_prompt.fish";
+    };
+  };
 
-  # allow home-manager to manage shell
+  ### bash (mainly used to init fish)
   programs.bash = {
     enable = true;
     initExtra = lib.mkBefore ''
       if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
       then
         shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+        exec ${lib.getExe pkgs.fish} $LOGIN_OPTION
       fi
     '';
   };

@@ -33,9 +33,4 @@ in
     nixpkgsStable.mypaint
     slack
   ];
-
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
-
-  news.display = "silent";
 }

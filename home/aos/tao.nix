@@ -35,14 +35,4 @@
     (google-cloud-sdk.withExtraComponents
       ([google-cloud-sdk.components.gke-gcloud-auth-plugin]))
   ];
-
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
-
-  programs.gpg.enable = true;
-  programs.gpg.publicKeys = [
-    { source = ./config/gpg-0xFF404ABD083C84EC-2023-09-13.asc; trust = 5; }
-  ];
-
-  news.display = "silent";
 }

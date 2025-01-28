@@ -1,4 +1,4 @@
-{ home, ... }:
+{ home, pkgs, ... }:
 
 {
   imports = [
@@ -6,6 +6,27 @@
     ./shell
     ./jujutsu.nix
   ];
+
+  home.packages = with pkgs; [
+    tmux
+    foot
+
+    fzf
+    ripgrep
+    delta
+
+    zathura
+  ];
+
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
+
+  programs.gpg.enable = true;
+  programs.gpg.publicKeys = [
+    { source = ../config/gpg-0xFF404ABD083C84EC-2023-09-13.asc; trust = 5; }
+  ];
+
+  # services.gpg-agent.enable = true;
 
   # program configs
   home.file.".ssh/id_rsa_yk.pub".source = ./ssh_id_rsa_yk.pub;
@@ -20,4 +41,6 @@
   home.file.".config/foot/foot.ini".source = ./terminal/foot.ini;
 
   home.file.".config/zathura/".source = ./zathura;
+
+  news.display = "silent";
 }
