@@ -22,6 +22,10 @@
       ${lib.getExe pkgs.gotoz} --init fish | source
 
       set -U fish_greeting # Disable greeting
+
+      set -g FZF_DEFAULT_OPTS '--height 30% --layout reverse --border --multi'
+      set -g FZF_DEFAULT_COMMAND '${lib.getExe pkgs.ripgrep} --files --hidden --follow --no-require-git'
+      set -g FZF_CTRL_T_COMMAND "''$FZF_DEFAULT_COMMAND"
     '';
     functions = {
       qr = "${lib.getExe pkgs.qrencode} -t ansiutf8 ''$argv";
