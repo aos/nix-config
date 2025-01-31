@@ -4,6 +4,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixos-hardware.url = "github:/NixOS/nixos-hardware/master";
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,6 +41,7 @@
       self,
       nixpkgs,
       home-manager,
+      lix-module,
       clan-core,
       ...
     }@inputs:
@@ -83,7 +88,10 @@
 
           sakina = {
             nixpkgs.pkgs = defaultPackages;
-            imports = [ ./hosts/sakina ];
+            imports = [
+              lix-module.nixosModules.default
+              ./hosts/sakina
+            ];
           };
 
           biggie = {

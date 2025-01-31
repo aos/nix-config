@@ -47,7 +47,7 @@
   ### bash (mainly used to init fish)
   programs.bash = {
     enable = true;
-    initExtra = lib.mkBefore ''
+    initExtra = ''
       if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
       then
         shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
@@ -57,17 +57,15 @@
   };
 
   home.file = {
-    "bash_aliases" = {
+    bash_aliases = {
       source = ./bash/bash_aliases;
       target = ".bash_aliases";
     };
-
-    "bash_functions" = {
+    bash_functions = {
       source = ./bash/bash_functions;
       target = ".bash_functions";
     };
-
-    "inputrc" = {
+    inputrc = {
       source = ./inputrc;
       target = ".inputrc";
     };
