@@ -14,7 +14,7 @@ in
 {
   ### Interface
   options.services.livebook-container = {
-    enable = lib.mkEnableOption "Service for Livebook";
+    enable = lib.mkEnableOption "livebook-container";
 
     imageName = lib.mkOption {
       type = lib.types.str;

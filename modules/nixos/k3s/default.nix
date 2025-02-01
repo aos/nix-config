@@ -17,7 +17,7 @@ in
   ];
 
   options.floofs.k3s = {
-    enable = lib.mkEnableOption "Enable k3s";
+    enable = lib.mkEnableOption "floofs-k3s";
     masterNode = lib.mkOption {
       type = lib.types.bool;
       default = false;

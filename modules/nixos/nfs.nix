@@ -13,7 +13,7 @@ let
 in
 {
   options.floofs.nfs = {
-    enable = lib.mkEnableOption "Enables NFS";
+    enable = lib.mkEnableOption "floofs-nfs";
     nfsLocation = lib.mkOption {
       type = lib.types.str;
       default = defaultLocation;

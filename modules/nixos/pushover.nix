@@ -6,7 +6,7 @@ let
 in
 {
   options.floofs.systemd-pushover = {
-    enable = lib.mkEnableOption "Enables notifications to Pushover with systemd service";
+    enable = lib.mkEnableOption "systemd-pushover";
   };
 
   config = lib.mkIf cfg.enable {
