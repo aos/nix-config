@@ -26,12 +26,10 @@
     { source = ../config/gpg-0xFF404ABD083C84EC-2023-09-13.asc; trust = 5; }
   ];
 
-  # services.gpg-agent.enable = true;
-
   # program configs
   home.file.".ssh/id_rsa_yk.pub".source = ./ssh_id_rsa_yk.pub;
   home.file.".ssh/config".source = ./ssh_config;
-  home.file.".gnupg/gpg-agent.conf".source = ./gpg-agent.conf;
+  # home.file.".gnupg/gpg-agent.conf".source = ./gpg-agent.conf;
   home.file.".gdbinit".source = ./gdbinit;
 
   home.file.".tmux.conf".source = ./tmux;
