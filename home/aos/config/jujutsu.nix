@@ -31,6 +31,7 @@ in
       aliases = {
         d = ["diff"];
         l = ["log"];
+        lr = ["log -r .."]; # all visible commits in repo
       };
       ui = {
         pager = "delta";
