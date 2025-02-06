@@ -100,6 +100,10 @@
               config = {
                 allowUnfree = true;
                 cudaSupport = true;
+                # For weechat-matrix plugin
+                permittedInsecurePackages = [
+                 "olm-3.2.16"
+               ];
               };
             };
             imports = [ ./hosts/biggie ];
