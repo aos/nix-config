@@ -11,16 +11,4 @@
     ./pkgs
     ./config
   ];
-
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "application/pdf" = "zathura.desktop";
-    };
-  };
-
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
-
-  news.display = "silent";
 }

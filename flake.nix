@@ -25,7 +25,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     clan-core = {
-      url = "git+https://git.clan.lol/clan/clan-core";
+      url = "github:clan-lol/clan-core";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.sops-nix.follows = "sops-nix";
       inputs.disko.follows = "disko";

@@ -75,6 +75,9 @@
 
       webcord
     ];
+    openssh.authorizedKeys.keyFiles = [
+      ../../../sops/keys/aos/authorized_keys
+    ];
   };
 
   programs.mtr.enable = true;
