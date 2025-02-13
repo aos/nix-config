@@ -30,6 +30,25 @@
     functions = {
       qr = "${lib.getExe pkgs.qrencode} -t ansiutf8 ''$argv";
       qq = ''llm -t q "''$argv"'';
+      t = ''
+        if test -z $argv[1]
+          set dirname xx
+        else
+          set dirname $argv[1]
+        end
+        pushd (mktemp -d -t $dirname.XXXX)
+      '';
+      untmp = ''
+        if test -z $argv[1]
+          set base (basename (pwd))
+          set untemp_dir "~/scratch/$base"
+        else
+          set untemp_dir $argv[1]
+        end
+        mkdir "$untemp_dir"
+        cp (pwd)/* "$untemp_dir"
+        cd "$untemp_dir"
+      '';
     };
   };
 

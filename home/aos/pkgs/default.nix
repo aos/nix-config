@@ -46,5 +46,6 @@ in
     # mypaint
     nb
     yazi
+    qalculate-gtk
   ];
 }
