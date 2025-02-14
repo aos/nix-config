@@ -19,6 +19,7 @@
   programs.screen = {
     enable = true;
     screenrc = ''
+      maptimeout 0
       multiuser on
       acladd wc
     '';

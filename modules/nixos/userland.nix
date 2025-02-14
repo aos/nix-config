@@ -27,8 +27,10 @@
     # raffi # fuzzel dmenu launcher
     # TODO: wait until this hits 0.5.1: https://nixpk.gs/pr-tracker.html?pr=342392
 
-    swaylock
-    swayidle
+    # swaylock
+    # swayidle
+    hyprlock
+    hypridle
 
     networkmanagerapplet
     pavucontrol
@@ -118,11 +120,17 @@
     };
   };
 
-  security.pam.services.swaylock = {
+  security.pam.services.hyprlock = {
     text = ''
       auth include login
     '';
   };
+
+  # security.pam.services.swaylock = {
+  #   text = ''
+  #     auth include login
+  #   '';
+  # };
 
   # allow automounting USB devices
   services.devmon.enable = true;
