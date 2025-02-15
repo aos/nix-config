@@ -27,8 +27,6 @@
     # raffi # fuzzel dmenu launcher
     # TODO: wait until this hits 0.5.1: https://nixpk.gs/pr-tracker.html?pr=342392
 
-    # swaylock
-    # swayidle
     hyprlock
     hypridle
 
@@ -46,7 +44,7 @@
     qalculate-gtk # calculator
     nautilus # file viewer
     wl-clipboard
-    xwaylandvideobridge # screensharing bridge
+    # xwaylandvideobridge # screensharing bridge
 
     qt5.qtwayland
     qt6.qtwayland
@@ -125,12 +123,6 @@
       auth include login
     '';
   };
-
-  # security.pam.services.swaylock = {
-  #   text = ''
-  #     auth include login
-  #   '';
-  # };
 
   # allow automounting USB devices
   services.devmon.enable = true;
