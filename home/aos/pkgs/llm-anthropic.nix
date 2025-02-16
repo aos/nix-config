@@ -1,4 +1,4 @@
-# https://github.com/NixOS/nixpkgs/pull/373495
+# https://github.com/NixOS/nixpkgs/pull/382108
 {
   lib,
   buildPythonPackage,
@@ -14,14 +14,14 @@
 
 buildPythonPackage rec {
   pname = "llm-anthropic";
-  version = "0.11";
+  version = "0.12";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "simonw";
     repo = "llm-anthropic";
     tag = version;
-    hash = "sha256-dwUTXonVlZyRVEErqQ+LLBTDy0NGHQLaciZOaVi5zBk=";
+    hash = "sha256-7+5j5jZBFfaaqnfjvLTI+mz1PUuG8sB5nD59UCpJuR4=";
   };
 
   build-system = [
@@ -49,6 +49,7 @@ buildPythonPackage rec {
   meta = {
     description = "LLM access to models by Anthropic, including the Claude series";
     homepage = "https://github.com/simonw/llm-anthropic";
+    changelog = "https://github.com/simonw/llm-anthropic/releases/tag/${version}/CHANGELOG.md";
     license = lib.licenses.asl20;
     maintainers = with lib.maintainers; [ aos ];
   };
