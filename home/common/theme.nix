@@ -26,7 +26,7 @@
       name = "catppuccin-macchiato-blue-compact";
       package = pkgs.catppuccin-gtk.override {
         variant = "macchiato";
-        accents = ["blue"];
+        accents = [ "blue" ];
         size = "compact";
       };
     };

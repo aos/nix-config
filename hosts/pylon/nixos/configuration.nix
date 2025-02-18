@@ -15,7 +15,11 @@
   networking.hostName = "pylon";
   time.timeZone = "America/New_York";
 
-  networking.firewall.allowedTCPPorts = [ 22 80 443 ];
+  networking.firewall.allowedTCPPorts = [
+    22
+    80
+    443
+  ];
 
   systemd.network.networks."10-uplink".networkConfig.Address = "2a01:4ff:f0:d641::1";
 

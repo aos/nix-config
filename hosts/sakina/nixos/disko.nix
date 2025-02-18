@@ -75,7 +75,10 @@
                 type = "filesystem";
                 format = "xfs";
                 mountpoint = "/data";
-                mountOptions = [ "defaults" "pquota" ];
+                mountOptions = [
+                  "defaults"
+                  "pquota"
+                ];
               };
             };
           };

@@ -23,7 +23,10 @@
 
   programs.gpg.enable = true;
   programs.gpg.publicKeys = [
-    { source = ../config/gpg-0xFF404ABD083C84EC-2023-09-13.asc; trust = 5; }
+    {
+      source = ../config/gpg-0xFF404ABD083C84EC-2023-09-13.asc;
+      trust = 5;
+    }
   ];
 
   # program configs

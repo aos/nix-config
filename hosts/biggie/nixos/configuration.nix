@@ -9,7 +9,10 @@
   imports = [ ./hardware-configuration.nix ];
 
   fileSystems."/data" = {
-    options = [ "defaults" "pquota" ];
+    options = [
+      "defaults"
+      "pquota"
+    ];
     device = "/dev/disk/by-partlabel/disk-secondary_hdd-root";
     fsType = "xfs";
   };
