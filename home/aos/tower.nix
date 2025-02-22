@@ -4,13 +4,6 @@
   inputs,
   ...
 }:
-
-let
-  nixpkgsStable = import inputs.nixpkgs-stable {
-    inherit (pkgs.stdenv.hostPlatform) system;
-    inherit (config.nixpkgs) config;
-  };
-in
 {
   home.stateVersion = "22.05";
   programs.home-manager.enable = true;
@@ -28,9 +21,8 @@ in
 
   home.packages = with pkgs; [
     spotify
-    webcord
+    discord
     zoom-us
-    nixpkgsStable.mypaint
     slack
   ];
 }

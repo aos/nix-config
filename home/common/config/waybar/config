@@ -33,6 +33,7 @@
   "hyprland/workspaces": {
     "on-click": "activate",
     "active-only": false,
+    "show-special": true,
     "all-outputs": true
   },
   "hyprland/window": {

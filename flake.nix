@@ -190,7 +190,8 @@
               self.packages.${defaultSystem}.sops-local
 
               nixos-anywhere
-              inputs.clan-core.packages.${defaultSystem}.clan-cli
+              # Broken until they add pathWith
+              # inputs.clan-core.packages.${defaultSystem}.clan-cli
               nix-inspect # Run with: nix-inspect -p .
               sops
               age

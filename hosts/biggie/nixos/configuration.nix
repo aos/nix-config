@@ -76,7 +76,7 @@
       curl
       git
 
-      webcord
+      discord
     ];
     openssh.authorizedKeys.keyFiles = [
       ../../../sops/keys/aos/authorized_keys

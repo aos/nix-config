@@ -29,10 +29,10 @@ in
     _1password-cli
 
     # Infra tools
-    ansible
-    packer
-    terraform
-    terraform-ls
+    # ansible
+    # packer
+    # terraform
+    # terraform-ls
     vagrant
 
     # k8s
@@ -43,9 +43,11 @@ in
     atools
 
     # etc
-    # mypaint
     nb
     yazi
+
     qalculate-gtk
+    mypaint
+    lorien
   ];
 }
