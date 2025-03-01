@@ -1,5 +1,6 @@
 secrets.nix
 result
 .terraform
+.direnv
 *.tfstate
 *.tfstate.backup
