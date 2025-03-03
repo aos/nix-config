@@ -30,7 +30,10 @@
       inputs.sops-nix.follows = "sops-nix";
       inputs.disko.follows = "disko";
     };
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland = {
+      url = "github:hyprwm/Hyprland/v0.47.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     catppuccin.url = "github:catppuccin/nix";
     gotoz.url = "git+https://git.sr.ht/~aos/gotoz";
     atools.url = "github:aos/atools";
