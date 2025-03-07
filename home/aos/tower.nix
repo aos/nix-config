@@ -24,5 +24,6 @@
     discord
     zoom-us
     slack
+    libreoffice
   ];
 }
