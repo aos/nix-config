@@ -46,6 +46,9 @@ in
     nb
     yazi
 
+    # llms
+    files-to-prompt
+
     qalculate-gtk
     mypaint
     lorien

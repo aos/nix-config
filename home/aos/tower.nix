@@ -25,5 +25,6 @@
     zoom-us
     slack
     libreoffice
+    vlc
   ];
 }
