@@ -175,6 +175,11 @@
           system = "x86_64-linux";
           modules = [ ./home/aos/thalamus.nix ];
         };
+
+        "aos@vm" = mkHomeConfiguration {
+          system = "x86_64-linux";
+          modules = [ ./home/aos/vm.nix ];
+        };
       };
 
       # Helper script to make updating sops easier
