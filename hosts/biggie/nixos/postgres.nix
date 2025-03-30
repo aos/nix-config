@@ -10,11 +10,18 @@
 
   sops = {
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-    defaultSopsFile = ../../../sops/general/secrets.enc.yaml;
-    secrets.b2_floofs_server_repository = { };
-    secrets.b2_floofs_server_password = { };
-    secrets.b2_floofs_server_key_id = { };
-    secrets.b2_floofs_server_key = { };
+    secrets.b2_floofs_server_repository = {
+      sopsFile = ../../../sops/general/secrets.enc.yaml;
+    };
+    secrets.b2_floofs_server_password = {
+      sopsFile = ../../../sops/general/secrets.enc.yaml;
+    };
+    secrets.b2_floofs_server_key_id = {
+      sopsFile = ../../../sops/general/secrets.enc.yaml;
+    };
+    secrets.b2_floofs_server_key = {
+      sopsFile = ../../../sops/general/secrets.enc.yaml;
+    };
 
     templates.restic_floofs_env.content = ''
       B2_ACCOUNT_ID=${config.sops.placeholder.b2_floofs_server_key_id}

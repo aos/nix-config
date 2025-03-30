@@ -1,4 +1,4 @@
-{ home, ... }:
+{ home, pkgs, ... }:
 
 {
   home = {
@@ -19,5 +19,8 @@
     };
   };
 
-  services.hypridle.enable = true;
+  services.hypridle = {
+    enable = true;
+    package = pkgs.callPackage ./hypridle.nix { };
+  };
 }

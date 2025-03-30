@@ -17,9 +17,12 @@ in
   config = lib.mkIf cfg.enable {
     sops = {
       age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-      defaultSopsFile = ../../sops/general/secrets.enc.yaml;
-      secrets.pushover_app_backups_key = { };
-      secrets.pushover_user_key = { };
+      secrets.pushover_app_backups_key = {
+        sopsFile = ../../sops/general/secrets.enc.yaml;
+      };
+      secrets.pushover_user_key = {
+        sopsFile = ../../sops/general/secrets.enc.yaml;
+      };
       templates.pushover_env.content = ''
         PUSHOVER_TOKEN=${config.sops.placeholder.pushover_app_backups_key}
         PUSHOVER_USER_KEY=${config.sops.placeholder.pushover_user_key}

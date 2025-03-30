@@ -23,6 +23,7 @@
 
     ./nixos/configuration.nix
     ./nixos/postgres.nix
+    ./nixos/transmission.nix
   ];
 
   systemd.network.networks."99-ethernet-default-dhcp".networkConfig.MulticastDNS = lib.mkForce false;
