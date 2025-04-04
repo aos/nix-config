@@ -19,8 +19,5 @@
     };
   };
 
-  services.hypridle = {
-    enable = true;
-    package = pkgs.callPackage ./hypridle.nix { };
-  };
+  services.hypridle.enable = true;
 }

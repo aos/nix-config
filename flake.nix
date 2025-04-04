@@ -31,7 +31,7 @@
       inputs.disko.follows = "disko";
     };
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.47.2";
+      url = "github:hyprwm/Hyprland/v0.48.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin.url = "github:catppuccin/nix";
