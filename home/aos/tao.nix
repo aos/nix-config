@@ -30,6 +30,11 @@
   };
 
   home.packages = with pkgs; [
+    ansible
+    packer
+    terraform
+    terraform-ls
+
     gh
     cloudflared
     (google-cloud-sdk.withExtraComponents ([ google-cloud-sdk.components.gke-gcloud-auth-plugin ]))

@@ -180,7 +180,7 @@ local vcs_picker = function(opts)
 
   local git_files_status, git_res = pcall(telescope_builtin.git_files, opts)
   if not git_files_status then
-      error("Could not launch jj/git files: \n" .. jj_res .. "\n" .. git_res)
+    local ff_pick_status, ff_res = pcall(telescope_builtin.find_files, opts)
   end
 end
 
