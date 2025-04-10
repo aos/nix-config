@@ -28,9 +28,11 @@
 
       set -U fish_greeting # Disable greeting
 
-      set -g FZF_DEFAULT_OPTS '--height 30% --layout reverse --border --multi'
-      set -g FZF_DEFAULT_COMMAND '${lib.getExe pkgs.ripgrep} --files --hidden --follow --no-require-git'
-      set -g FZF_CTRL_T_COMMAND "''$FZF_DEFAULT_COMMAND"
+      set -x FZF_DEFAULT_OPTS '--height 30% --layout reverse --border --multi'
+      set -x FZF_DEFAULT_COMMAND '${lib.getExe pkgs.ripgrep} --files --hidden --follow --no-require-git'
+      set -x FZF_CTRL_T_COMMAND "''$FZF_DEFAULT_COMMAND"
+
+      set -x MANPAGER '${lib.getExe pkgs.neovim} +Man!'
     '';
     functions = {
       qr = "${lib.getExe pkgs.qrencode} -t ansiutf8 ''$argv";
