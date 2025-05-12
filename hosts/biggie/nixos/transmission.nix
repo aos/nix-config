@@ -19,7 +19,7 @@ in
         "rpc-username": "${config.sops.placeholder.tx_rpc_username}",
         "rpc-password": "${config.sops.placeholder.tx_rpc_password}",
         "rpc-whitelist": "${config.sops.placeholder.tx_whitelist}",
-        "rpc-host-whitelist": "${config.sops.placeholder.tx_whitelist}",
+        "rpc-host-whitelist": "${config.sops.placeholder.tx_whitelist}"
       }
     '';
   };

@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   inputs,
   ...
@@ -76,7 +77,12 @@
       curl
       git
 
-      discord
+      vesktop
+      vlc
+    ] ++ map(name: pkgs.kdePackages.${name})
+    [
+        "kcalc"
+        "kolourpaint"
     ];
     openssh.authorizedKeys.keyFiles = [
       ../../../sops/keys/aos/authorized_keys
