@@ -48,13 +48,13 @@
       untmp = ''
         if test -z $argv[1]
           set base (basename (pwd))
-          set untemp_dir "~/scratch/$base"
+          set untemp_dir ~/scratch/$base
         else
           set untemp_dir $argv[1]
         end
-        mkdir "$untemp_dir"
-        cp (pwd)/* "$untemp_dir"
-        cd "$untemp_dir"
+        mkdir $untemp_dir
+        cp -r (pwd)/{.,}* $untemp_dir
+        cd $untemp_dir
       '';
     };
   };
