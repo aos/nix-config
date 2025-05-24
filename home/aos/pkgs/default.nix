@@ -10,7 +10,7 @@ in
 {
   imports = [
     ./python.nix
-    ./elixir.nix
+    # ./elixir.nix
   ];
 
   # Packages to install
