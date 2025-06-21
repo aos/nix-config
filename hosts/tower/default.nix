@@ -41,7 +41,13 @@
     ];
   };
 
-  services.fwupd.enable = true;
+  services.fwupd = {
+    enable = true;
+    extraRemotes = [ "lvfs-testing" ];
+    uefiCapsuleSettings = {
+      DisableCapsuleUpdateOnDisk = true;
+    };
+  };
 
   networking.extraHosts = ''
     127.0.0.1 conduit.example

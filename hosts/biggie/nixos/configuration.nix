@@ -55,6 +55,7 @@
 
   services.printing.enable = true;
 
+  security.sudo.wheelNeedsPassword = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -62,6 +63,8 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  programs.kdeconnect.enable = true;
 
   users.users.aos = {
     isNormalUser = true;

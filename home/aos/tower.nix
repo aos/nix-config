@@ -26,5 +26,8 @@
     slack
     libreoffice
     vlc
+    claude-code
   ];
+
+  fonts.fontconfig.enable = true;
 }

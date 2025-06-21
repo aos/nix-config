@@ -82,7 +82,8 @@
   fonts.packages = with pkgs; [
     cantarell-fonts
     font-awesome
-    noto-fonts-emoji
+    dejavu_fonts
+    noto-fonts-color-emoji
     material-design-icons
     nerd-fonts.ubuntu
     nerd-fonts.noto
