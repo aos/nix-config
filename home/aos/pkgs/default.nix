@@ -9,7 +9,7 @@ let
 in
 {
   imports = [
-    # ./python.nix
+    ./python.nix
     # ./elixir.nix
   ];
 

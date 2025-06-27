@@ -22,10 +22,10 @@
     enable = true;
     package = pkgs.caddy.withPlugins {
       plugins = [
-        "github.com/caddy-dns/cloudflare@v0.0.0-20240703190432-89f16b99c18e"
+        "github.com/caddy-dns/cloudflare@v0.2.1"
         "github.com/WeidiDeng/caddy-cloudflare-ip@v0.0.0-20231130002422-f53b62aa13cb"
       ];
-      hash = "sha256-cfa8PCZPF2SpQzNGg7i1Gq1oh2kqCk2iFie+qp8yksc=";
+      hash = "sha256-u1vthRVXRbsD8FnlzfX39Yn/uzHzvYfipu4NNp7uJLE=";
     };
     globalConfig = ''
       servers {

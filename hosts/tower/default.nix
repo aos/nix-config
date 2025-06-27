@@ -27,6 +27,8 @@
     ./nixos/configuration.nix
   ];
 
+  programs.localsend.enable = true;
+
   programs.fish.enable = true;
 
   floofs.nfs.enable = true;
@@ -49,11 +51,6 @@
     };
   };
 
-  networking.extraHosts = ''
-    127.0.0.1 conduit.example
-    127.0.0.1 test.conduit.example
-  '';
-
   # Turn off some things that cause instant wakeup after suspend
   services.udev.extraRules =
     let
@@ -73,5 +70,9 @@
         # Turn off wakeup for some devices that causes poor suspend behavior
         ACTION=="add" SUBSYSTEM=="pci" ATTR{vendor}=="${devs.vendor}" ATTR{device}=="${devs.device}" ATTR{power/wakeup}="disabled"
       '') devs
-    );
+    ) + ''
+      # DFU (Internal bootloader for STM32 and AT32 MCUs)
+      SUBSYSTEM=="usb", ATTRS{idVendor}=="2e3c", ATTRS{idProduct}=="df11", TAG+="uaccess"
+      SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", TAG+="uaccess"
+    '';
 }

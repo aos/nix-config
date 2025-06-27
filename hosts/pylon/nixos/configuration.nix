@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, lib, ... }:
 
 {
   imports = [
@@ -11,6 +11,10 @@
     efiSupport = true;
     efiInstallAsRemovable = true;
   };
+
+  # There's a bug somewhere with this, disable for now
+  # We don't plan on increasing the root partition anytime soon
+  boot.growPartition = lib.mkForce false;
 
   networking.hostName = "pylon";
   time.timeZone = "America/New_York";
