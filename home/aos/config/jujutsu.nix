@@ -54,8 +54,7 @@ in
       ui = {
         pager = "${lib.getExe pkgs.delta}";
         default-command = [ "status" ];
-
-        diff.format = "git";
+        diff-formatter = ":git";
       };
       template-aliases = {
         "colored(color, txt)" =

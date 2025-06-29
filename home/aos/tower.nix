@@ -43,7 +43,6 @@ in
     slack
     libreoffice
     vlc
-    claude-code
     nixpkgsBfc.betaflight-configurator
   ];
 
