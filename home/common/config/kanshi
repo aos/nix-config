@@ -1,0 +1,9 @@
+profile docked_desk {
+  output "AOC G2490W1G4 PIOMBHA149013" mode 1920x1080@144.00 position 0,0
+  output "Acer Technologies KA242Y TJHAA0013P00" mode 1920x1080@74.97 position 1920,0 transform 270
+  output "eDP-1" disable
+}
+
+profile undocked {
+  output "eDP-1" enable scale 1.175
+}

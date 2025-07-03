@@ -13,6 +13,7 @@
     file = {
       ".config/hypr/".source = ./config/hypr;
       ".config/waybar/".source = ./config/waybar;
+      ".config/kanshi/config".source = ./config/kanshi;
       ".config/fuzzel/fuzzel.ini".source = ./config/fuzzel.ini;
       ".config/mako/config".source = ./config/mako;
       ".config/swappy/config".source = ./config/swappy;

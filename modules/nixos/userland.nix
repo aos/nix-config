@@ -20,6 +20,7 @@
     exfatprogs
 
     waybar
+    kanshi # autorandr for wayland
     libnotify
 
     mako # notification daemon
@@ -49,7 +50,6 @@
     qt5.qtwayland
     qt6.qtwayland
     drm_info
-    wlay # graphical output management (maybe replace with kanshi?)
 
     firefox
   ];
@@ -104,8 +104,8 @@
   };
 
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = false;
-  services.xserver.desktopManager.gnome.enable = false;
+  services.displayManager.gdm.enable = false;
+  services.desktopManager.gnome.enable = false;
 
   services.xserver.xkb.layout = "us";
   services.xserver.xkb.options = "ctrl:nocaps";
