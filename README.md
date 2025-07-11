@@ -44,6 +44,13 @@ sops sops/general/secrets.enc.yaml
 SOPS_AGE_KEY=$(ssh-to-age -private-key -i ~/.ssh/id_tower) sops sops/general/secrets.enc.yaml
 ```
 
+There is a `sops-local` action that does that above simply.
+
+When generating a new host, grab the SSH pub key from `/etc/ssh/ssh_host_key*` and add that to the `.sops.yaml` via:
+```
+ssh-to-age -i <pub_key_file>
+```
+
 ### TUI view
 
 ```
