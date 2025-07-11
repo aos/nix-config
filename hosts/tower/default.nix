@@ -55,10 +55,12 @@
   services.udev.extraRules =
     let
       devs = [
-        {
-          vendor = "0x8086";
-          device = "0xa0ed";
-        }
+        # USB ports (xHCI)
+        # {
+        #   vendor = "0x8086";
+        #   device = "0xa0ed";
+        # }
+        # Thunderbolt 4 USB
         {
           vendor = "0x8086";
           device = "0x9a13";

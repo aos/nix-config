@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "flake:nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-images.url = "github:nix-community/nixos-images";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
@@ -20,7 +20,7 @@
     in
     {
       packages = forAllSystems (system: {
-        iso-installer = nixos-generators.nixosGenerate {
+        default = nixos-generators.nixosGenerate {
           inherit system;
           modules = [
             nixos-images.nixosModules.image-installer

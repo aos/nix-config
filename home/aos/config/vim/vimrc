@@ -111,6 +111,12 @@ highlight! link Folded Special
 noremap <Space> za
 noremap <expr> <Leader><Space> &foldlevel ? 'zM' : 'zR'
 
+" Disable Dirvish <C-p>
+augroup dirvish_config
+  autocmd!
+  autocmd FileType dirvish silent! unmap <buffer> <C-p>
+augroup END
+
 lua << EOF
 
 -- :RepoLink

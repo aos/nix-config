@@ -143,6 +143,15 @@
             inherit inputs;
           };
         };
+
+        temple = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          pkgs = pkgsFor "x86_64-linux";
+          modules = [ ./hosts/temple ];
+          specialArgs = {
+            inherit inputs;
+          };
+        };
       } // clan.nixosConfigurations;
 
       inherit (clan) clanInternals;

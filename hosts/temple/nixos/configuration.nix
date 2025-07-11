@@ -12,9 +12,7 @@
     ./disko.nix
   ];
 
-  # sops.defaultSopsFile = lib.mkForce ../../../sops/samira/secrets.enc.yaml;
-
-  networking.hostName = "soraya";
+  networking.hostName = "temple";
 
   networking.useDHCP = true;
   systemd.network.enable = true;
@@ -22,5 +20,11 @@
   time.timeZone = "America/New_York";
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  system.stateVersion = "24.11";
+  networking.firewall.allowedTCPPorts = [
+    22
+    80
+    443
+  ];
+
+  system.stateVersion = "25.05";
 }
