@@ -18,6 +18,12 @@
 
   hardware.nvidia-container-toolkit.enable = true;
 
+  # Podman issueshttps://github.com/NixOS/nixpkgs/issues/417312
+  virtualisation.containers.containersConf.settings.engine.cdi_spec_dirs = [
+    "/etc/cdi"
+    "/var/run/cdi"
+  ];
+
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;

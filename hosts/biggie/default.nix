@@ -17,7 +17,7 @@
     ../../modules/nixos/steam.nix
     ../../modules/nixos/bluetooth.nix
 
-    ../../modules/nixos/weechat.nix
+    # ../../modules/nixos/weechat.nix
 
     ../../modules/nixos/ml.nix
 
@@ -35,6 +35,12 @@
       "--advertise-exit-node"
       "--advertise-routes=192.168.8.0/24"
     ];
+  };
+
+  services.dockerRegistry = {
+    enable = true;
+    listenAddress = "0.0.0.0";
+    openFirewall = true;
   };
 
   networking.firewall.allowedTCPPorts = [ 443 ];

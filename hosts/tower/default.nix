@@ -44,7 +44,7 @@
   };
 
   services.fwupd = {
-    enable = true;
+    enable = false;
     extraRemotes = [ "lvfs-testing" ];
     uefiCapsuleSettings = {
       DisableCapsuleUpdateOnDisk = true;

@@ -38,24 +38,46 @@
     '';
   };
 
-  networking.firewall.allowedTCPPorts = [ 5432 ];
+  networking.firewall.allowedTCPPorts = [ 5432 8080 ];
 
-  virtualisation.oci-containers = {
-    backend = "podman";
-    containers.homeassistant = {
-      image = "ghcr.io/home-assistant/home-assistant:2025.6";
-      autoStart = true;
-      environment.TZ = "America/New_York";
-      volumes = [
-        "/etc/home-assistant:/config"
-        "/var/lib/home-assistant-media:/media"
-        # "/run/dbus:/run/dbus:ro"
-      ];
-      extraOptions = [
-        # "--privileged"
-        "--network=host"
-        "--device=/dev/ttyACM0:/dev/ttyACM0"
-      ];
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+
+    oci-containers = {
+      backend = "podman";
+      containers = {
+        homeassistant = {
+          image = "ghcr.io/home-assistant/home-assistant:2025.6";
+          autoStart = true;
+          environment.TZ = "America/New_York";
+          volumes = [
+            "/etc/home-assistant:/config"
+            "/var/lib/home-assistant-media:/media"
+            # "/run/dbus:/run/dbus:ro" # for bluetooth
+          ];
+          extraOptions = [
+            "--network=host"
+          ];
+        };
+        zigbee2mqtt = {
+          image = "ghcr.io/koenkk/zigbee2mqtt:2.5.1";
+          autoStart = true;
+          environment.TZ = "America/New_York";
+          volumes = [
+            "/etc/zigbee2mqtt/data:/app/data"
+            "/run/udev:/run/udev:ro"
+          ];
+          extraOptions = [
+            "--network=host"
+            "--group-add=keep-groups"
+            "--device=/dev/ttyACM0:/dev/ttyACM0"
+          ];
+        };
+      };
     };
   };
 }
