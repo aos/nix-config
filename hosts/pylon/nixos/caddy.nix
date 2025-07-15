@@ -11,10 +11,16 @@
 
     secrets.cf_floofs_api_token = { };
     secrets.ingress_lb_ip = { };
+    secrets.registry_endpoint = {};
+    secrets.registry_username = {};
+    secrets.registry_password_hashed = {};
 
     templates.caddy_env.content = ''
       CF_DNS_API_TOKEN=${config.sops.placeholder.cf_floofs_api_token}
       INGRESS_LOADBALANCER_IP=${config.sops.placeholder.ingress_lb_ip}
+      DOCKER_REGISTRY_ENDPOINT=${config.sops.placeholder.registry_endpoint}
+      DOCKER_REGISTRY_USERNAME=${config.sops.placeholder.registry_username}
+      DOCKER_REGISTRY_PASSWORD=${config.sops.placeholder.registry_password_hashed}
     '';
   };
 
@@ -35,15 +41,40 @@
         }
       }
     '';
-    virtualHosts."*.floofs.club".extraConfig = ''
-      tls {
-        dns cloudflare {env.CF_DNS_API_TOKEN}
-      }
+    virtualHosts = {
+      "registry.floofs.club".extraConfig = ''
+        tls {
+          dns cloudflare {env.CF_DNS_API_TOKEN}
+        }
 
-      reverse_proxy http://{$INGRESS_LOADBALANCER_IP} {
-        header_up X-Forwarded-Proto https
-      }
-    '';
+        basic_auth {
+          {$DOCKER_REGISTRY_USERNAME} {$DOCKER_REGISTRY_PASSWORD}
+        }
+
+        request_body {
+          max_size 10GB
+        }
+
+        reverse_proxy {$DOCKER_REGISTRY_ENDPOINT} {
+          header_up X-Forwarded-Proto https
+
+          transport http {
+            read_timeout 600s
+            write_timeout 600s
+          }
+        }
+      '';
+
+      "*.floofs.club".extraConfig = ''
+        tls {
+          dns cloudflare {env.CF_DNS_API_TOKEN}
+        }
+
+        reverse_proxy http://{$INGRESS_LOADBALANCER_IP} {
+          header_up X-Forwarded-Proto https
+        }
+      '';
+    };
     environmentFile = config.sops.templates.caddy_env.path;
   };
 }

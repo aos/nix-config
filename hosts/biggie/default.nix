@@ -2,6 +2,7 @@
   inputs,
   config,
   lib,
+  pkgs,
   ...
 }:
 
@@ -41,6 +42,12 @@
     enable = true;
     listenAddress = "0.0.0.0";
     openFirewall = true;
+    enableDelete = true;
+    enableGarbageCollect = true;
+  };
+  systemd.services.docker-registry.environment = {
+    REGISTRY_LOG_LEVEL = "info";
+    OTEL_TRACES_EXPORTER = "none";
   };
 
   networking.firewall.allowedTCPPorts = [ 443 ];
