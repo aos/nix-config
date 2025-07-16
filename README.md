@@ -51,6 +51,12 @@ When generating a new host, grab the SSH pub key from `/etc/ssh/ssh_host_key*` a
 ssh-to-age -i <pub_key_file>
 ```
 
+If this host needs access to the **general** secrets, you need to ensure to add that host to the `.sops.yaml` and
+update the keys:
+```
+sops-local updatekeys sops/general/secrets.enc.yaml
+```
+
 ### TUI view
 
 ```

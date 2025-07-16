@@ -11,9 +11,11 @@
 
     secrets.cf_floofs_api_token = { };
     secrets.ingress_lb_ip = { };
-    secrets.registry_endpoint = {};
-    secrets.registry_username = {};
     secrets.registry_password_hashed = {};
+    secrets.registry_endpoint = {};
+    secrets.registry_username = {
+      sopsFile = ../../../sops/general/secrets.enc.yaml;
+    };
 
     templates.caddy_env.content = ''
       CF_DNS_API_TOKEN=${config.sops.placeholder.cf_floofs_api_token}
