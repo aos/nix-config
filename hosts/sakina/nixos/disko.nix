@@ -4,7 +4,7 @@
   disko.devices = {
     disk = {
       main_ssd = {
-        device = "/dev/disk/by-id/wwn-0x5002538f3115e804";
+        device = "/dev/disk/by-id/wwn-0x5002538f55507f6f";
         type = "disk";
         content = {
           type = "gpt";
