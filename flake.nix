@@ -30,7 +30,8 @@
       inputs.sops-nix.follows = "sops-nix";
       inputs.disko.follows = "disko";
     };
-    hyprland.url = "github:hyprwm/Hyprland/v0.48.1";
+    colmena.url = "github:zhaofengli/colmena";
+    hyprland.url = "github:hyprwm/Hyprland/v0.50.1";
     catppuccin.url = "github:catppuccin/nix";
     gotoz.url = "git+https://git.sr.ht/~aos/gotoz";
     atools.url = "github:aos/atools";
@@ -43,6 +44,7 @@
       home-manager,
       lix-module,
       clan-core,
+      colmena,
       ...
     }@inputs:
     let
@@ -69,7 +71,7 @@
           inherit modules;
         };
 
-      clan = clan-core.lib.buildClan {
+      clan = clan-core.lib.clan {
         meta.name = "floofs";
         directory = ./.;
         specialArgs = {
@@ -93,9 +95,21 @@
               ./hosts/sakina
             ];
           };
+        };
+      };
+    in
+    {
+      colmenaHive = colmena.lib.makeHive {
+        meta = {
+          allowApplyAll = false;
+          specialArgs = {
+            inherit inputs;
+          };
 
-          biggie = {
-            nixpkgs.pkgs = import nixpkgs {
+          nixpkgs = defaultPackages;
+
+          nodeNixpkgs = {
+            biggie = import nixpkgs {
               system = defaultSystem;
               config = {
                 allowUnfree = true;
@@ -106,17 +120,24 @@
                 ];
               };
             };
-            imports = [ ./hosts/biggie ];
-          };
-
-          pylon = {
-            nixpkgs.pkgs = defaultPackages;
-            imports = [ ./hosts/pylon ];
           };
         };
+
+        biggie = { name, nodes, pkgs, ... }: {
+          imports = [ ./hosts/biggie ];
+        };
+
+        temple = { ... }: {
+          deployment.buildOnTarget = true;
+
+          imports = [ ./hosts/temple ];
+        };
+
+        pylon = {
+          imports = [ ./hosts/pylon ];
+        };
       };
-    in
-    {
+
       nixosConfigurations = {
         synth = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -143,18 +164,9 @@
             inherit inputs;
           };
         };
+      } // clan.config.nixosConfigurations;
 
-        temple = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          pkgs = pkgsFor "x86_64-linux";
-          modules = [ ./hosts/temple ];
-          specialArgs = {
-            inherit inputs;
-          };
-        };
-      } // clan.nixosConfigurations;
-
-      inherit (clan) clanInternals;
+      inherit (clan.config) clanInternals;
 
       homeConfigurations = {
         aos = mkHomeConfiguration {
@@ -205,6 +217,8 @@
 
               nixos-anywhere
               inputs.clan-core.packages.${defaultSystem}.clan-cli
+              inputs.colmena.packages.${defaultSystem}.colmena
+
               nix-inspect # Run with: nix-inspect -p .
               sops
               age

@@ -6,8 +6,6 @@
       ps: with ps; [
         pynvim
         python-lsp-server
-        llm
-        llm-anthropic
       ]
     ))
   ];

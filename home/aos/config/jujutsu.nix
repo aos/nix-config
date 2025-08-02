@@ -45,6 +45,14 @@ in
           "--from"
           "heads(::@- & bookmarks())"
           "--to"
+          "@"
+        ];
+        "tug-" = [
+          "bookmark"
+          "move"
+          "--from"
+          "heads(::@- & bookmarks())"
+          "--to"
           "@-"
         ];
         vim = [ "util" "exec" "--" "bash" "-c"

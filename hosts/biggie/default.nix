@@ -52,6 +52,5 @@
 
   networking.firewall.allowedTCPPorts = [ 443 ];
 
-  clan.core.networking.targetHost = "root@${config.networking.hostName}";
-  clan.core.deployment.requireExplicitUpdate = true;
+  deployment.buildOnTarget = true;
 }

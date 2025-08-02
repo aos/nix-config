@@ -27,6 +27,7 @@
     ./nixos/configuration.nix
   ];
 
+  services.flatpak.enable = true;
   programs.localsend.enable = true;
 
   programs.fish.enable = true;

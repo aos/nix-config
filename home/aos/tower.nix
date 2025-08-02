@@ -44,6 +44,10 @@ in
     libreoffice
     vlc
     nixpkgsBfc.betaflight-configurator
+
+    (llm.withPlugins {
+      llm-anthropic = true;
+    })
   ];
 
   fonts.fontconfig.enable = true;

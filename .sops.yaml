@@ -21,6 +21,7 @@ creation_rules:
         - *soraya
         - *sakina
         - *temple
+        - *pylon
 
   - path_regex: pylon/secrets.enc.yaml$
     key_groups:

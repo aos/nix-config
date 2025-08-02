@@ -5,6 +5,12 @@
   users.groups.gamemode = { };
 
   programs.steam = {
+    package = pkgs.steam.override {
+      # Fix time zone in clock
+      extraEnv.TZDIR = "/usr/share/zoneinfo";
+      # extraBwrapArgs = [ "--unsetenv TZ" ];
+    };
+
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;

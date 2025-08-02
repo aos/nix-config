@@ -10,7 +10,6 @@ in
 {
   imports = [
     ./python.nix
-    # ./elixir.nix
   ];
 
   # Packages to install
@@ -33,7 +32,7 @@ in
     # packer
     # terraform
     # terraform-ls
-    vagrant
+    # vagrant
 
     # k8s
     k9s

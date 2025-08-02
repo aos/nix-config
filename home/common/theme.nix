@@ -18,10 +18,10 @@
 
   gtk = {
     enable = true;
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
+    # iconTheme = {
+    #   name = "Papirus-Dark";
+    #   package = pkgs.papirus-icon-theme;
+    # };
     theme = {
       name = "catppuccin-macchiato-blue-compact";
       package = pkgs.catppuccin-gtk.override {

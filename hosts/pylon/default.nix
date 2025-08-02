@@ -14,7 +14,6 @@
     extraSetFlags = [ "--accept-routes" ];
   };
 
-  clan.core.networking.buildHost = "root@biggie";
-  clan.core.networking.targetHost = "root@${config.networking.hostName}";
-  clan.core.deployment.requireExplicitUpdate = true;
+  deployment.targetHost = config.networking.hostName;
+  deployment.buildOnTarget = true;
 }
