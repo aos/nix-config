@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   inputs,
   ...
@@ -43,7 +44,11 @@ in
     slack
     libreoffice
     vlc
+
+    freecad
+    prusa-slicer
     nixpkgsBfc.betaflight-configurator
+    # betaflight-configurator
 
     (llm.withPlugins {
       llm-anthropic = true;

@@ -13,4 +13,6 @@
     enable = true;
     extraSetFlags = [ "--accept-routes" ];
   };
+
+  deployment.buildOnTarget = true;
 }

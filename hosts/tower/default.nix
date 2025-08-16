@@ -78,4 +78,11 @@
       SUBSYSTEM=="usb", ATTRS{idVendor}=="2e3c", ATTRS{idProduct}=="df11", TAG+="uaccess"
       SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", TAG+="uaccess"
     '';
+
+  # https://community.frame.work/t/how-to-rebind-the-xf86rfkill-f10-media-key/62545/2
+  environment.etc."udev/hwdb.d/99-local.hwdb".text = ''
+    # Rewrite RFKILL (airplane mode) of the `wireless device` to `prog1`.
+    evdev:input:b0018v32ACp0006*
+      KEYBOARD_KEY_100c6=prog1
+  '';
 }

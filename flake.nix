@@ -123,17 +123,15 @@
           };
         };
 
-        biggie = { name, nodes, pkgs, ... }: {
+        biggie = { ... }: {
           imports = [ ./hosts/biggie ];
         };
 
         temple = { ... }: {
-          deployment.buildOnTarget = true;
-
           imports = [ ./hosts/temple ];
         };
 
-        pylon = {
+        pylon = { ... }: {
           imports = [ ./hosts/pylon ];
         };
       };
