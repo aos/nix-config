@@ -6,6 +6,9 @@
   ...
 }:
 
+let
+  hyprlandPkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   imports = [
     inputs.disko.nixosModules.disko
@@ -85,4 +88,12 @@
     evdev:input:b0018v32ACp0006*
       KEYBOARD_KEY_100c6=prog1
   '';
+
+  # Fix for broken mesa with Hyprland
+  hardware.graphics = {
+    package = hyprlandPkgs.mesa;
+
+    enable32Bit = true;
+    package32 = hyprlandPkgs.pkgsi686Linux.mesa;
+  };
 }
