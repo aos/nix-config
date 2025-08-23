@@ -83,6 +83,7 @@ in
     '';
 
   # https://community.frame.work/t/how-to-rebind-the-xf86rfkill-f10-media-key/62545/2
+  # sudo systemd-hwdb update && sudo udevadm trigger
   environment.etc."udev/hwdb.d/99-local.hwdb".text = ''
     # Rewrite RFKILL (airplane mode) of the `wireless device` to `prog1`.
     evdev:input:b0018v32ACp0006*
