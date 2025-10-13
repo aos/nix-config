@@ -1,52 +1,6 @@
-vim.opt.number = true
-vim.opt.wrap = true
-vim.opt.showmode = true
-vim.opt.title = true
-vim.opt.hidden = true
-vim.opt.autoread = true
-
-vim.opt.cursorline = true
-vim.opt.backspace = 'indent,eol,start'
-
-vim.opt.sts = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-
-vim.opt.hlsearch = true
-vim.opt.ignorecase = true
-vim.opt.incsearch = true
-vim.opt.smartcase = true
-
-vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
-
-vim.keymap.set('n', 'H', '^', { noremap = true })
-vim.keymap.set('n', 'L', '$', { noremap = true })
-vim.keymap.set('o', 'L', '$', { noremap = true })
-vim.keymap.set('v', 'L', 'g_', { noremap = true })
-
-vim.keymap.set('n', 'k', function() return vim.v.count == 0 and 'gk' or 'k' end, { expr = true, silent = true })
-vim.keymap.set('n', 'j', function() return vim.v.count == 0 and 'gj' or 'j' end, { expr = true, silent = true })
-
-vim.keymap.set('n', '<Esc>', ':noh<CR><Esc>', { silent = true })
-vim.keymap.set('n', '<BS>', '<C-^>', { noremap = true })
-vim.keymap.set('n', '<C-p>', '<Tab>', { noremap = true })
-
-vim.opt.path:append('**')
-
-vim.opt.cp = false
-
-vim.opt.background = 'dark'
-
-if not vim.fn.has('nvim') == 1 then
-  vim.cmd('syntax on')
-  vim.cmd('filetype plugin indent on')
-  return
-end
-
--- nvim-specific settings
-
+-- Load lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
@@ -75,14 +29,57 @@ require("lazy").setup({
   'aos/vim-ascetic',
 })
 
-if vim.fn.has("termguicolors") == 1 then
-  vim.opt.termguicolors = true
-end
+vim.opt.background = 'dark'
+vim.cmd.colorscheme('ascetic')
 
-vim.cmd('colorscheme ascetic')
+vim.opt.number = true
+vim.opt.wrap = true
+vim.opt.showmode = true
+vim.opt.title = true
+vim.opt.hidden = true
+vim.opt.autoread = true
+
+vim.opt.cursorline = true
+vim.opt.backspace = 'indent,eol,start'
+
+vim.opt.sts = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+
+vim.opt.hlsearch = true
+vim.opt.ignorecase = true
+vim.opt.incsearch = true
+vim.opt.smartcase = true
+vim.opt.inccommand = 'nosplit'
+
+vim.opt.path:append('**')
+
+vim.opt.cp = false
+vim.opt.completeopt = 'menuone,noinsert,noselect,preview'
+
+vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
+
+vim.keymap.set('n', 'H', '^', { noremap = true })
+vim.keymap.set('n', 'L', '$', { noremap = true })
+vim.keymap.set('o', 'L', '$', { noremap = true })
+vim.keymap.set('v', 'L', 'g_', { noremap = true })
+
+vim.keymap.set(
+  'n', 'k',
+  function() return vim.v.count == 0 and 'gk' or 'k' end,
+  { expr = true, silent = true }
+)
+vim.keymap.set(
+  'n', 'j',
+  function() return vim.v.count == 0 and 'gj' or 'j' end,
+  { expr = true, silent = true }
+)
+
+vim.keymap.set('n', '<Esc>', ':noh<CR><Esc>', { silent = true })
+vim.keymap.set('n', '<BS>', '<C-^>', { noremap = true })
+vim.keymap.set('n', '<C-p>', '<Tab>', { noremap = true })
 
 vim.g.mapleader = ','
-vim.opt.inccommand = 'nosplit'
 
 -- Copy/paste to/from system clipboard
 vim.keymap.set('n', '<Leader>y', '"+y', { noremap = true })
@@ -93,7 +90,6 @@ vim.keymap.set('v', '<Leader>p', '"+p', { noremap = true })
 -- Delete trailing whitespace
 vim.keymap.set('n', '<Leader>wd', ':%s/\\s\\+$//e<CR>', { silent = true, noremap = true })
 
-vim.opt.completeopt = 'menuone,noinsert,noselect,preview'
 -- Use <Tab> and <S-Tab> to navigate through popup menu
 vim.keymap.set('i', '<Tab>', function() return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>' end, { expr = true })
 vim.keymap.set('i', '<S-Tab>', function() return vim.fn.pumvisible() == 1 and '<C-p>' or '<S-Tab>' end, { expr = true })
@@ -140,13 +136,13 @@ require("repolink").setup{}
 vim.api.nvim_create_user_command(
   'Theme',
   function()
-    if(vim.o.background == 'dark')
+    if(vim.opt.background == 'dark')
     then
       vim.g.ascetic_transparent_bg = 0
-      vim.o.background = 'light'
+      vim.opt.background = 'light'
     else
       vim.g.ascetic_transparent_bg = 1
-      vim.o.background = 'dark'
+      vim.opt.background = 'dark'
     end
   end,
   {bang = true, desc = 'Toggle dark/light theme'}
@@ -164,8 +160,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Telescope
 local telescope = require('telescope')
 local telescope_builtin = require('telescope.builtin')
+local telescope_actions = require('telescope.actions')
 
-telescope.setup {
+telescope.setup({
   defaults = {
     layout_strategy = 'flex',
     layout_config = {
@@ -176,9 +173,9 @@ telescope.setup {
     mappings = {
       i = {
         ['<C-o>'] = require('telescope.actions.layout').toggle_preview,
-        ['<C-k>'] = require('telescope.actions').move_selection_previous,
-        ['<C-j>'] = require('telescope.actions').move_selection_next,
-        ['<C-x>'] = require('telescope.actions').delete_buffer,
+        ['<C-k>'] = telescope_actions.move_selection_previous,
+        ['<C-j>'] = telescope_actions.move_selection_next,
+        ['<C-x>'] = telescope_actions.delete_buffer,
       },
       n = {
         ['<C-o>'] = require('telescope.actions.layout').toggle_preview,
@@ -190,7 +187,7 @@ telescope.setup {
       follow = true,
     }
   },
-}
+})
 telescope.load_extension('jj')
 local vcs_picker = function(opts)
   local jj_pick_status, jj_res = pcall(telescope.extensions.jj.files, opts)
@@ -213,7 +210,7 @@ vim.keymap.set('n', '<leader>fc', telescope_builtin.git_commits, tele_opts)
 vim.keymap.set('n', '<leader>fb', telescope_builtin.git_bcommits, tele_opts)
 
 -- Treesitter configs
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
@@ -247,7 +244,7 @@ require('nvim-treesitter.configs').setup {
       set_jumps = true,
     },
   },
-}
+})
 
 -- LSP global
 -- Remove sign column for Lsp diagnostics and recolor the number instead

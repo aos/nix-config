@@ -8,7 +8,7 @@
 
   home.file = {
     "init.lua" = {
-      source = ./vimrc;
+      source = ./init.lua;
       target = ".config/nvim/init.lua";
     };
   };
