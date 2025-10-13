@@ -12,26 +12,6 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
-require("lazy").setup({
-  'neovim/nvim-lspconfig',
-  'nvim-treesitter/nvim-treesitter',
-  'nvim-treesitter/nvim-treesitter-textobjects',
-  'nvim-lua/plenary.nvim',
-  'nvim-telescope/telescope.nvim',
-  'zschreur/telescope-jj.nvim',
-  'justinmk/vim-dirvish',
-  'tpope/vim-fugitive',
-  'tpope/vim-surround',
-  'tpope/vim-unimpaired',
-  'tpope/vim-sleuth',
-  '9seconds/repolink.nvim',
-
-  'aos/vim-ascetic',
-})
-
-vim.opt.background = 'dark'
-vim.cmd.colorscheme('ascetic')
-
 vim.opt.number = true
 vim.opt.wrap = true
 vim.opt.showmode = true
@@ -57,6 +37,38 @@ vim.opt.path:append('**')
 vim.opt.cp = false
 vim.opt.completeopt = 'menuone,noinsert,noselect,preview'
 
+vim.g.mapleader = ','
+
+require("lazy").setup({
+  pkg = {
+    sources = {
+      "lazy",
+      "packspec",
+    }
+  },
+  rocks = {
+    enabled = false,
+  },
+  spec = {
+    'neovim/nvim-lspconfig',
+    'nvim-treesitter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope.nvim',
+    'zschreur/telescope-jj.nvim',
+    'justinmk/vim-dirvish',
+    'tpope/vim-fugitive',
+    'tpope/vim-surround',
+    'tpope/vim-unimpaired',
+    '9seconds/repolink.nvim',
+
+    'aos/vim-ascetic',
+  },
+})
+
+vim.opt.background = 'dark'
+vim.cmd.colorscheme('ascetic')
+
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
 
 vim.keymap.set('n', 'H', '^', { noremap = true })
@@ -78,8 +90,6 @@ vim.keymap.set(
 vim.keymap.set('n', '<Esc>', ':noh<CR><Esc>', { silent = true })
 vim.keymap.set('n', '<BS>', '<C-^>', { noremap = true })
 vim.keymap.set('n', '<C-p>', '<Tab>', { noremap = true })
-
-vim.g.mapleader = ','
 
 -- Copy/paste to/from system clipboard
 vim.keymap.set('n', '<Leader>y', '"+y', { noremap = true })
