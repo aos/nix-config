@@ -53,6 +53,7 @@ in
     (llm.withPlugins {
       llm-anthropic = true;
     })
+    claude-code
   ];
 
   fonts.fontconfig.enable = true;

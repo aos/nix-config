@@ -7,14 +7,9 @@
   };
 
   home.file = {
-    "vimrc" = {
+    "init.lua" = {
       source = ./vimrc;
-      target = ".vimrc";
-    };
-
-    "init.vim" = {
-      source = ./init.vim;
-      target = ".config/nvim/init.vim";
+      target = ".config/nvim/init.lua";
     };
   };
 }

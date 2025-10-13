@@ -1,123 +1,137 @@
-set number
-set wrap
-set showmode
-set title
-set hidden
-set autoread
+vim.opt.number = true
+vim.opt.wrap = true
+vim.opt.showmode = true
+vim.opt.title = true
+vim.opt.hidden = true
+vim.opt.autoread = true
 
-set cursorline
-set backspace=indent,eol,start
+vim.opt.cursorline = true
+vim.opt.backspace = 'indent,eol,start'
 
-set sts=2
-let &shiftwidth=&sts
-set expandtab
+vim.opt.sts = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
 
-set hlsearch
-set ignorecase
-set incsearch
-set smartcase
+vim.opt.hlsearch = true
+vim.opt.ignorecase = true
+vim.opt.incsearch = true
+vim.opt.smartcase = true
 
-inoremap jk <Esc>
+vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
 
-noremap H ^
-nnoremap L $
-onoremap L $
-vnoremap L g_
+vim.keymap.set('n', 'H', '^', { noremap = true })
+vim.keymap.set('n', 'L', '$', { noremap = true })
+vim.keymap.set('o', 'L', '$', { noremap = true })
+vim.keymap.set('v', 'L', 'g_', { noremap = true })
 
-nnoremap <expr> <silent> k v:count == 0 ? 'gk' : 'k'
-nnoremap <expr> <silent> j v:count == 0 ? 'gj' : 'j'
+vim.keymap.set('n', 'k', function() return vim.v.count == 0 and 'gk' or 'k' end, { expr = true, silent = true })
+vim.keymap.set('n', 'j', function() return vim.v.count == 0 and 'gj' or 'j' end, { expr = true, silent = true })
 
-nnoremap <silent> <Esc> :noh<CR><Esc>
-nnoremap <BS> <C-^>
-nnoremap <C-p> <Tab>
+vim.keymap.set('n', '<Esc>', ':noh<CR><Esc>', { silent = true })
+vim.keymap.set('n', '<BS>', '<C-^>', { noremap = true })
+vim.keymap.set('n', '<C-p>', '<Tab>', { noremap = true })
 
-set path+=**
+vim.opt.path:append('**')
 
-set nocp
+vim.opt.cp = false
 
-set background=dark
+vim.opt.background = 'dark'
 
-if (!has('nvim'))
-  syntax on
-  filetype plugin indent on
-  finish
-endif
+if not vim.fn.has('nvim') == 1 then
+  vim.cmd('syntax on')
+  vim.cmd('filetype plugin indent on')
+  return
+end
 
-" nvim-specific settings
+-- nvim-specific settings
 
-" auto-install vimplug and plugins
-if empty(glob(stdpath('data') . '/site/autoload/plug.vim'))
-  silent execute '!curl -fLo ' . stdpath('data') . '/site/autoload/plug.vim' . ' --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
+end
+vim.opt.runtimepath:prepend(lazypath)
 
-call plug#begin(stdpath('data') . '/plugged')
-  Plug 'neovim/nvim-lspconfig'
-  Plug 'nvim-treesitter/nvim-treesitter'
-  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
-  Plug 'zschreur/telescope-jj.nvim'
-  Plug 'justinmk/vim-dirvish'
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-unimpaired'
-  Plug 'tpope/vim-sleuth' " Set buffer options
-  Plug '9seconds/repolink.nvim'
+require("lazy").setup({
+  'neovim/nvim-lspconfig',
+  'nvim-treesitter/nvim-treesitter',
+  'nvim-treesitter/nvim-treesitter-textobjects',
+  'nvim-lua/plenary.nvim',
+  'nvim-telescope/telescope.nvim',
+  'zschreur/telescope-jj.nvim',
+  'justinmk/vim-dirvish',
+  'tpope/vim-fugitive',
+  'tpope/vim-surround',
+  'tpope/vim-unimpaired',
+  'tpope/vim-sleuth',
+  '9seconds/repolink.nvim',
 
-  " Plug 'habamax/vim-alchemist' " Dark background
-  " Plug 'aos/vim-aeon' " Light background
-  Plug 'aos/vim-ascetic' " monochrome
-  " Plug '~/src/vim-ascetic'
-call plug#end()
+  'aos/vim-ascetic',
+})
 
-if (has("termguicolors"))
-  set termguicolors
-endif
+if vim.fn.has("termguicolors") == 1 then
+  vim.opt.termguicolors = true
+end
 
-colorscheme ascetic
+vim.cmd('colorscheme ascetic')
 
-let mapleader = ','
-set inccommand=nosplit
+vim.g.mapleader = ','
+vim.opt.inccommand = 'nosplit'
 
-" Copy/paste to/from system clipboard
-nnoremap <Leader>y "+y
-vnoremap <Leader>y "+y
-nnoremap <Leader>p "+p
-vnoremap <Leader>p "+p
+-- Copy/paste to/from system clipboard
+vim.keymap.set('n', '<Leader>y', '"+y', { noremap = true })
+vim.keymap.set('v', '<Leader>y', '"+y', { noremap = true })
+vim.keymap.set('n', '<Leader>p', '"+p', { noremap = true })
+vim.keymap.set('v', '<Leader>p', '"+p', { noremap = true })
 
-" Delete trailing whitespace
-nnoremap <silent> <Leader>wd :%s/\s\+$//e<CR>
+-- Delete trailing whitespace
+vim.keymap.set('n', '<Leader>wd', ':%s/\\s\\+$//e<CR>', { silent = true, noremap = true })
 
-set completeopt=menuone,noinsert,noselect,preview
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" Set preview window to bottom
-set splitbelow
-" Set preview window to right
-set splitright
-" Autoclose preview window when done selecting
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | silent! pclose | endif
+vim.opt.completeopt = 'menuone,noinsert,noselect,preview'
+-- Use <Tab> and <S-Tab> to navigate through popup menu
+vim.keymap.set('i', '<Tab>', function() return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>' end, { expr = true })
+vim.keymap.set('i', '<S-Tab>', function() return vim.fn.pumvisible() == 1 and '<C-p>' or '<S-Tab>' end, { expr = true })
+-- Set preview window to bottom
+vim.opt.splitbelow = true
+-- Set preview window to right
+vim.opt.splitright = true
+-- Autoclose preview window when done selecting
+vim.api.nvim_create_autocmd({ 'InsertLeave', 'CompleteDone' }, {
+  pattern = '*',
+  callback = function()
+    if vim.fn.pumvisible() == 0 then
+      vim.cmd('silent! pclose')
+    end
+  end
+})
 
-" Tree-sitter based folding
-set nofoldenable " start file unfolded
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-highlight! link Folded Special
+-- Tree-sitter based folding
+vim.opt.foldenable = false -- start file unfolded
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.cmd('highlight! link Folded Special')
 
-" Fold mappings
-noremap <Space> za
-noremap <expr> <Leader><Space> &foldlevel ? 'zM' : 'zR'
+-- Fold mappings
+vim.keymap.set('n', '<Space>', 'za', { noremap = true })
+vim.keymap.set('n', '<Leader><Space>', function()
+  return vim.opt.foldlevel:get() > 0 and 'zM' or 'zR'
+end, { expr = true, noremap = true })
 
-" Disable Dirvish <C-p>
-augroup dirvish_config
-  autocmd!
-  autocmd FileType dirvish silent! unmap <buffer> <C-p>
-augroup END
-
-lua << EOF
+-- Disable Dirvish <C-p>
+vim.api.nvim_create_augroup('dirvish_config', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'dirvish',
+  group = 'dirvish_config',
+  callback = function()
+    pcall(vim.keymap.del, 'n', '<C-p>', { buffer = true })
+  end
+})
 
 -- :RepoLink
 require("repolink").setup{}
@@ -315,7 +329,7 @@ local rust_analyzer_config = {
   }
 }
 
-lspconfig_util = require('lspconfig.util')
+local lspconfig_util = require('lspconfig.util')
 
 local pylsp_config = {
   root_dir = function(fname)
@@ -355,8 +369,10 @@ local lsp_servers = {
   ['zls'] = {},
 }
 
-local nvim_lsp = require('lspconfig')
 for server, config in pairs(lsp_servers) do
-  nvim_lsp[server].setup(vim.tbl_deep_extend("force", lsp_defaults, config))
+  local full_config = vim.tbl_deep_extend("force", lsp_defaults, config)
+  full_config.name = server
+  vim.lsp.config(server, full_config)
 end
-EOF
+
+vim.lsp.enable(vim.tbl_keys(lsp_servers))
