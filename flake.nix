@@ -31,7 +31,7 @@
       inputs.disko.follows = "disko";
     };
     colmena.url = "github:zhaofengli/colmena";
-    hyprland.url = "github:hyprwm/Hyprland/v0.50.1";
+    hyprland.url = "github:hyprwm/Hyprland/v0.51.1";
     catppuccin.url = "github:catppuccin/nix";
     gotoz.url = "git+https://git.sr.ht/~aos/gotoz";
     atools.url = "github:aos/atools";

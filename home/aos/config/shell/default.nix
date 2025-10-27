@@ -33,8 +33,7 @@
       set -U fish_greeting # Disable greeting
 
       set -x FZF_DEFAULT_OPTS '--height 30% --layout reverse --border --multi'
-      set -x FZF_DEFAULT_COMMAND '${lib.getExe pkgs.ripgrep} --files --hidden --follow --no-require-git'
-      set -x FZF_CTRL_T_COMMAND "''$FZF_DEFAULT_COMMAND"
+      set -x FZF_CTRL_T_COMMAND '${lib.getExe pkgs.ripgrep} --files --hidden --follow --no-require-git'
 
       set -x MANPAGER '${lib.getExe pkgs.neovim} +Man!'
     '';

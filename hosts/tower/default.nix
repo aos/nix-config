@@ -88,14 +88,19 @@ in
         # DFU (Internal bootloader for STM32 and AT32 MCUs)
         SUBSYSTEM=="usb", ATTRS{idVendor}=="2e3c", ATTRS{idProduct}=="df11", TAG+="uaccess"
         SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", TAG+="uaccess"
+        ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789B]?", ENV{ID_MM_DEVICE_IGNORE}="1"
+        # Wally flashing rules for Ergodox EZ
+        ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789A]?", ENV{MTP_NO_PROBE}="1"
+        SUBSYSTEMS=="usb", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789ABCD]?", MODE:="0666"
+        KERNEL=="ttyACM*", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789B]?", MODE:="0666"
       '';
   };
 
   # Fix for broken mesa with Hyprland
-  hardware.graphics = {
-    package = hyprlandPkgs.mesa;
+  # hardware.graphics = {
+  #   package = hyprlandPkgs.mesa;
 
-    enable32Bit = true;
-    package32 = hyprlandPkgs.pkgsi686Linux.mesa;
-  };
+  #   enable32Bit = true;
+  #   package32 = hyprlandPkgs.pkgsi686Linux.mesa;
+  # };
 }
