@@ -223,9 +223,9 @@
               ssh-to-age
               terraform-ls
               (terraform.withPlugins (p: [
-                p.hcloud
-                p.digitalocean
-                p.sops
+                p.hetznercloud_hcloud
+                p.digitalocean_digitalocean
+                p.carlpett_sops
               ]))
             ];
           };

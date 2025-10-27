@@ -46,7 +46,7 @@ in
     yazi
 
     # llms
-    files-to-prompt
+    # files-to-prompt
 
     qalculate-gtk
     mypaint

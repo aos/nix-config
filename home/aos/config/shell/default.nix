@@ -9,6 +9,9 @@
   home.packages = with pkgs; [
     wl-clipboard
 
+    fzf
+    ripgrep
+
     gotoz
     # atuin
   ];
@@ -25,6 +28,7 @@
     interactiveShellInit = ''
       ${lib.getExe pkgs.nix-your-shell} fish | source
       ${lib.getExe pkgs.gotoz} --init fish | source
+      ${lib.getExe pkgs.fzf} --fish | source
 
       set -U fish_greeting # Disable greeting
 

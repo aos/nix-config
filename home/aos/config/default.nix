@@ -11,8 +11,6 @@
     tmux
     foot
 
-    fzf
-    ripgrep
     delta
 
     zathura
