@@ -3,7 +3,7 @@ ignore-empty-password
 indicator-idle-visible
 indicator-radius=200
 
-image=./sysc.jpg
+image=~/.config/hypr/sysc.jpg
 
 # Theme
 color=1e1e2e

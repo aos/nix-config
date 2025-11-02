@@ -17,6 +17,7 @@
       ".config/fuzzel/fuzzel.ini".source = ./config/fuzzel.ini;
       ".config/mako/config".source = ./config/mako;
       ".config/swappy/config".source = ./config/swappy;
+      ".config/swaylock/config".source = ./config/swaylock;
     };
   };
 

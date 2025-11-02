@@ -16,10 +16,12 @@
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
+  programs.waybar.enable = true;
+
   environment.systemPackages = with pkgs; [
     exfatprogs
 
-    waybar
+    # waybar # replaced by service above
     kanshi # autorandr for wayland
     libnotify
 
@@ -28,7 +30,8 @@
     # raffi # fuzzel dmenu launcher
     # TODO: wait until this hits 0.5.1: https://nixpk.gs/pr-tracker.html?pr=342392
 
-    hyprlock
+    swaylock
+    # hyprlock # you break too much
     hypridle
 
     networkmanagerapplet
@@ -119,11 +122,17 @@
     };
   };
 
-  security.pam.services.hyprlock = {
+  security.pam.services.swaylock = {
     text = ''
       auth include login
     '';
   };
+
+  # security.pam.services.hyprlock = {
+  #   text = ''
+  #     auth include login
+  #   '';
+  # };
 
   # allow automounting USB devices
   services.devmon.enable = true;
