@@ -42,7 +42,7 @@ bind-key -T copy-mode-vi L send -X end-of-line
 setw -g mode-style "fg=black,bg=colour178"
 
 # Allow 'foot' terminal to get true-color
-set -ga terminal-overrides ",foot:Tc"
+# set -ga terminal-overrides ",foot:Tc"
 set -ga terminal-overrides ',xterm-256color:Tc'
 # Set default terminal mode to 256 color
 set -g default-terminal "tmux-256color"

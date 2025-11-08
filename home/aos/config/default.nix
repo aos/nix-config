@@ -10,6 +10,7 @@
   home.packages = with pkgs; [
     tmux
     foot
+    ghostty
 
     delta
 
@@ -38,6 +39,7 @@
   home.file.".gitconfig".source = ./gitconfig;
   home.file.".ignore".source = ./rg_ignore;
   home.file.".config/foot/foot.ini".source = ./terminal/foot.ini;
+  home.file.".config/ghostty/config".source = ./terminal/ghostty;
 
   home.file.".config/zathura/".source = ./zathura;
 

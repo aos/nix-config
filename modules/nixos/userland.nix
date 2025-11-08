@@ -55,6 +55,7 @@
     drm_info
 
     firefox
+    foot
   ];
 
   environment.sessionVariables = {

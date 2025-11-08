@@ -1,0 +1,8 @@
+# theme = dark:Tomorrow Night
+theme = dark:Broadcast,light:3024 Day
+font-family = "Inconsolata Nerd Font"
+font-size = 14
+bold-color = bright
+window-padding-x = 5
+window-padding-y = 5
+window-padding-balance = true
