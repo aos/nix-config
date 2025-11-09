@@ -22,4 +22,5 @@
   };
 
   services.hypridle.enable = true;
+  programs.swaylock.enable = true;
 }

@@ -30,9 +30,9 @@
     # raffi # fuzzel dmenu launcher
     # TODO: wait until this hits 0.5.1: https://nixpk.gs/pr-tracker.html?pr=342392
 
-    swaylock
+    # swaylock # in homemanager - programs.swaylock.enable
     # hyprlock # you break too much
-    hypridle
+    # hypridle # in homemanager - services.hypridle
 
     networkmanagerapplet
     pavucontrol
