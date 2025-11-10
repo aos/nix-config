@@ -10,7 +10,6 @@
   home.packages = with pkgs; [
     tmux
     foot
-    ghostty
 
     delta
 

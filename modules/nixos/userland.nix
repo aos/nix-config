@@ -56,6 +56,7 @@
 
     firefox
     foot
+    ghostty
   ];
 
   environment.sessionVariables = {
