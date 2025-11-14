@@ -2,7 +2,7 @@
 # theme = dark:Broadcast,light:3024 Day
 # theme = dark:Bluloco Dark,light:3024 Day
 # theme = dark:Catppuccin Macchiato,light:3024 Day
-theme = dark:Elegant,light:3024 Day
+theme = dark:Elegant,light:Breaddog
 font-family = "Inconsolata Nerd Font"
 font-size = 14
 bold-color = bright

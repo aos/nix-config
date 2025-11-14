@@ -28,6 +28,7 @@ in
 
   services.transmission = {
     enable = true;
+    package = pkgs.transmission_4;
     home = txHomeDir;
     openRPCPort = true;
     credentialsFile = config.sops.templates.tx_creds.path;

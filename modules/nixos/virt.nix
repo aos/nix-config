@@ -15,7 +15,9 @@
     };
   };
 
-  users.users.aos.extraGroups = [ "libvirtd" ];
+  users.users.aos.extraGroups = [ "libvirtd" "podman" ];
 
   programs.virt-manager.enable = true;
+
+  environment.systemPackages = [ pkgs.podman-compose pkgs.podman-tui ];
 }

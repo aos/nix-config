@@ -10,6 +10,7 @@
   imports = [
     inputs.srvos.nixosModules.desktop
     ../../modules/nixos/monitoring.nix
+    ../../modules/nixos/nix.nix
 
     ../../modules/nixos/network.nix
 

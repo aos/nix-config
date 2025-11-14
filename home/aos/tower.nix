@@ -54,6 +54,7 @@ in
       llm-anthropic = true;
     })
     claude-code
+    vagrant
   ];
 
   fonts.fontconfig.enable = true;

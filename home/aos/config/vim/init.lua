@@ -66,6 +66,7 @@ require("lazy").setup({
   },
 })
 
+vim.opt.termguicolors = true
 vim.opt.background = 'dark'
 vim.cmd.colorscheme('ascetic')
 
@@ -146,7 +147,7 @@ require("repolink").setup{}
 vim.api.nvim_create_user_command(
   'Theme',
   function()
-    if(vim.opt.background == 'dark')
+    if(vim.opt.background:get() == 'dark')
     then
       vim.g.ascetic_transparent_bg = 0
       vim.opt.background = 'light'

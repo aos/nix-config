@@ -127,10 +127,12 @@
           imports = [ ./hosts/biggie ];
         };
 
+        # Home assistant, etc.
         temple = { ... }: {
           imports = [ ./hosts/temple ];
         };
 
+        # VPS
         pylon = { ... }: {
           imports = [ ./hosts/pylon ];
         };
