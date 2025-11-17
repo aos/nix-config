@@ -40,9 +40,10 @@
     (google-cloud-sdk.withExtraComponents ([ google-cloud-sdk.components.gke-gcloud-auth-plugin ]))
     awscli2
     ssm-session-manager-plugin
-    (writeShellScriptBin "claude" ''
-      source ~/.config/claude_code_env.sh
-      exec ${lib.getExe pkgs.claude-code} "$@"
-    '')
+    claude-code
+    # (writeShellScriptBin "claude" ''
+    #   source ~/.config/claude_code_env.sh
+    #   exec ${lib.getExe pkgs.claude-code} "$@"
+    # '')
   ];
 }
