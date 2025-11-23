@@ -3,10 +3,8 @@
 {
   home.packages = [
     (pkgs.python3.withPackages (
-      ps: with ps; [
-        pynvim
-        python-lsp-server
-      ]
+      ps: with ps; [ requests ]
     ))
+    pkgs.ruff
   ];
 }

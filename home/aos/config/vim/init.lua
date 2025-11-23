@@ -259,15 +259,29 @@ require('nvim-treesitter.configs').setup({
 
 -- LSP global
 -- Remove sign column for Lsp diagnostics and recolor the number instead
-vim.o.signcolumn = "no"
-vim.fn.sign_define("DiagnosticSignError",
-  { text = "E", texthl = "DiagnosticSignError", numhl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarn",
-  { text = "W", texthl = "DiagnosticSignWarn", numhl = "DiagnosticSignWarn" })
-vim.fn.sign_define("DiagnosticSignInfo",
-  { text = "I", texthl = "DiagnosticSignInfo", numhl = "DiagnosticSignInfo" })
-vim.fn.sign_define("DiagnosticSignHint",
-  { text = "H", texthl = "DiagnosticSignHint", numhl = "DiagnosticSignHint" })
+vim.opt.signcolumn = "no"
+vim.diagnostic.config {
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = 'E',
+      [vim.diagnostic.severity.WARN] = 'W',
+      [vim.diagnostic.severity.INFO] = 'I',
+      [vim.diagnostic.severity.HINT] = 'H',
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
+      [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
+      [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
+    },
+    linehl = {
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
+      [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
+      [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
+    },
+  }
+}
 
 local lsp_on_attach = function(client, bufnr)
   -- Mappings
@@ -290,7 +304,20 @@ local lsp_on_attach = function(client, bufnr)
   buf_set_keymap('n', '<C-k>', "<Cmd>lua vim.diagnostic.goto_prev({float = {border='single'}})<CR>", opts)
   buf_set_keymap('n', '<C-j>', "<Cmd>lua vim.diagnostic.goto_next({float = {border='single'}})<CR>", opts)
 
-  vim.cmd [[ command! Fmt execute 'lua vim.lsp.buf.format()' ]]
+  vim.api.nvim_create_user_command('Fmt', function() vim.lsp.buf.format() end, {})
+
+  -- Only create Imports command if server supports it
+  if client.config.imports_command then
+    vim.api.nvim_create_user_command(
+      'Imports',
+      function()
+        vim.lsp.buf.code_action({
+          context = {only = {"source.organizeImports"}}, apply=true
+        })
+      end,
+      {}
+    )
+  end
 end
 
 local lsp_defaults = {
@@ -339,40 +366,15 @@ local rust_analyzer_config = {
 
 local lspconfig_util = require('lspconfig.util')
 
-local pylsp_config = {
-  root_dir = function(fname)
-    local root_files = {
-      'pyproject.toml',
-      'setup.py',
-      'setup.cfg',
-      'requirements.txt',
-      'Pipfile',
-    }
-    return lspconfig_util.root_pattern(unpack(root_files))(fname) or
-           lspconfig_util.find_git_ancestor(fname)
-  end,
-  single_file_support = true,
-
-  settings = {
-    pylsp = {
-      configurationSources = { "flake8" },
-      plugins = {
-        flake8 = { enabled = true },
-        pycodestyle = { enabled = false },
-        mccabe = { enabled = false },
-        pyflakes = { enabled = false },
-      }
-    }
-  }
-}
-
 local lsp_servers = {
-  ['pylsp'] = pylsp_config,
+  ['ruff'] = {},
   ['rust_analyzer'] = rust_analyzer_config,
   ['terraformls'] = {},
-  ['gopls'] = {},
+  ['gopls'] = {
+    imports_command = true,
+  },
   ['elixirls'] = {
-    cmd = { 'elixir-ls' }
+    cmd = { 'elixir-ls' },
   },
   ['zls'] = {},
 }
