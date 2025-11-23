@@ -1,5 +1,5 @@
 -- Load lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath("data") .. '/lazy/lazy.nvim'
 if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -33,6 +33,15 @@ vim.opt.smartcase = true
 vim.opt.inccommand = 'nosplit'
 
 vim.opt.path:append('**')
+
+-- Set up undodir
+vim.opt.swapfile = false
+vim.opt.backup = false
+local undodir = vim.fn.stdpath('data') .. '/undo'
+vim.fn.mkdir(undodir, 'p')
+vim.opt.undodir = undodir
+vim.opt.undofile = true
+vim.opt.undolevels = 10000
 
 vim.opt.cp = false
 vim.opt.completeopt = 'menuone,noinsert,noselect,preview'
@@ -260,7 +269,7 @@ require('nvim-treesitter.configs').setup({
 -- LSP global
 -- Remove sign column for Lsp diagnostics and recolor the number instead
 vim.opt.signcolumn = "no"
-vim.diagnostic.config {
+vim.diagnostic.config({
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = 'E',
@@ -281,7 +290,7 @@ vim.diagnostic.config {
       [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
     },
   }
-}
+})
 
 local lsp_on_attach = function(client, bufnr)
   -- Mappings
@@ -300,7 +309,7 @@ local lsp_on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
   buf_set_keymap('n', 'gs', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
-  buf_set_keymap('n', 'gk', "<Cmd>lua vim.diagnostic.open_float(bufnr, {border='single',scope= 'line'})<CR>", opts)
+  buf_set_keymap('n', 'gk', "<Cmd>lua vim.diagnostic.open_float(bufnr, {border='single',scope='line'})<CR>", opts)
   buf_set_keymap('n', '<C-k>', "<Cmd>lua vim.diagnostic.goto_prev({float = {border='single'}})<CR>", opts)
   buf_set_keymap('n', '<C-j>', "<Cmd>lua vim.diagnostic.goto_next({float = {border='single'}})<CR>", opts)
 
@@ -320,23 +329,21 @@ local lsp_on_attach = function(client, bufnr)
   end
 end
 
+-- override LSP floating windows
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = 'rounded'
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
 local lsp_defaults = {
   on_attach = lsp_on_attach,
   flags = {
     debounce_text_changes = 200,
   },
   handlers = {
-    ["textDocument/hover"] = vim.lsp.with(
-      vim.lsp.handlers.hover, {
-        border = "single"
-      }
-    ),
-    ["textDocument/signatureHelp"] = vim.lsp.with(
-      vim.lsp.handlers.signature_help, {
-        border = "single"
-      }
-    ),
-    ["textDocument/publishDiagnostics"] = vim.lsp.with(
+    ['textDocument/publishDiagnostics'] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics, {
         -- enable signs
         signs = true,
