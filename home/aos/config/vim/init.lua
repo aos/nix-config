@@ -130,8 +130,8 @@ vim.api.nvim_create_autocmd({ 'InsertLeave', 'CompleteDone' }, {
 -- Tree-sitter based folding
 vim.opt.foldenable = false -- start file unfolded
 vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-vim.cmd('highlight! link Folded Special')
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 
 -- Fold mappings
 vim.keymap.set('n', '<Space>', 'za', { noremap = true })
@@ -315,6 +315,13 @@ local lsp_on_attach = function(client, bufnr)
 
   vim.api.nvim_create_user_command('Fmt', function() vim.lsp.buf.format() end, {})
 
+  -- LSP-based folding
+  local win = vim.api.nvim_get_current_win()
+  vim.wo[win][0].foldtext = 'v:lua.vim.lsp.foldtext()'
+  if client:supports_method('textDocument/foldingRange') then
+    vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+  end
+
   -- Only create Imports command if server supports it
   if client.config.imports_command then
     vim.api.nvim_create_user_command(
@@ -374,7 +381,7 @@ local rust_analyzer_config = {
 local lspconfig_util = require('lspconfig.util')
 
 local lsp_servers = {
-  ['ruff'] = {},
+  ['pyright'] = {},
   ['rust_analyzer'] = rust_analyzer_config,
   ['terraformls'] = {},
   ['gopls'] = {

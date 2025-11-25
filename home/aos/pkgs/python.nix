@@ -5,6 +5,6 @@
     (pkgs.python3.withPackages (
       ps: with ps; [ requests ]
     ))
-    pkgs.ruff
+    pkgs.pyright
   ];
 }
