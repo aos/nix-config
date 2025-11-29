@@ -36,6 +36,7 @@
     unzip
     vim
     xfsprogs
+    piper
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -99,6 +100,7 @@
   };
 
   services.openssh.enable = true;
+  services.ratbagd.enable = true;
 
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];

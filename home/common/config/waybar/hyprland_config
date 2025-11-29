@@ -2,12 +2,14 @@
   "position": "top",
   "layer": "top",
   "spacing": 4,
-  "height": 30,
 
   "modules-left": [
-    "niri/workspaces",
+    "hyprland/workspaces",
     "custom/separator",
-    "niri/window"
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "hyprland/submap"
   ],
   "modules-right": [
     "tray",
@@ -28,12 +30,18 @@
     "exec": "echo \"|\"",
     "format": "{}"
   },
-  "niri/workspaces": {
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "active-only": false,
+    "show-special": true,
     "all-outputs": true
   },
-  "niri/window": {
-    "separate-outputs": true,
+  "hyprland/window": {
     "max-length": 80
+  },
+  "hyprland/submap": {
+    "format": "[[ {} ]]",
+    "tooltip": false
   },
   "tray": {
     "spacing": 10

@@ -7,13 +7,17 @@
 }:
 
 {
-  programs.hyprland = {
+  # programs.hyprland = {
+  #   enable = false;
+  #   # https://wiki.hyprland.org/Useful-Utilities/Systemd-start/#uwsm
+  #   withUWSM = true;
+  #   xwayland.enable = true;
+  #   package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+  #   portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  # };
+
+  programs.niri = {
     enable = true;
-    # https://wiki.hyprland.org/Useful-Utilities/Systemd-start/#uwsm
-    withUWSM = true;
-    xwayland.enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
   programs.waybar.enable = true;
@@ -48,7 +52,7 @@
     qalculate-gtk # calculator
     nautilus # file viewer
     wl-clipboard
-    # xwaylandvideobridge # screensharing bridge
+    xwayland-satellite
 
     qt5.qtwayland
     qt6.qtwayland
@@ -59,30 +63,22 @@
     ghostty
   ];
 
-  environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
-    NIXOS_OZONE_WL = "1";
-  };
-
-  xdg.portal = {
-    enable = true;
-    config = {
-      common = {
-        default = [ "hyprland" ];
-      };
-      hyprland = {
-        default = [
-          "gtk"
-          "hyprland"
-        ];
-      };
-    };
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
-    ];
-    xdgOpenUsePortal = true;
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   config = {
+  #     common = {
+  #       default = [ "gtk" "gnome" ];
+  #     };
+  #     niri = {
+  #       default = [ "gtk" "gnome" ];
+  #     };
+  #   };
+  #   extraPortals = [
+  #     pkgs.xdg-desktop-portal-gtk
+  #     pkgs.xdg-desktop-portal-gnome
+  #   ];
+  #   xdgOpenUsePortal = true;
+  # };
 
   fonts.packages = with pkgs; [
     cantarell-fonts
@@ -119,7 +115,8 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd 'uwsm start hyprland-uwsm.desktop'";
+        # command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd 'uwsm start hyprland-uwsm.desktop'";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd 'niri-session'";
       };
     };
   };
@@ -129,12 +126,6 @@
       auth include login
     '';
   };
-
-  # security.pam.services.hyprlock = {
-  #   text = ''
-  #     auth include login
-  #   '';
-  # };
 
   # allow automounting USB devices
   services.devmon.enable = true;

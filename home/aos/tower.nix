@@ -33,13 +33,14 @@ in
     ./pkgs
     ./config
 
-    ../common/hyprland.nix
+    ../common/userland.nix
+    # ../common/hyprland.nix
     ../common/theme.nix
   ];
 
   home.packages = with pkgs; [
     spotify
-    discord
+    vesktop
     zoom-us
     slack
     libreoffice

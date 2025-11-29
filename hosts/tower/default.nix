@@ -13,6 +13,7 @@ in
   imports = [
     inputs.disko.nixosModules.disko
     inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
+    inputs.niri-flake.nixosModules.niri
 
     ../../modules/nixos/network.nix
     ../../modules/nixos/nix.nix

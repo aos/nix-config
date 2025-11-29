@@ -33,6 +33,7 @@
     colmena.url = "github:zhaofengli/colmena";
     hyprland.url = "github:hyprwm/Hyprland/v0.51.1";
     catppuccin.url = "github:catppuccin/nix";
+    niri-flake.url = "github:sodiboo/niri-flake";
     gotoz.url = "git+https://git.sr.ht/~aos/gotoz";
     atools.url = "github:aos/atools";
   };
