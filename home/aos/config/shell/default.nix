@@ -13,7 +13,7 @@
     ripgrep
 
     gotoz
-    # atuin
+    atuin
   ];
 
   programs.fish = {
@@ -28,7 +28,8 @@
     interactiveShellInit = ''
       ${lib.getExe pkgs.nix-your-shell} fish | source
       ${lib.getExe pkgs.gotoz} --init fish | source
-      ${lib.getExe pkgs.fzf} --fish | source
+      ${lib.getExe pkgs.fzf} --fish | FZF_CTRL_R_COMMAND= source
+      ${lib.getExe pkgs.atuin} init fish --disable-up-arrow | source
 
       set -U fish_greeting # Disable greeting
 

@@ -39,6 +39,7 @@
   home.file.".ignore".source = ./rg_ignore;
   home.file.".config/foot/foot.ini".source = ./terminal/foot.ini;
   home.file.".config/ghostty/config".source = ./terminal/ghostty;
+  home.file.".config/atuin/config.toml".source = ./atuin.toml;
 
   home.file.".config/zathura/".source = ./zathura;
 

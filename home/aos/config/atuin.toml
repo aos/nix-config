@@ -1,0 +1,28 @@
+invert = true
+auto_sync = false
+enter_accept = false
+update_check = false
+style = "compact"
+inline_height = 30
+common_subcommands = [
+  "apt",
+  "cargo",
+  "docker",
+  "g",
+  "git",
+  "go",
+  "ip",
+  "jj",
+  "kubectl",
+  "nix",
+  "nmcli",
+  "npm",
+  "pecl",
+  "pnpm",
+  "podman",
+  "port",
+  "systemctl",
+  "tmux",
+  "yarn",
+  "zig",
+]
