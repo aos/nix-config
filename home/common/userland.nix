@@ -23,10 +23,15 @@
       ".config/swappy/config".source = ./config/swappy;
       ".config/swaylock/config".source = ./config/swaylock;
     };
+
+    packages = with pkgs; [
+      bluetui
+    ];
   };
 
   services.hypridle.enable = true;
   programs.swaylock.enable = true;
+  programs.waybar.enable = true;
 
   xdg.configFile."electron-flags.conf".text = ''
     --enable-features=UseOzonePlatform

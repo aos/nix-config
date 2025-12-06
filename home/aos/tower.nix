@@ -38,6 +38,8 @@ in
     ../common/theme.nix
   ];
 
+  targets.genericLinux.gpu.enable = false;
+
   home.packages = with pkgs; [
     spotify
     vesktop

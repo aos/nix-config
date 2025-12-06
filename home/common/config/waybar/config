@@ -51,7 +51,8 @@
     "tooltip-format": "{status}",
     "tooltip-format-enumerate-connected": "{device_alias} - {device_address}",
     "tooltip-format-enumerate-connected-battery": "{device_alias} - {device_address} - {device_battery_percentage}%",
-    "tooltip-format-connected": "{device_enumerate}"
+    "tooltip-format-connected": "{device_enumerate}",
+    "on-click": "ghostty -e bluetui"
   },
   "pulseaudio": {
     "scroll-step": 1,

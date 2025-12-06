@@ -22,7 +22,7 @@ nvim +PlugInstall +PlugClean! +qall
 ### Run
 
 ```
-home-manager switch --flakes .#aos@tower
+home-manager switch --flake .#aos@tower
 ```
 
 ### Yubikey

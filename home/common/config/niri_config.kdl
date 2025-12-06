@@ -3,8 +3,6 @@ spawn-at-startup "mako"
 spawn-sh-at-startup "wl-gammarelay-rs run"
 spawn-sh-at-startup "nm-applet --indicator"
 
-workspace "C"
-
 input {
     mod-key "Super"
 
@@ -296,3 +294,5 @@ binds {
 xwayland-satellite {
     path "xwayland-satellite"
 }
+
+workspace "C"
