@@ -109,6 +109,7 @@
 
           nixpkgs = defaultPackages;
 
+          # special override nixpkgs for some systems
           nodeNixpkgs = {
             biggie = import nixpkgs {
               system = defaultSystem;

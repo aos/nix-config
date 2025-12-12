@@ -7,14 +7,9 @@
 }:
 
 {
-  # programs.hyprland = {
-  #   enable = false;
-  #   # https://wiki.hyprland.org/Useful-Utilities/Systemd-start/#uwsm
-  #   withUWSM = true;
-  #   xwayland.enable = true;
-  #   package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-  #   portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-  # };
+  imports = [
+    inputs.niri-flake.nixosModules.niri
+  ];
 
   programs.niri = {
     enable = true;
@@ -23,7 +18,7 @@
   environment.systemPackages = with pkgs; [
     exfatprogs
 
-    # waybar # replaced by service above
+    # waybar # replaced by service in home-manager
     kanshi # autorandr for wayland
     libnotify
 
@@ -32,9 +27,8 @@
     # raffi # fuzzel dmenu launcher
     # TODO: wait until this hits 0.5.1: https://nixpk.gs/pr-tracker.html?pr=342392
 
-    # swaylock # in homemanager - programs.swaylock.enable
-    # hyprlock # you break too much
-    # hypridle # in homemanager - services.hypridle
+    # swaylock # in home-manager - programs.swaylock.enable
+    # hypridle # in home-manager - services.hypridle
 
     networkmanagerapplet
     pavucontrol
@@ -61,23 +55,6 @@
     ghostty
   ];
 
-  # xdg.portal = {
-  #   enable = true;
-  #   config = {
-  #     common = {
-  #       default = [ "gtk" "gnome" ];
-  #     };
-  #     niri = {
-  #       default = [ "gtk" "gnome" ];
-  #     };
-  #   };
-  #   extraPortals = [
-  #     pkgs.xdg-desktop-portal-gtk
-  #     pkgs.xdg-desktop-portal-gnome
-  #   ];
-  #   xdgOpenUsePortal = true;
-  # };
-
   fonts.packages = with pkgs; [
     cantarell-fonts
     font-awesome
@@ -97,9 +74,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
-    wireplumber = {
-      enable = true;
-    };
+    wireplumber.enable = true;
   };
 
   services.xserver.enable = true;
@@ -113,7 +88,6 @@
     enable = true;
     settings = {
       default_session = {
-        # command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd 'uwsm start hyprland-uwsm.desktop'";
         command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd 'niri-session'";
       };
     };

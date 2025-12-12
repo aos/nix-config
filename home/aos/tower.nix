@@ -34,7 +34,6 @@ in
     ./config
 
     ../common/userland.nix
-    # ../common/hyprland.nix
     ../common/theme.nix
   ];
 
