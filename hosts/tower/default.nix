@@ -6,9 +6,6 @@
   ...
 }:
 
-let
-  hyprlandPkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in
 {
   imports = [
     inputs.disko.nixosModules.disko
@@ -95,12 +92,4 @@ in
         KERNEL=="ttyACM*", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789B]?", MODE:="0666"
       '';
   };
-
-  # Fix for broken mesa with Hyprland
-  # hardware.graphics = {
-  #   package = hyprlandPkgs.mesa;
-
-  #   enable32Bit = true;
-  #   package32 = hyprlandPkgs.pkgsi686Linux.mesa;
-  # };
 }
