@@ -20,10 +20,12 @@
       ".config/mako/config".source = ./config/mako;
       ".config/swappy/config".source = ./config/swappy;
       ".config/swaylock/config".source = ./config/swaylock;
+      ".config/kagi/config.json".source = ./config/kagi_search.json;
     };
 
     packages = with pkgs; [
       bluetui
+      kagi-search
     ];
   };
 
