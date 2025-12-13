@@ -82,6 +82,29 @@ window-rule {
     open-on-workspace "C"
 }
 
+// Indicate screencasted windows with red border
+window-rule {
+    match is-window-cast-target=true
+
+    focus-ring {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+
+    border {
+        inactive-color "#7d0d2d"
+    }
+
+    shadow {
+        color "#7d0d2d70"
+    }
+
+    tab-indicator {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+}
+
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
