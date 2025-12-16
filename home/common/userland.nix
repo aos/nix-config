@@ -1,6 +1,10 @@
 { home, pkgs, ... }:
 
 {
+  imports = [
+    ./swayidle.nix
+  ];
+
   home = {
     sessionVariables = {
       NIXOS_OZONE_WL = 1;
@@ -11,37 +15,31 @@
       XDG_SESSION_TYPE = "wayland";
     };
 
-    file = {
-      ".config/niri/config.kdl".source = ./config/niri_config.kdl;
-      ".config/hypr/".source = ./config/hypr;
-      ".config/waybar/".source = ./config/waybar;
-      ".config/kanshi/config".source = ./config/kanshi;
-      ".config/fuzzel/fuzzel.ini".source = ./config/fuzzel.ini;
-      ".config/mako/config".source = ./config/mako;
-      ".config/swappy/config".source = ./config/swappy;
-      ".config/swaylock/config".source = ./config/swaylock;
-      ".config/kagi/config.json".source = ./config/kagi_search.json;
-    };
-
     packages = with pkgs; [
       bluetui
       kagi-search
     ];
   };
 
-  services.hypridle.enable = true;
-  # services.mako.enable = true;
-  programs.swaylock.enable = true;
-  # programs.fuzzel.enable = true;
+  xdg.configFile = {
+    "waybar".source = ./config/waybar;
+    "niri/config.kdl".source = ./config/niri_config.kdl;
+    "mako/config".source = ./config/mako;
+    "fuzzel/fuzzel.ini".source = ./config/fuzzel.ini;
+    "swappy/config".source = ./config/swappy;
+    "kanshi/config".source = ./config/kanshi;
+    "sysc.jpg".source = ./config/sysc.jpg;
+    "kagi/config.json".source = ./config/kagi_search.json;
+    "electron-flags.conf".text = ''
+      --enable-features=UseOzonePlatform
+      --ozone-platform=wayland
+    '';
+  };
+
   programs.waybar = {
     enable = true;
     systemd.enable = true;
   };
-
-  xdg.configFile."electron-flags.conf".text = ''
-    --enable-features=UseOzonePlatform
-    --ozone-platform=wayland
-  '';
 
   xdg.portal = {
     enable = true;
