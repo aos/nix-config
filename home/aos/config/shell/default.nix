@@ -56,9 +56,11 @@
         else
           set untemp_dir $argv[1]
         end
-        mkdir $untemp_dir
-        cp -r (pwd)/{.,}* $untemp_dir
-        cd $untemp_dir
+        mkdir -p $untemp_dir
+        cp -r * $untemp_dir/ 2>/dev/null or true
+        cp -r .[^.]* $untemp_dir/ 2>/dev/null or true
+        popd
+        pushd $untemp_dir
       '';
     };
   };

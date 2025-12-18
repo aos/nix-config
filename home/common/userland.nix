@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ./swayidle.nix
+    # ./swayidle.nix
+    ./hypridle.nix
   ];
 
   home = {
@@ -21,40 +22,47 @@
     ];
   };
 
-  xdg.configFile = {
-    "waybar".source = ./config/waybar;
-    "niri/config.kdl".source = ./config/niri_config.kdl;
-    "mako/config".source = ./config/mako;
-    "fuzzel/fuzzel.ini".source = ./config/fuzzel.ini;
-    "swappy/config".source = ./config/swappy;
-    "kanshi/config".source = ./config/kanshi;
-    "sysc.jpg".source = ./config/sysc.jpg;
-    "kagi/config.json".source = ./config/kagi_search.json;
-    "electron-flags.conf".text = ''
-      --enable-features=UseOzonePlatform
-      --ozone-platform=wayland
-    '';
-  };
-
   programs.waybar = {
     enable = true;
     systemd.enable = true;
   };
 
-  xdg.portal = {
-    enable = true;
-    config = {
-      common.default = [ "gtk" "gnome" ];
-      niri = {
-        default = [ "gtk" "gnome" ];
-        "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
-        "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
-      };
+  xdg = {
+    configFile = {
+      "waybar".source = ./config/waybar;
+      "niri/config.kdl".source = ./config/niri_config.kdl;
+      "mako/config".source = ./config/mako;
+      "fuzzel/fuzzel.ini".source = ./config/fuzzel.ini;
+      "swappy/config".source = ./config/swappy;
+      "kanshi/config".source = ./config/kanshi;
+      "sysc.jpg".source = ./config/sysc.jpg;
+      "kagi/config.json".source = ./config/kagi_search.json;
+      "electron-flags.conf".text = ''
+        --enable-features=UseOzonePlatform
+        --ozone-platform=wayland
+      '';
     };
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-gnome
-    ];
-    xdgOpenUsePortal = true;
+
+    portal = {
+      enable = true;
+      config = {
+        common.default = [ "gtk" "gnome" ];
+        niri = {
+          default = [ "gtk" "gnome" ];
+          "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+          "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+        };
+      };
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-gnome
+      ];
+      xdgOpenUsePortal = true;
+    };
+
+    terminal-exec = {
+      enable = true;
+      settings.default = ["com.mitchellh.ghostty.desktop"];
+    };
   };
 }
