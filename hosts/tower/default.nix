@@ -44,6 +44,11 @@
     ];
   };
 
+  boot.binfmt = {
+    preferStaticEmulators = true;
+    emulatedSystems = [ "aarch64-linux" ];
+  };
+
   services.fwupd = {
     enable = false;
     extraRemotes = [ "lvfs-testing" ];

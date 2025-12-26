@@ -63,6 +63,7 @@ in
         pager = "${lib.getExe pkgs.delta}";
         default-command = [ "status" ];
         diff-formatter = ":git";
+        diff-editor = ["nvim" "-c" "DiffEditor $left $right $output"];
       };
       template-aliases = {
         "colored(color, txt)" =

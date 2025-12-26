@@ -2,7 +2,6 @@
   description = "Server nixos configurations";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     disko = {
       url = "github:nix-community/disko";
@@ -25,6 +24,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.sops-nix.follows = "sops-nix";
       inputs.disko.follows = "disko";
+    };
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     colmena.url = "github:zhaofengli/colmena";
     catppuccin.url = "github:catppuccin/nix";
@@ -216,6 +219,7 @@
               inputs.colmena.packages.${defaultSystem}.colmena
 
               nix-inspect # Run with: nix-inspect -p .
+              nix-output-monitor
               sops
               age
               ssh-to-age

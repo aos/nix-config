@@ -18,7 +18,7 @@ in
 
     nixfmt-rfc-style
 
-    jless
+    fx
     jq
     tealdeer
     curl

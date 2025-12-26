@@ -7,6 +7,7 @@
 }:
 
 let
+  llm-pkgs = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
   nixpkgsBfc = import inputs.nixpkgs {
     system = "x86_64-linux";
     overlays = [
@@ -41,21 +42,26 @@ in
 
   home.packages = with pkgs; [
     spotify
-    vesktop
+    # vesktop # https://nixpkgs-tracker.ocfox.me/?pr=476347
+    discord
     zoom-us
     slack
     libreoffice
     vlc
 
-    freecad
+    # freecad # missing from nixos cache
     prusa-slicer
-    nixpkgsBfc.betaflight-configurator
-    # betaflight-configurator
+    betaflight-configurator
+    # nixpkgsBfc.betaflight-configurator
 
-    (llm.withPlugins {
-      llm-anthropic = true;
-    })
-    claude-code
+    # (llm.withPlugins {
+    #   llm-anthropic = true;
+    # })
+    # claude-code
+    llm-pkgs.claude-code
+    llm-pkgs.pi
+    llm-pkgs.beads
+
     vagrant
   ];
 

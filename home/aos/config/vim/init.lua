@@ -70,6 +70,7 @@ require("lazy").setup({
     'tpope/vim-surround',
     'tpope/vim-unimpaired',
     '9seconds/repolink.nvim',
+    { 'julienvincent/hunk.nvim', cmd = { 'DiffEditor' }, dependencies = { 'MunifTanjim/nui.nvim' }, opts = {} },
 
     'aos/vim-ascetic',
   },
