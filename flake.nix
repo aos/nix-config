@@ -1,5 +1,6 @@
 {
   description = "Server nixos configurations";
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -33,6 +34,17 @@
     catppuccin.url = "github:catppuccin/nix";
     gotoz.url = "git+https://git.sr.ht/~aos/gotoz";
     atools.url = "github:aos/atools";
+  };
+
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://cache.numtide.com"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+    ];
   };
 
   outputs =
@@ -199,13 +211,29 @@
         };
       };
 
-      # Helper script to make updating sops easier
-      packages."${defaultSystem}".sops-local =
-        with defaultPackages;
-        writeShellScriptBin "sops-local" ''
+      packages."${defaultSystem}" = with defaultPackages; {
+        # Helper script to make updating sops easier
+        sops-local = writeShellScriptBin "sops-local" ''
           export SOPS_AGE_KEY=$(ssh-to-age -private-key -i ~/.ssh/id_tower)
           ${lib.getExe pkgs.sops} $@
         '';
+
+        # home-manager switch with nom
+        hms = writeShellScriptBin "hms" ''
+          name="''${1}"
+          ${lib.getExe home-manager.packages.${defaultSystem}.default} switch \
+            --log-format internal-json \
+            --flake .#"$name" |& ${lib.getExe nix-output-monitor} --json
+        '';
+
+        # nixos-rebuild switch with nom
+        nrs = writeShellScriptBin "nrs" ''
+          name="''${1}"
+          sudo nixos-rebuild switch \
+            --log-format internal-json \
+            --flake .#"$name" |& ${lib.getExe nix-output-monitor} --json
+        '';
+      };
 
       devShells."${defaultSystem}" = {
         default =
@@ -213,6 +241,8 @@
           mkShell {
             buildInputs = [
               self.packages.${defaultSystem}.sops-local
+              self.packages.${defaultSystem}.hms
+              self.packages.${defaultSystem}.nrs
 
               nixos-anywhere
               inputs.clan-core.packages.${defaultSystem}.clan-cli

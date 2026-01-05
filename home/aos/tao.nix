@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 
 {
   home.stateVersion = "24.05";
@@ -40,10 +40,7 @@
     (google-cloud-sdk.withExtraComponents ([ google-cloud-sdk.components.gke-gcloud-auth-plugin ]))
     awscli2
     ssm-session-manager-plugin
-    claude-code
-    # (writeShellScriptBin "claude" ''
-    #   source ~/.config/claude_code_env.sh
-    #   exec ${lib.getExe pkgs.claude-code} "$@"
-    # '')
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
   ];
 }
