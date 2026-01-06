@@ -14,6 +14,6 @@ window-padding-balance = true
 clipboard-read = allow
 clipboard-write = allow
 
-# custom-shader = ./shaders/glitchy.glsl
-# custom-shader = ./shaders/bettercrt.glsl
-# custom-shader = ./shaders/bloom.glsl
+# Swap clipboards to be more consistent
+# keybind = ctrl+shift+v=paste_from_selection
+# keybind = shift+insert=paste_from_clipboard

@@ -57,9 +57,12 @@
           set untemp_dir $argv[1]
         end
         mkdir -p $untemp_dir
-        cp -r * $untemp_dir/ 2>/dev/null or true
-        cp -r .[^.]* $untemp_dir/ 2>/dev/null or true
-        popd
+        cp -r * $untemp_dir/ 2>/dev/null; or true
+        for f in .*
+          if test "$f" != "." -a "$f" != ".."
+            cp -r "$f" $untemp_dir/ 2>/dev/null; or true
+          end
+        end
         pushd $untemp_dir
       '';
     };
