@@ -48,7 +48,9 @@
     ".gitconfig".source = ./gitconfig;
     ".ignore".source = ./rg_ignore;
 
-    ".pi/agent/extensions".source = ./pi-extensions;
+    ".pi/agent/extensions".source = ./pi-agent/extensions;
+    ".pi/agent/keybindings.json".source = ./pi-agent/keybindings.json;
+    ".pi/agent/AGENTS.md".source = ./pi-agent/AGENTS.md;
 
     # ".gnupg/gpg-agent.conf".source = ./gpg-agent.conf;
   };
