@@ -36,7 +36,6 @@
       "swappy/config".source = ./config/swappy;
       "kanshi/config".source = ./config/kanshi;
       "sysc.jpg".source = ./config/sysc.jpg;
-      "kagi/config.json".source = ./config/kagi_search.json;
       "electron-flags.conf".text = ''
         --enable-features=UseOzonePlatform
         --ozone-platform=wayland

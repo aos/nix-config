@@ -1,5 +1,0 @@
-{
-  "password_command": "op item get kagi-session-link --reveal --fields label=password",
-  "timeout": 30,
-  "max_retries": 5
-}

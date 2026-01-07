@@ -175,9 +175,9 @@ class KagiSearch:
         password_command = config.get("password_command", "rbw get kagi-session-link")
 
         try:
-            # Execute the password command
+            # Execute the password command (use shell=True for tilde expansion, etc.)
             result = subprocess.run(
-                password_command.split(), capture_output=True, text=True, check=True
+                password_command, shell=True, capture_output=True, text=True, check=True
             )
             session_link = result.stdout.strip()
 

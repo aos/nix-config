@@ -1,0 +1,5 @@
+{
+  "password_command": "cat ~/.config/kagi/session_token",
+  "timeout": 30,
+  "max_retries": 5
+}

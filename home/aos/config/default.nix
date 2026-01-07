@@ -27,21 +27,31 @@
     }
   ];
 
-  # program configs
-  home.file.".ssh/id_rsa_yk.pub".source = ./ssh_id_rsa_yk.pub;
-  home.file.".ssh/config".source = ./ssh_config;
-  # home.file.".gnupg/gpg-agent.conf".source = ./gpg-agent.conf;
-  home.file.".gdbinit".source = ./gdbinit;
+  xdg = {
+    configFile = {
+      "kagi/config.json".source = ./kagi_search.json;
+      "ghostty/config".source = ./terminal/ghostty;
+      "atuin/config.toml".source = ./atuin.toml;
+      "zathura/".source = ./zathura;
+      "foot/foot.ini".source = ./terminal/foot.ini;
+    };
+  };
 
-  home.file.".tmux.conf".source = ./tmux;
+  home.file = {
+    ".ssh/id_rsa_yk.pub".source = ./ssh_id_rsa_yk.pub;
+    ".ssh/config".source = ./ssh_config;
 
-  home.file.".gitconfig".source = ./gitconfig;
-  home.file.".ignore".source = ./rg_ignore;
-  home.file.".config/foot/foot.ini".source = ./terminal/foot.ini;
-  home.file.".config/ghostty/config".source = ./terminal/ghostty;
-  home.file.".config/atuin/config.toml".source = ./atuin.toml;
+    ".tmux.conf".source = ./tmux;
 
-  home.file.".config/zathura/".source = ./zathura;
+    ".gdbinit".source = ./gdbinit;
+
+    ".gitconfig".source = ./gitconfig;
+    ".ignore".source = ./rg_ignore;
+
+    ".pi/agent/extensions".source = ./pi-extensions;
+
+    # ".gnupg/gpg-agent.conf".source = ./gpg-agent.conf;
+  };
 
   news.display = "silent";
 }
