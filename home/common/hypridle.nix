@@ -4,10 +4,10 @@ let
   lockcmd-bin = pkgs.writeShellScriptBin "swaylock-cmd" ''
     ${pkgs.swaylock-effects}/bin/swaylock \
         --daemonize \
+        --submit-on-touch \
     	--clock \
         --timestr '%H:%M' \
         --image=~/.config/sysc.jpg \
-        --ignore-empty-password \
     	--indicator \
         --indicator-idle-visible \
     	--indicator-radius 200 \
@@ -24,6 +24,8 @@ let
     	--line-color 00000000 \
     	--inside-color 00000000 \
         --inside-ver-color 00000000
+
+    # --ignore-empty-password \
   '';
   display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
 in
