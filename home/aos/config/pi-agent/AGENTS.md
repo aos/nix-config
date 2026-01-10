@@ -41,3 +41,4 @@ When debugging:
 - Modern language idioms and conventions
 - Standard library over external dependencies when reasonable
 - Security-conscious patterns by default
+- Use ripgrep (`rg`) over `grep` always, and `fd` over `find`.
