@@ -14,6 +14,7 @@
         # "repl-flake"
       ];
 
+      accept-flake-config = true;
       log-lines = lib.mkDefault 25;
 
       # Fallback quickly if substituters are not available.

@@ -42,7 +42,7 @@ in
 
   home.packages = with pkgs; [
     spotify
-    # vesktop # https://nixpkgs-tracker.ocfox.me/?pr=476347
+    vesktop # https://nixpkgs-tracker.ocfox.me/?pr=476347
     discord
     zoom-us
     slack
@@ -54,13 +54,8 @@ in
     betaflight-configurator
     # nixpkgsBfc.betaflight-configurator
 
-    # (llm.withPlugins {
-    #   llm-anthropic = true;
-    # })
-    # claude-code
     llm-pkgs.claude-code
     llm-pkgs.pi
-    llm-pkgs.beads
 
     vagrant
   ];

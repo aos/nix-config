@@ -16,7 +16,7 @@ in
   home.packages = with pkgs; [
     (pass.withExtensions (ext: with ext; [ pass-otp ]))
 
-    nixfmt-rfc-style
+    nixfmt 
 
     fx
     jq

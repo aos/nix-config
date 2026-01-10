@@ -263,6 +263,6 @@
           };
       };
 
-      formatter."${defaultSystem}" = defaultPackages.nixfmt-rfc-style;
+      formatter."${defaultSystem}" = defaultPackages.nixfmt;
     };
 }
