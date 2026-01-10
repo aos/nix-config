@@ -1,5 +1,9 @@
 spawn-at-startup "kanshi"
 spawn-at-startup "mako"
+
+spawn-at-startup "firefox"
+spawn-at-startup "ghostty"
+
 spawn-sh-at-startup "wl-gammarelay-rs run"
 spawn-sh-at-startup "nm-applet --indicator"
 
@@ -28,7 +32,10 @@ output "eDP-1" {
 
 layout {
     gaps 8
-    center-focused-column "never"
+
+    center-focused-column "on-overflow"
+
+    always-center-single-column
 
     background-color "rgb(26, 28, 29)"
 
@@ -63,8 +70,9 @@ hotkey-overlay {
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
-animations {
-}
+// prefer-no-csd
+
+animations {}
 
 // Enable round corners on focus ring
 window-rule {

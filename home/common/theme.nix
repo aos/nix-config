@@ -14,6 +14,7 @@
     accent = "blue";
 
     fish.enable = false;
+    hyprlock.enable = false;
   };
 
   gtk = {

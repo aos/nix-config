@@ -112,9 +112,13 @@
     };
   };
 
+  services.fprintd.enable = true;
+
   security.polkit.enable = true;
   security.rtkit.enable = true;
-  security.pam.services.hyprlock = { };
+  security.pam.services.hyprlock = {
+    fprintAuth = true;
+  };
 
   # allow automounting USB devices
   services.devmon.enable = true;
