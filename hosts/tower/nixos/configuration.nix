@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
@@ -37,6 +37,12 @@
 
   networking.hostName = "tower";
   networking.networkmanager.enable = true;
+
+  # Workaround for https://github.com/NixOS/nixpkgs/issues/476906
+  # The wpa_supplicant module adds a resumeCommands that restarts wpa_supplicant
+  # after sleep, but this causes a race condition with NetworkManager resulting
+  # in a 10-second delay before wifi reconnects.
+  powerManagement.resumeCommands = lib.mkForce "";
 
   # time.timeZone = "America/New_York";
   services.automatic-timezoned.enable = true;
