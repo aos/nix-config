@@ -44,6 +44,9 @@
     ];
   };
 
+  # for uv and torch, etc.
+  programs.nix-ld.enable = true;
+
   boot.binfmt = {
     preferStaticEmulators = true;
     emulatedSystems = [ "aarch64-linux" ];

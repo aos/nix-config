@@ -19,7 +19,7 @@
     packages = with pkgs; [
       bluetui
       kagi-search
-      lightpanda
+      browser-tools
     ];
   };
 
