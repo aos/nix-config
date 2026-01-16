@@ -58,6 +58,7 @@ in
     llm-pkgs.pi
 
     vagrant
+    gh
   ];
 
   fonts.fontconfig.enable = true;

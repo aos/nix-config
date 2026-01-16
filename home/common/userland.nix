@@ -20,6 +20,7 @@
       bluetui
       kagi-search
       browser-tools
+      matryoshka-rlm
     ];
   };
 

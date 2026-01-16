@@ -66,6 +66,7 @@
           overlays = [
             inputs.gotoz.overlays.default
             inputs.atools.overlays.default
+            # Custom packages
             (import ./pkgs)
           ];
           config.allowUnfree = true;

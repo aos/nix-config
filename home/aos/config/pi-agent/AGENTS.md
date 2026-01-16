@@ -7,11 +7,12 @@
 
 ## Code & Documentation
 
-- Readable > clever. Standard library > external deps when reasonable
+- Prefer readable over clever code. Standard library over external deps when reasonable
+- Follow language idioms; when unclear, match existing codebase style
 - Comments: only when intent isn't obvious. Explain *why*, not *what*
 - Function docs: one sentence max. Parameters/returns only if non-obvious
 - READMEs: what it does, how to run, key deps. Nothing more
-- Security-conscious: never print secrets
+- Never print secrets. Stop if you suspect secret access is needed
 
 ## Response Style
 
@@ -20,12 +21,14 @@
 - Show only relevant diffs, not full files
 - Bullets over paragraphs. Examples over abstractions
 - No filler: skip "Great question!", "Sure!", "Here's what I came up with", etc.
+- Include commands to reproduce
 
 ## Execution
 - Smallest correct change. No drive-by refactors
 - Keep existing conventions unless asked
 - Implement in small steps
 - Prefer local fixes over big rewrites
+- Finish with: what changed, why, how to verify
 
 ## Debugging
 
@@ -35,5 +38,8 @@
 
 ## Tool Preferences
 
-- `rg` over `grep`
-- `fd` over `find`
+- Use `matryoshka` skill to navigate and analyze large files (> 300 lines)
+- Use `kagi-search` skill to search the web for information
+- Use `browser-tools` skill to navigate websites
+- Use `rg` over `grep`
+- Use `fd` over `find`

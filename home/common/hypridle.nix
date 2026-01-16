@@ -91,7 +91,7 @@ in
     enable = true;
     settings = {
       general = {
-        lock_cmd = "pidof hyprlock || hyprlock";
+        lock_cmd = "pidof hyprlock || hyprlock --no-fade-in";
         before_sleep_cmd = "loginctl lock-session";
         after_sleep_cmd = display "on";
         inhibit_sleep = 3;
