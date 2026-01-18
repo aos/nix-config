@@ -41,5 +41,5 @@
 - Use `matryoshka` skill to navigate and analyze large files (> 300 lines)
 - Use `kagi-search` skill to search the web for information
 - Use `browser-tools` skill to navigate websites
-- Use `rg` over `grep`
-- Use `fd` over `find`
+- Use `rg` instead of `grep`
+- Use `fd` instead of `find`

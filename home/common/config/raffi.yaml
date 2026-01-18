@@ -1,0 +1,7 @@
+screenshot:
+  description: Screenshot and draw
+  script: |
+    file="$(mktemp -t screenshot_$(date +'%Y%m%d_%H%M%S').XXXXXXX)"
+    niri msg action screenshot --path $file
+    swappy -f $file
+  icon: script

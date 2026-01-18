@@ -35,6 +35,7 @@
       "niri/config.kdl".source = ./config/niri_config.kdl;
       "mako/config".source = ./config/mako;
       "fuzzel/fuzzel.ini".source = ./config/fuzzel.ini;
+      "raffi/raffi.yaml".source = ./config/raffi.yaml;
       "swappy/config".source = ./config/swappy;
       "kanshi/config".source = ./config/kanshi;
       "sysc.jpg".source = ./config/sysc.jpg;

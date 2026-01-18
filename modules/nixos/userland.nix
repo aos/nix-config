@@ -20,8 +20,7 @@
 
     mako # notification daemon
     fuzzel # Launcher
-    # raffi # fuzzel dmenu launcher
-    # TODO: wait until this hits 0.5.1: https://nixpk.gs/pr-tracker.html?pr=342392
+    raffi # fuzzel dmenu launcher
 
     # swaylock # in home-manager - programs.swaylock.enable
     # hypridle # in home-manager - services.hypridle
