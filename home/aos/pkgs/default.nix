@@ -6,6 +6,7 @@
 }:
 
 let
+  llm-pkgs = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   imports = [
@@ -28,11 +29,13 @@ in
     _1password-cli
 
     # Infra tools
+    gh
     # ansible
     # packer
     # terraform
     # terraform-ls
     # vagrant
+
 
     # k8s
     k9s
@@ -46,7 +49,12 @@ in
     yazi
 
     # llms
-    # files-to-prompt
+    llm-pkgs.claude-code
+    llm-pkgs.pi
+    # pi stuff
+    kagi-search
+    browser-tools
+    matryoshka-rlm
 
     qalculate-gtk
     mypaint

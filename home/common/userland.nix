@@ -18,9 +18,6 @@
 
     packages = with pkgs; [
       bluetui
-      kagi-search
-      browser-tools
-      matryoshka-rlm
     ];
   };
 

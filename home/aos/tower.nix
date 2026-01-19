@@ -7,7 +7,6 @@
 }:
 
 let
-  llm-pkgs = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
   nixpkgsBfc = import inputs.nixpkgs {
     system = "x86_64-linux";
     overlays = [
@@ -42,8 +41,7 @@ in
 
   home.packages = with pkgs; [
     spotify
-    vesktop # https://nixpkgs-tracker.ocfox.me/?pr=476347
-    discord
+    vesktop
     zoom-us
     slack
     libreoffice
@@ -54,11 +52,7 @@ in
     betaflight-configurator
     # nixpkgsBfc.betaflight-configurator
 
-    llm-pkgs.claude-code
-    llm-pkgs.pi
-
     vagrant
-    gh
   ];
 
   fonts.fontconfig.enable = true;
