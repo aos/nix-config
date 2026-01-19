@@ -5,19 +5,7 @@ description: Analyze large documents (100x larger than LLM context) using recurs
 
 # Matryoshka - Recursive Language Model
 
-Analyzes documents using symbolic Nucleus commands executed by the Lattice engine. Processes documents 100x larger than your LLM's context window with 80%+ token savings via handle-based storage.
-
-## Setup
-
-Ensure `matryoshka-rlm` is installed (includes `lattice-http`):
-
-```bash
-# Check installation
-which lattice-http
-
-# Or install via npm
-npm install -g matryoshka-rlm
-```
+Analyze large documents (> 300 lines). Use when searching, filtering, aggregating text logs, reports, or structured text data without loading everything into context.
 
 ## Workflow
 
@@ -26,28 +14,28 @@ npm install -g matryoshka-rlm
 3. **Query progressively** - Refine with grep → filter → aggregate
 4. **Close session** - Free memory when done
 
-**Token efficiency:** Query results return compact handle stubs like `$res1: Array(1000) [preview...]` instead of full data. Use `expand` to inspect only what you need.
+Query results return compact handle stubs like `$res1: Array(1000) [preview...]` instead of full data. Use `expand` to inspect only what you need.
 
 ## Quick Start
 
 ```bash
 # Start server
-./scripts/start-server.sh
+scripts/start-server.sh
 
 # Load a document
-./scripts/load.sh ./logs.txt
+scripts/load.sh ./logs.txt
 
 # Search for patterns
-./scripts/query.sh '(grep "ERROR")'
+scripts/query.sh '(grep "ERROR")'
 
 # Count results
-./scripts/query.sh '(count RESULTS)'
+scripts/query.sh '(count RESULTS)'
 
 # Sum numeric values
-./scripts/query.sh '(sum RESULTS)'
+scripts/query.sh '(sum RESULTS)'
 
 # Close session
-./scripts/close.sh
+scripts/close.sh
 ```
 
 ## Nucleus Query Examples
@@ -130,70 +118,70 @@ All scripts read default port from `LATTICE_PORT` env var (default: 3456).
 Starts `lattice-http` server in background.
 
 ```bash
-./scripts/start-server.sh [port]   # Default: 3456
+scripts/start-server.sh [port]   # Default: 3456
 ```
 
 ### `load.sh`
 Loads a document for analysis.
 
 ```bash
-./scripts/load.sh <file-path>
-./scripts/load.sh ./logs.txt
+scripts/load.sh <file-path>
+scripts/load.sh ./logs.txt
 
 # Or pass content directly
-./scripts/load.sh - < file.txt  # Read from stdin
+scripts/load.sh - < file.txt  # Read from stdin
 ```
 
 ### `query.sh`
 Executes a Nucleus query.
 
 ```bash
-./scripts/query.sh '(grep "ERROR")'
-./scripts/query.sh '(count RESULTS)'
+scripts/query.sh '(grep "ERROR")'
+scripts/query.sh '(count RESULTS)'
 ```
 
 ### `status.sh`
 Shows session status (timeout, queries, document info).
 
 ```bash
-./scripts/status.sh
+scripts/status.sh
 ```
 
 ### `bindings.sh`
 Shows current variable bindings.
 
 ```bash
-./scripts/bindings.sh
+scripts/bindings.sh
 ```
 
 ### `expand.sh`
 Expands a handle to see full data (optional limit/offset).
 
 ```bash
-./scripts/expand.sh RESULTS           # Show full RESULTS
-./scripts/expand.sh RESULTS 10        # First 10 items
-./scripts/expand.sh RESULTS 10 20     # Offset 10, limit 10
+scripts/expand.sh RESULTS           # Show full RESULTS
+scripts/expand.sh RESULTS 10        # First 10 items
+scripts/expand.sh RESULTS 10 20     # Offset 10, limit 10
 ```
 
 ### `close.sh`
 Closes the current session and frees memory.
 
 ```bash
-./scripts/close.sh
+scripts/close.sh
 ```
 
 ### `stats.sh`
 Gets document statistics (length, line count).
 
 ```bash
-./scripts/stats.sh
+scripts/stats.sh
 ```
 
 ### `health.sh`
 Health check with session info.
 
 ```bash
-./scripts/health.sh
+scripts/health.sh
 ```
 
 ## Troubleshooting
@@ -201,17 +189,17 @@ Health check with session info.
 ### Server not running
 ```bash
 # Check if server is running
-./scripts/health.sh
+scripts/health.sh
 
 # Restart
-./scripts/close.sh
-./scripts/start-server.sh
+scripts/close.sh
+scripts/start-server.sh
 ```
 
 ### Session expired
 Sessions auto-expire after 10 minutes of inactivity. Simply load the document again:
 ```bash
-./scripts/load.sh ./file.txt
+scripts/load.sh ./file.txt
 ```
 
 ### Query returns errors
@@ -226,9 +214,3 @@ Sessions auto-expire after 10 minutes of inactivity. Simply load the document ag
 | `LATTICE_PORT` | 3456 | Server port |
 | `LATTICE_HOST` | localhost | Server host |
 | `LATTICE_TIMEOUT` | 600 | Session timeout (seconds) |
-
-## See Also
-
-- [Matryoshka GitHub](https://github.com/yogthos/Matryoshka)
-- [RLM Paper](https://arxiv.org/abs/2512.24601)
-- [Nucleus DSL Reference](https://github.com/yogthos/Matryoshka#nucleus-dsl-reference)

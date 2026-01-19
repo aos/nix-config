@@ -29,7 +29,7 @@
     "format": "{}"
   },
   "niri/workspaces": {
-    "all-outputs": true
+    "all-outputs": false
   },
   "niri/window": {
     "separate-outputs": true,

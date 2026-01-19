@@ -4,4 +4,9 @@ screenshot:
     file="$(mktemp -t screenshot_$(date +'%Y%m%d_%H%M%S').XXXXXXX)"
     niri msg action screenshot --path $file
     swappy -f $file
-  icon: script
+  icon: "draw-arrow"
+
+bluetooth:
+  description: Connect to Airpods
+  binary: btw
+  icon: "draw-star"

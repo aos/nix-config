@@ -46,6 +46,8 @@
     drm_info
     xdg-utils
 
+    papirus-icon-theme
+
     firefox
     foot
     ghostty

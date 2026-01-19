@@ -38,8 +38,10 @@
 
 ## Tool Preferences
 
-- Use `matryoshka` skill to navigate and analyze large files (> 300 lines)
-- Use `kagi-search` skill to search the web for information
-- Use `browser-tools` skill to navigate websites
-- Use `rg` instead of `grep`
-- Use `fd` instead of `find`
+**ALWAYS** respect these preferences.
+
+- `matryoshka` skill: navigate and analyze large files (> 300 lines)
+- `kagi-search` skill: search the web for information
+- `browser-tools` skill: navigate websites
+- `rg` command instead of `grep`
+- `fd` command instead of `find`
