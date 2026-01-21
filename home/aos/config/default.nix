@@ -50,6 +50,7 @@
 
     ".pi/agent/extensions".source = ./pi-agent/extensions;
     ".pi/agent/skills".source = ./pi-agent/skills;
+    ".pi/agent/prompts".source = ./pi-agent/prompts;
     ".pi/agent/keybindings.json".source = ./pi-agent/keybindings.json;
     ".pi/agent/AGENTS.md".source = ./pi-agent/AGENTS.md;
 
