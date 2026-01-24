@@ -5,6 +5,7 @@
   "cursorRight": ["right", "ctrl+f"],
   "selectUp": ["up", "ctrl+p"],
   "selectDown": ["down", "ctrl+n"],
+  "toggleSessionPath": "ctrl+shift+p",
   "cycleModelForward": [],
   "cycleModelBackward": []
 }

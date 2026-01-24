@@ -7,10 +7,13 @@
 
   services.livebook-container = {
     enable = true;
-    imageTag = "0.13.3-cuda12.1";
+    imageTag = "0.18.3-cuda12";
     nvidiaSupport = true;
     environment = {
       LIVEBOOK_TOKEN_ENABLED = false;
     };
+    extraOptions = [
+      "--add-host=postgres:host-gateway"
+    ];
   };
 }

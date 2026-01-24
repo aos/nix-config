@@ -30,8 +30,6 @@
   services.flatpak.enable = false;
   programs.localsend.enable = true;
 
-  programs.fish.enable = true;
-
   floofs.nfs.enable = true;
 
   services.tailscale.extraSetFlags = [ "--accept-routes" ];

@@ -72,7 +72,7 @@
     "format": "{icon}{capacity}%",
     "format-charging": "󰂄 {capacity}%",
     "format-critical": "󰂃 {capacity}%",
-    "format-icons": ["󰁼 ", "󰁽 ", "󰁿 ", "󰂁 ", "󰂂 "],
+    "format-icons": ["󰁼 ", "󰁽 ", "󰁿 ", "󰂀 ", "󰂂 "],
     "tooltip-format": "{time}\n{power}W"
   },
   "clock": {

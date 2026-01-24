@@ -36,6 +36,7 @@
     enableTCPIP = true;
     # Trust with password, all databases
     authentication = ''
+      host  all all 10.0.0.0/8      md5
       host  all all 192.168.10.1/24 md5
       host  all all 100.64.0.0/10   md5
     '';

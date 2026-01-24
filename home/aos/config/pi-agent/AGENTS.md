@@ -42,6 +42,6 @@
 
 - `matryoshka` skill: navigate and analyze large files (> 300 lines)
 - `kagi-search` skill: search the web for information
-- `browser-tools` skill: navigate websites
+- `agent-browser` skill: browser navigation and automation
 - `rg` command instead of `grep`
 - `fd` command instead of `find`
