@@ -40,7 +40,7 @@
     '';
     functions = {
       qr = "${lib.getExe pkgs.qrencode} -t ansiutf8 ''$argv";
-      qq = ''pi --model zai/glm-4.7 -p "''$argv"'';
+      qq = ''pi --model zai/glm-4.7-flash -p "''$argv"'';
       t = ''
         if test -z $argv[1]
           set dirname xx

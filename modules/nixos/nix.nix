@@ -42,14 +42,14 @@
         "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
       ];
     };
-    # TODO: can't really use this as the +5 modifier doesn't work...
+    # TODO: +5 modifier doesn't work...
     # See: https://github.com/NixOS/nix/pull/9894
-    # gc = {
-    #   automatic = true;
-    #   dates = "weekly";
-    #   # Keep the last 5 generations
-    #   options = "--delete-older-than +5";
-    # };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      # Keep the last 30d of generations
+      options = "--delete-older-than 30d";
+    };
 
     # https://discourse.nixos.org/t/difference-between-nix-settings-auto-optimise-store-and-nix-optimise-automatic/25350
     optimise.automatic = true;

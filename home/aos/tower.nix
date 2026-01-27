@@ -36,9 +36,10 @@ in
     # freecad # missing from nixos cache
     prusa-slicer
     betaflight-configurator
-    # nixpkgsBfc.betaflight-configurator
 
     vagrant
+
+    et # simple cli pomodoro timer
   ];
 
   fonts.fontconfig.enable = true;

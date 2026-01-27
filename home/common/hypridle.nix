@@ -3,6 +3,7 @@
 let
   display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
   backgroundImage = ./config/sysc.jpg;
+  lockIcon = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark/64x64/apps/system-lock-screen.svg";
 in
 {
   programs.hyprlock = {
@@ -100,7 +101,7 @@ in
       listener = [
         {
           timeout = 420;   # 7min
-          on-timeout = "notify-send -u critical 'system will be locking soon!'";
+          on-timeout = "notify-send -u critical -i ${lockIcon} -t 59000 'system will be locking soon!'";
         }
         {
           timeout = 480;   # 8min

@@ -1,0 +1,8 @@
+{
+	"mappings": [
+		{ "pattern": "claude-*", "file": "~/.pi/agents/claude.md" },
+		{ "pattern": "gpt-4o*", "file": "~/.pi/agents/openai.md" },
+		{ "pattern": "kimi-*", "file": "~/.pi/agents/kimi.md" }
+	],
+	"defaultFile": "~/.pi/agents/default.md"
+}

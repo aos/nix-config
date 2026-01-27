@@ -53,6 +53,8 @@
     ".pi/agent/prompts".source = ./pi-agent/prompts;
     ".pi/agent/keybindings.json".source = ./pi-agent/keybindings.json;
     ".pi/agent/AGENTS.md".source = ./pi-agent/AGENTS.md;
+    ".pi/agents/".source = ./pi-agent/agents;
+    ".pi/agent/model-agents.json".source = ./pi-agent/model-agents.json;
 
     # ".gnupg/gpg-agent.conf".source = ./gpg-agent.conf;
   };
