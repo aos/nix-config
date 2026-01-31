@@ -379,8 +379,6 @@ local rust_analyzer_config = {
   }
 }
 
-local lspconfig_util = require('lspconfig.util')
-
 local lsp_servers = {
   ['pyright'] = {},
   ['rust_analyzer'] = rust_analyzer_config,
@@ -392,6 +390,12 @@ local lsp_servers = {
     cmd = { 'elixir-ls' },
   },
   ['zls'] = {},
+  ['shopify'] = {
+    cmd = { 'shopify', 'theme', 'language-server' },
+    filetypes = { 'liquid' },
+    root_markers = { '.shopify', '.git' },
+    on_demand = true,
+  }
 }
 
 for server, config in pairs(lsp_servers) do
@@ -400,4 +404,11 @@ for server, config in pairs(lsp_servers) do
   vim.lsp.config(server, full_config)
 end
 
-vim.lsp.enable(vim.tbl_keys(lsp_servers))
+local auto_enabled = {}
+for server, config in pairs(lsp_servers) do
+  if not config.on_demand then
+    table.insert(auto_enabled, server)
+  end
+end
+
+vim.lsp.enable(auto_enabled)
