@@ -320,11 +320,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1769744268,
-        "narHash": "sha256-EaCWtNxve/HBU5F9wbyB2fmruFQTc+1pNdcOqqy1kVE=",
+        "lastModified": 1769915799,
+        "narHash": "sha256-4dKUpIljblQ2flKjtUKHHrWa1T3bEk+Yck/gCoTO3yY=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "ee488ef7f4853426dfe56fbeeb7ddeecbb75a17d",
+        "rev": "4ec1fbf6d28fe136f0639a60b7297a522605fa3e",
         "type": "github"
       },
       "original": {
@@ -499,6 +499,26 @@
         "type": "github"
       }
     },
+    "pi-config": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1769920544,
+        "narHash": "sha256-DhJLA2yiInF8s6S6BY3fLySPZTi/KKirAaFcJ9ACOJ8=",
+        "owner": "aos",
+        "repo": "pi-config",
+        "rev": "e13ff3dc74a8df7791d2db9d1d4c90a0975a99fe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aos",
+        "repo": "pi-config",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "atools": "atools",
@@ -511,6 +531,7 @@
         "llm-agents": "llm-agents",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_5",
+        "pi-config": "pi-config",
         "sops-nix": "sops-nix",
         "srvos": "srvos"
       }

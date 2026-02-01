@@ -1,10 +1,11 @@
-{ home, pkgs, ... }:
+{ home, pkgs, inputs, ... }:
 
 {
   imports = [
     ./vim
     ./shell
     ./jujutsu.nix
+    inputs.pi-config.homeManagerModules.default
   ];
 
   home.packages = with pkgs; [
@@ -47,14 +48,6 @@
 
     ".gitconfig".source = ./gitconfig;
     ".ignore".source = ./rg_ignore;
-
-    ".pi/agent/extensions".source = ./pi-agent/extensions;
-    ".pi/agent/skills".source = ./pi-agent/skills;
-    ".pi/agent/prompts".source = ./pi-agent/prompts;
-    ".pi/agent/keybindings.json".source = ./pi-agent/keybindings.json;
-    ".pi/agent/AGENTS.md".source = ./pi-agent/AGENTS.md;
-    ".pi/agents/".source = ./pi-agent/agents;
-    ".pi/agent/model-agents.json".source = ./pi-agent/model-agents.json;
 
     # ".gnupg/gpg-agent.conf".source = ./gpg-agent.conf;
   };

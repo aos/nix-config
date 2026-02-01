@@ -52,11 +52,6 @@ in
     llm-pkgs.claude-code
     llm-pkgs.pi
     llm-pkgs.agent-browser
-    # pi stuff
-    kagi-search
-    browser-tools
-    matryoshka-rlm
-
     qalculate-gtk
     mypaint
     lorien
