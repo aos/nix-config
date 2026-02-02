@@ -506,11 +506,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769962734,
-        "narHash": "sha256-uRosJCB33QDy/ZaTBNRqWJubWyJntqoR74PuNPs04Xg=",
+        "lastModified": 1769981623,
+        "narHash": "sha256-sQnPxZqTYsJWpFFiLGEibNjIoObZomxBzPw6wGRLH94=",
         "owner": "aos",
         "repo": "pi-config",
-        "rev": "21b083b87ea563ad944f10b27201979ad371979e",
+        "rev": "e223ccafca3d61e84cfe94eeca82b27165f11bd0",
         "type": "github"
       },
       "original": {
