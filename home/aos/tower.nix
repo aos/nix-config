@@ -34,8 +34,8 @@ in
     vlc
 
     # freecad # missing from nixos cache
-    prusa-slicer
-    betaflight-configurator
+    # prusa-slicer
+    # betaflight-configurator
 
     vagrant
 

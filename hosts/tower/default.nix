@@ -29,6 +29,7 @@
 
   services.flatpak.enable = false;
   programs.localsend.enable = true;
+  programs._1password.enable = true;
 
   floofs.nfs.enable = true;
 

@@ -19,7 +19,7 @@
     ../../modules/nixos/steam.nix
     ../../modules/nixos/bluetooth.nix
 
-    # ../../modules/nixos/weechat.nix
+    ../../modules/nixos/weechat.nix
 
     ../../modules/nixos/ml.nix
 

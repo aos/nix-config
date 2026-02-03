@@ -23,7 +23,10 @@
       k = "kubectl";
     };
     shellInit = ''
-      fish_config theme choose "Mono Smoke"
+      if not set -q aos_theme
+        set -U aos_theme "Mono Smoke"
+      end
+      fish_config theme choose "$aos_theme"
     '';
     interactiveShellInit = ''
       ${lib.getExe pkgs.nix-your-shell} fish | source

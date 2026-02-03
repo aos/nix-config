@@ -26,7 +26,7 @@ in
     tree
     htop
     age
-    _1password-cli
+    # _1password-cli
 
     # Infra tools
     gh
@@ -49,7 +49,7 @@ in
     yazi
 
     # llms
-    llm-pkgs.claude-code
+    # llm-pkgs.claude-code
     llm-pkgs.pi
     llm-pkgs.agent-browser
     qalculate-gtk

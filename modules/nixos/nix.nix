@@ -1,5 +1,8 @@
-{ inputs, lib, ... }:
+{ inputs, lib, config, ... }:
 
+let
+  cudaSupport = config.nixpkgs.config.cudaSupport or false;
+in
 {
   nix = {
     settings = {
@@ -35,12 +38,12 @@
       extra-substituters = [
         "https://nix-community.cachix.org"
         "https://cache.numtide.com"
-      ];
+      ] ++ lib.optional cudaSupport "https://cache.nixos-cuda.org";
 
       extra-trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
-      ];
+      ] ++ lib.optional cudaSupport "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=";
     };
     # TODO: +5 modifier doesn't work...
     # See: https://github.com/NixOS/nix/pull/9894
