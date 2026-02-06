@@ -4,7 +4,7 @@
 # theme = dark:Catppuccin Macchiato,light:3024 Day
 theme = dark:Elegant,light:Breadog
 # theme=Elegant
-font-family = "Inconsolata Nerd Font"
+font-family = Berkeley Mono
 font-size = 14
 bold-color = bright
 window-padding-x = 5

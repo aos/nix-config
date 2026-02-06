@@ -34,6 +34,10 @@
     catppuccin.url = "github:catppuccin/nix";
     gotoz.url = "git+https://git.sr.ht/~aos/gotoz";
     atools.url = "github:aos/atools";
+    custom-fonts = {
+      url = "git+ssh://git@git.sr.ht/~aos/custom-fonts";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     pi-config = {
       url = "github:aos/pi-config";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -71,6 +75,7 @@
             inputs.gotoz.overlays.default
             inputs.atools.overlays.default
             inputs.pi-config.overlays.default
+            inputs.custom-fonts.overlays.default
             # Custom packages
             (import ./pkgs)
           ];

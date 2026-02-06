@@ -41,6 +41,4 @@ in
 
     et # simple cli pomodoro timer
   ];
-
-  fonts.fontconfig.enable = true;
 }

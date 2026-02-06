@@ -29,7 +29,7 @@ fi
 case "$mode" in
   dark)
     target_scheme="'prefer-dark'"
-    theme_theme="$THEME_DARK"
+    target_theme="$THEME_DARK"
     ;;
   light)
     target_scheme="'prefer-light'"

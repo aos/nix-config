@@ -28,6 +28,8 @@
     }
   ];
 
+  fonts.fontconfig.enable = true;
+
   xdg = {
     configFile = {
       "kagi/config.json".source = ./kagi_search.json;

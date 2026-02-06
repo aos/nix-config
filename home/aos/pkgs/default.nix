@@ -51,9 +51,10 @@ in
     # llms
     # llm-pkgs.claude-code
     llm-pkgs.pi
-    llm-pkgs.agent-browser
     qalculate-gtk
     mypaint
     lorien
+
+    berkeley-mono
   ];
 }
