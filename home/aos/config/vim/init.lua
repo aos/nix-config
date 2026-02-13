@@ -62,14 +62,11 @@ require("lazy").setup({
     'neovim/nvim-lspconfig',
     'nvim-treesitter/nvim-treesitter',
     'nvim-treesitter/nvim-treesitter-textobjects',
-    'nvim-lua/plenary.nvim',
-    'nvim-telescope/telescope.nvim',
-    'zschreur/telescope-jj.nvim',
+    'folke/snacks.nvim',
     'justinmk/vim-dirvish',
     'tpope/vim-fugitive',
     'tpope/vim-surround',
     'tpope/vim-unimpaired',
-    '9seconds/repolink.nvim',
     { 'julienvincent/hunk.nvim', cmd = { 'DiffEditor' }, dependencies = { 'MunifTanjim/nui.nvim' }, opts = {} },
 
     'aos/vim-ascetic',
@@ -150,8 +147,20 @@ vim.api.nvim_create_autocmd('FileType', {
   end
 })
 
--- :RepoLink
-require("repolink").setup{}
+-- :RepoLink — copy permalink to clipboard via snacks.gitbrowse
+vim.api.nvim_create_user_command(
+  'RepoLink',
+  function()
+    Snacks.gitbrowse.open({
+      what = "permalink",
+      open = function(url)
+        vim.fn.setreg('+', url)
+        vim.notify(url, vim.log.levels.INFO)
+      end,
+    })
+  end,
+  { range = true, desc = 'Copy permalink to clipboard' }
+)
 
 -- :Theme
 vim.api.nvim_create_user_command(
@@ -178,57 +187,75 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end
 })
 
--- Telescope
-local telescope = require('telescope')
-local telescope_builtin = require('telescope.builtin')
-local telescope_actions = require('telescope.actions')
-
-telescope.setup({
-  defaults = {
-    layout_strategy = 'flex',
-    layout_config = {
-      flex = {
-        flip_columns = 200,
-      }
+-- Snacks.picker
+require('snacks').setup({
+  picker = {
+    layout = {
+      preset = function()
+        return vim.o.columns >= 200 and "default" or "vertical"
+      end,
     },
-    mappings = {
-      i = {
-        ['<C-o>'] = require('telescope.actions.layout').toggle_preview,
-        ['<C-k>'] = telescope_actions.move_selection_previous,
-        ['<C-j>'] = telescope_actions.move_selection_next,
-        ['<C-x>'] = telescope_actions.delete_buffer,
+    sources = {
+      files = {
+        follow = true,
       },
-      n = {
-        ['<C-o>'] = require('telescope.actions.layout').toggle_preview,
-      }
     },
-  },
-  pickers = {
-    find_files = {
-      follow = true,
-    }
+    win = {
+      input = {
+        keys = {
+          ['<C-o>'] = { 'toggle_preview', mode = { 'i', 'n' } },
+        },
+      },
+      list = {
+        keys = {
+          ['<C-o>'] = 'toggle_preview',
+        },
+      },
+    },
   },
 })
-telescope.load_extension('jj')
-local vcs_picker = function(opts)
-  local jj_pick_status, jj_res = pcall(telescope.extensions.jj.files, opts)
-  if jj_pick_status then
-    return
-  end
 
-  local git_files_status, git_res = pcall(telescope_builtin.git_files, opts)
-  if not git_files_status then
-    local ff_pick_status, ff_res = pcall(telescope_builtin.find_files, opts)
+local function jj_files()
+  Snacks.picker.pick({
+    title = "Jujutsu Files",
+    finder = function(opts, ctx)
+      return require("snacks.picker.source.proc").proc(
+        ctx:opts({
+          cmd = "jj",
+          args = { "file", "list", "--no-pager" },
+          transform = function(item)
+            item.file = item.text
+          end,
+        }),
+        ctx
+      )
+    end,
+    format = "file",
+    show_empty = true,
+  })
+end
+
+local function vcs_picker()
+  local ok = pcall(function()
+    local obj = vim.system({ "jj", "root" }, { text = true }):wait()
+    if obj.code ~= 0 then error("not jj") end
+    jj_files()
+  end)
+  if ok then return end
+
+  local git_ok = pcall(Snacks.picker.git_files)
+  if not git_ok then
+    Snacks.picker.files()
   end
 end
 
---Add telescope shortcuts
-local tele_opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<Tab>', telescope_builtin.buffers, tele_opts)
-vim.keymap.set('n', '<leader>ff', vcs_picker, tele_opts)
-vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, tele_opts)
-vim.keymap.set('n', '<leader>fc', telescope_builtin.git_commits, tele_opts)
-vim.keymap.set('n', '<leader>fb', telescope_builtin.git_bcommits, tele_opts)
+-- Picker shortcuts
+local pick_opts = { noremap = true, silent = true }
+vim.keymap.set('n', '<Tab>', function() Snacks.picker.buffers() end, pick_opts)
+vim.keymap.set('n', '<leader>ff', vcs_picker, pick_opts)
+vim.keymap.set('n', '<leader>fg', function() Snacks.picker.grep() end, pick_opts)
+vim.keymap.set('n', '<leader>fc', function() Snacks.picker.git_log() end, pick_opts)
+vim.keymap.set('n', '<leader>fb', function() Snacks.picker.git_log_file() end, pick_opts)
 
 -- Treesitter configs
 require('nvim-treesitter.configs').setup({
@@ -306,8 +333,8 @@ local lsp_on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true }
 
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua Snacks.picker.lsp_definitions()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<Cmd>lua Snacks.picker.lsp_references()<CR>', opts)
   buf_set_keymap('n', 'gs', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
   buf_set_keymap('n', 'gk', "<Cmd>lua vim.diagnostic.open_float(bufnr, {border='single',scope='line'})<CR>", opts)
