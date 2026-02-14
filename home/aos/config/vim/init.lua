@@ -188,17 +188,20 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Snacks.picker
+vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "Comment" })
+
 require('snacks').setup({
   picker = {
-    layout = {
-      preset = function()
-        return vim.o.columns >= 200 and "default" or "vertical"
-      end,
-    },
     sources = {
       files = {
         follow = true,
+        hidden = true,
       },
+      grep = {
+        follow = true,
+        hidden = true,
+      },
+      explorer = { hidden = true },
     },
     win = {
       input = {
@@ -219,11 +222,13 @@ local function jj_files()
   Snacks.picker.pick({
     title = "Jujutsu Files",
     finder = function(opts, ctx)
+      local cwd = vim.fs.normalize(opts.cwd or vim.fn.getcwd(0))
       return require("snacks.picker.source.proc").proc(
         ctx:opts({
           cmd = "jj",
           args = { "file", "list", "--no-pager" },
           transform = function(item)
+            item.cwd = cwd
             item.file = item.text
           end,
         }),
