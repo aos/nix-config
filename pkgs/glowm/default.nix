@@ -7,9 +7,9 @@
 }:
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "glowm";
-  version = "unstable-2026-02-14";
+  version = "v0.0.1";
 
-  src = ./glowm;
+  src = ./glowm.sh;
 
   dontUnpack = true;
   nativeBuildInputs = [ makeWrapper ];
@@ -33,7 +33,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
   meta = {
     description = "Glow wrapper with Mermaid-to-ASCII rendering";
-    license = lib.licenses.unfree;
+    license = lib.licenses.mit;
     mainProgram = "glowm";
     platforms = lib.platforms.all;
   };

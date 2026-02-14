@@ -232,8 +232,6 @@
       };
 
       packages."${defaultSystem}" = with defaultPackages; {
-        inherit glowm;
-
         # Helper script to make updating sops easier
         sops-local = writeShellScriptBin "sops-local" ''
           export SOPS_AGE_KEY=$(ssh-to-age -private-key -i ~/.ssh/id_tower)

@@ -26,7 +26,6 @@ in
     tree
     htop
     age
-    # _1password-cli
 
     # Infra tools
     gh
@@ -47,13 +46,14 @@ in
     nb
     yazi
 
-    # llms
-    # llm-pkgs.claude-code
     llm-pkgs.pi
     qalculate-gtk
     mypaint
     lorien
 
     berkeley-mono
+
+    # custom packages
+    glowm
   ];
 }
