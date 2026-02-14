@@ -30,6 +30,10 @@
       url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mermaid-ascii = {
+      url = "github:AlexanderGrooff/mermaid-ascii";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     colmena.url = "github:zhaofengli/colmena";
     catppuccin.url = "github:catppuccin/nix";
     gotoz.url = "git+https://git.sr.ht/~aos/gotoz";
@@ -77,7 +81,7 @@
             inputs.pi-config.overlays.default
             inputs.custom-fonts.overlays.default
             # Custom packages
-            (import ./pkgs)
+            (import ./pkgs { inherit inputs; })
           ];
           config.allowUnfree = true;
         };
@@ -144,24 +148,30 @@
           };
         };
 
-        biggie = { ... }: {
-          imports = [ ./hosts/biggie ];
-        };
+        biggie =
+          { ... }:
+          {
+            imports = [ ./hosts/biggie ];
+          };
 
         # Home assistant, etc.
-        temple = { ... }: {
-          imports = [ ./hosts/temple ];
-        };
+        temple =
+          { ... }:
+          {
+            imports = [ ./hosts/temple ];
+          };
 
         # VPS
-        pylon = { ... }: {
-          imports = [ ./hosts/pylon ];
-        };
+        pylon =
+          { ... }:
+          {
+            imports = [ ./hosts/pylon ];
+          };
       };
 
       nixosConfigurations = {
         synth = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          pkgs = pkgsFor "x86_64-linux";
           modules = [ ./hosts/synth ];
           specialArgs = {
             inherit inputs;
@@ -169,7 +179,6 @@
         };
 
         tower = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
           pkgs = pkgsFor "x86_64-linux";
           modules = [ ./hosts/tower ];
           specialArgs = {
@@ -178,14 +187,14 @@
         };
 
         thalamus = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
           pkgs = pkgsFor "x86_64-linux";
           modules = [ ./hosts/thalamus ];
           specialArgs = {
             inherit inputs;
           };
         };
-      } // clan.config.nixosConfigurations;
+      }
+      // clan.config.nixosConfigurations;
 
       inherit (clan.config) clanInternals;
       clan = clan.config;
@@ -223,6 +232,8 @@
       };
 
       packages."${defaultSystem}" = with defaultPackages; {
+        inherit glowm;
+
         # Helper script to make updating sops easier
         sops-local = writeShellScriptBin "sops-local" ''
           export SOPS_AGE_KEY=$(ssh-to-age -private-key -i ~/.ssh/id_tower)
@@ -274,6 +285,6 @@
           };
       };
 
-      formatter."${defaultSystem}" = defaultPackages.nixfmt;
+      formatter."${defaultSystem}" = defaultPackages.nixfmt-tree;
     };
 }

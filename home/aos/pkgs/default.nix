@@ -17,7 +17,7 @@ in
   home.packages = with pkgs; [
     (pass.withExtensions (ext: with ext; [ pass-otp ]))
 
-    nixfmt 
+    nixfmt
 
     fx
     jq
@@ -35,7 +35,6 @@ in
     # terraform
     # terraform-ls
     # vagrant
-
 
     # k8s
     k9s

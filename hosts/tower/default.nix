@@ -88,7 +88,8 @@
           # Turn off wakeup for some devices that causes poor suspend behavior
           ACTION=="add" SUBSYSTEM=="pci" ATTR{vendor}=="${devs.vendor}" ATTR{device}=="${devs.device}" ATTR{power/wakeup}="disabled"
         '') devs
-      ) + ''
+      )
+      + ''
         # DFU (Internal bootloader for STM32 and AT32 MCUs)
         SUBSYSTEM=="usb", ATTRS{idVendor}=="2e3c", ATTRS{idProduct}=="df11", TAG+="uaccess"
         SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", TAG+="uaccess"

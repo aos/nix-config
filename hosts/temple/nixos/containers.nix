@@ -9,9 +9,9 @@
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     defaultSopsFile = ../../../sops/temple/secrets.enc.yaml;
 
-    secrets.bingbong_db_url = {};
-    secrets.bingbong_key = {};
-    secrets.mqtt_client_password = {};
+    secrets.bingbong_db_url = { };
+    secrets.bingbong_key = { };
+    secrets.mqtt_client_password = { };
     secrets.registry_username = {
       sopsFile = ../../../sops/general/secrets.enc.yaml;
     };

@@ -190,8 +190,7 @@ in
       ];
 
       extraOptions =
-        lib.filter (o: o != nvidiaOption) cfg.extraOptions
-        ++ lib.optional cfg.nvidiaSupport nvidiaOption;
+        lib.filter (o: o != nvidiaOption) cfg.extraOptions ++ lib.optional cfg.nvidiaSupport nvidiaOption;
 
       volumes = [ "${cfg.dataDir}:/data" ];
 

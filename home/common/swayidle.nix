@@ -35,16 +35,31 @@ in
     enable = true;
 
     events = [
-      { event = "before-sleep"; command = (display "off") + "; " + lib.getExe lockcmd-bin; }
-      { event = "after-resume"; command = display "on"; }
-      { event = "lock"; command = lib.getExe lockcmd-bin; }
+      {
+        event = "before-sleep";
+        command = (display "off") + "; " + lib.getExe lockcmd-bin;
+      }
+      {
+        event = "after-resume";
+        command = display "on";
+      }
+      {
+        event = "lock";
+        command = lib.getExe lockcmd-bin;
+      }
     ];
 
     timeouts = [
       # 8 min
-      { timeout = 480; command = lib.getExe lockcmd-bin; }
+      {
+        timeout = 480;
+        command = lib.getExe lockcmd-bin;
+      }
       # 30 min
-      { timeout = 1000; command = "systemctl suspend"; }
+      {
+        timeout = 1000;
+        command = "systemctl suspend";
+      }
     ];
   };
 }

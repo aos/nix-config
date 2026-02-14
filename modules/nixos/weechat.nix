@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   services.weechat.enable = true;
@@ -36,18 +41,18 @@
 #     description = "weechat";
 #     after = [ "network.target" ];
 #     wantedBy = [ "multi-user.target" ];
-# 
+#
 #     restartIfChanged = false;
-# 
+#
 #     path = [ pkgs.rxvt-unicode-unwrapped.terminfo ];
-# 
+#
 #     serviceConfig = {
 #       User = "wc";
 #       Group = "wc";
 #       RemainAfterExit = true;
 #       Type = "simple";
 #     };
-# 
+#
 #     script = "exec ${pkgs.screen}/bin/screen -Dm -S weechat-screen ${weechat}/bin/weechat --dir /var/lib/weechat";
 #   };
 # }

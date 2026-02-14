@@ -45,9 +45,15 @@
     portal = {
       enable = true;
       config = {
-        common.default = [ "gtk" "gnome" ];
+        common.default = [
+          "gtk"
+          "gnome"
+        ];
         niri = {
-          default = [ "gtk" "gnome" ];
+          default = [
+            "gtk"
+            "gnome"
+          ];
           "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
           "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
         };
@@ -61,7 +67,7 @@
 
     terminal-exec = {
       enable = true;
-      settings.default = ["com.mitchellh.ghostty.desktop"];
+      settings.default = [ "com.mitchellh.ghostty.desktop" ];
     };
   };
 }

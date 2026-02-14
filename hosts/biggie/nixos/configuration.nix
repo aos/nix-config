@@ -75,19 +75,21 @@
       "wheel"
       "gamemode"
     ];
-    packages = with pkgs; [
-      firefox
-      vim
-      curl
-      git
+    packages =
+      with pkgs;
+      [
+        firefox
+        vim
+        curl
+        git
 
-      vesktop
-      vlc
-    ] ++ map(name: pkgs.kdePackages.${name})
-    [
+        vesktop
+        vlc
+      ]
+      ++ map (name: pkgs.kdePackages.${name}) [
         "kcalc"
         "kolourpaint"
-    ];
+      ];
     openssh.authorizedKeys.keyFiles = [
       ../../../sops/keys/aos/authorized_keys
     ];

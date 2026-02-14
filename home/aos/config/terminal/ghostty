@@ -5,7 +5,7 @@
 theme = dark:Elegant,light:Breadog
 # theme=Elegant
 font-family = Berkeley Mono
-font-size = 14
+font-size = 12
 bold-color = bright
 window-padding-x = 5
 window-padding-y = 5

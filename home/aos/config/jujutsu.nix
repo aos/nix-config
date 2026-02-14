@@ -36,9 +36,17 @@ in
       };
       aliases = {
         d = [ "diff" ];
-        l = [ "log" "-T" "builtin_log_oneline" ];
+        l = [
+          "log"
+          "-T"
+          "builtin_log_oneline"
+        ];
         # all visible commits in repo
-        lr = [ "log" "-r" ".." ];
+        lr = [
+          "log"
+          "-r"
+          ".."
+        ];
         tug = [
           "bookmark"
           "move"
@@ -55,15 +63,24 @@ in
           "--to"
           "@-"
         ];
-        vim = [ "util" "exec" "--" "bash" "-c"
-          ''${lib.getExe pkgs.neovim} $(jj show --no-patch -T'diff.files().map(|file| file.path())')''
+        vim = [
+          "util"
+          "exec"
+          "--"
+          "bash"
+          "-c"
+          "${lib.getExe pkgs.neovim} $(jj show --no-patch -T'diff.files().map(|file| file.path())')"
         ];
       };
       ui = {
         pager = "${lib.getExe pkgs.delta}";
         default-command = [ "status" ];
         diff-formatter = ":git";
-        diff-editor = ["nvim" "-c" "DiffEditor $left $right $output"];
+        diff-editor = [
+          "nvim"
+          "-c"
+          "DiffEditor $left $right $output"
+        ];
       };
       template-aliases = {
         "colored(color, txt)" =
@@ -75,25 +92,26 @@ in
         "ps1_repo_info" =
           if fishEnabled then
             repoPromptFish
-          else ''
-            concat(
-              yellow("(@ "),
-              surround("", " ", yellow(bookmarks)),
-              surround("", " -> ",
-                if(!description,  magenta(separate("+",
-                  parents.map(|c| coalesce(
-                  c.tags(), c.bookmarks(), c.change_id().shortest())
-                  ))))),
-              if(empty,
-                magenta(change_id.shortest()),
-                magenta(change_id.shortest() ++ "*")),
-              surround(":", "", concat(
-                if(divergent, cyan("Y")),
-                if(conflict,  red("X")),
-              )),
-              yellow(")"),
-            )
-          '';
+          else
+            ''
+              concat(
+                yellow("(@ "),
+                surround("", " ", yellow(bookmarks)),
+                surround("", " -> ",
+                  if(!description,  magenta(separate("+",
+                    parents.map(|c| coalesce(
+                    c.tags(), c.bookmarks(), c.change_id().shortest())
+                    ))))),
+                if(empty,
+                  magenta(change_id.shortest()),
+                  magenta(change_id.shortest() ++ "*")),
+                surround(":", "", concat(
+                  if(divergent, cyan("Y")),
+                  if(conflict,  red("X")),
+                )),
+                yellow(")"),
+              )
+            '';
       };
     };
   };

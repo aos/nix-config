@@ -100,20 +100,20 @@ in
 
       listener = [
         {
-          timeout = 420;   # 7min
+          timeout = 420; # 7min
           on-timeout = "notify-send -u critical -i ${lockIcon} -t 59000 'system will be locking soon!'";
         }
         {
-          timeout = 480;   # 8min
+          timeout = 480; # 8min
           on-timeout = "loginctl lock-session";
         }
         {
-          timeout = 600;   # 10min
+          timeout = 600; # 10min
           on-timeout = display "off";
           on-resume = display "on";
         }
         {
-          timeout = 720;  # 12min
+          timeout = 720; # 12min
           on-timeout = "systemctl suspend";
         }
       ];

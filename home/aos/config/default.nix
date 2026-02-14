@@ -1,4 +1,9 @@
-{ home, pkgs, inputs, ... }:
+{
+  home,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
