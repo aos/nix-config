@@ -55,5 +55,6 @@ in
 
     # custom packages
     glowm
+    mdts
   ];
 }
