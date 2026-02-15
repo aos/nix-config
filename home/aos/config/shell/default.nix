@@ -43,7 +43,11 @@
     '';
     functions = {
       qr = "${lib.getExe pkgs.qrencode} -t ansiutf8 ''$argv";
-      qq = ''pi --model zai/glm-4.7-flash -p "''$argv"'';
+      qq = ''
+        set -l extra_args $argv[1..-2]
+        set -l prompt $argv[-1]
+        pi --model anthropic/claude-haiku-4-5 $extra_args -p "$prompt"
+      '';
       t = ''
         if test -z $argv[1]
           set dirname xx
