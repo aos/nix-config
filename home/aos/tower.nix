@@ -32,6 +32,7 @@ in
     slack
     libreoffice
     vlc
+    obsidian
 
     # freecad # missing from nixos cache
     # prusa-slicer

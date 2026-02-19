@@ -68,6 +68,24 @@ require("lazy").setup({
     'tpope/vim-surround',
     'tpope/vim-unimpaired',
     { 'julienvincent/hunk.nvim', cmd = { 'DiffEditor' }, dependencies = { 'MunifTanjim/nui.nvim' }, opts = {} },
+    {
+      'obsidian-nvim/obsidian.nvim',
+      ft = "markdown",
+      dependencies = { 'saghen/blink.cmp' },
+      opts = {
+        legacy_commands = false,
+        workspaces = {
+          {
+            name = "personal",
+            path = "~/vaults/personal",
+          },
+          {
+            name = "work",
+            path = "~/vaults/work",
+          },
+        },
+      },
+    },
 
     'aos/vim-ascetic',
   },
@@ -241,17 +259,17 @@ local function jj_files()
 end
 
 local function vcs_picker()
-  local ok = pcall(function()
-    local obj = vim.system({ "jj", "root" }, { text = true }):wait()
-    if obj.code ~= 0 then error("not jj") end
-    jj_files()
-  end)
-  if ok then return end
-
-  local git_ok = pcall(Snacks.picker.git_files)
-  if not git_ok then
-    Snacks.picker.files()
+  local jj = vim.system({ "jj", "root" }, { text = true }):wait()
+  if jj.code == 0 then
+    return jj_files()
   end
+
+  local git = vim.system({ "git", "rev-parse", "--git-dir" }, { text = true }):wait()
+  if git.code == 0 then
+    return Snacks.picker.git_files()
+  end
+
+  Snacks.picker.files()
 end
 
 -- Picker shortcuts
