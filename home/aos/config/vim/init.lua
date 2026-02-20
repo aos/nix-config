@@ -72,19 +72,6 @@ require("lazy").setup({
       'obsidian-nvim/obsidian.nvim',
       ft = "markdown",
       dependencies = { 'saghen/blink.cmp' },
-      opts = {
-        legacy_commands = false,
-        workspaces = {
-          {
-            name = "personal",
-            path = "~/vaults/personal",
-          },
-          {
-            name = "work",
-            path = "~/vaults/work",
-          },
-        },
-      },
     },
 
     'aos/vim-ascetic',
@@ -462,3 +449,18 @@ for server, config in pairs(lsp_servers) do
 end
 
 vim.lsp.enable(auto_enabled)
+
+-- Enable obsidian
+require("obsidian").setup({
+  legacy_commands = false,
+  workspaces = {
+    {
+      name = "personal",
+      path = "~/vaults/personal",
+    },
+    {
+      name = "work",
+      path = "~/vaults/work",
+    },
+  },
+})
