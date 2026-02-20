@@ -452,6 +452,15 @@ vim.lsp.enable(auto_enabled)
 
 -- Enable obsidian
 require("obsidian").setup({
+  note_id_func = function(title)
+    if title then
+      return title
+    end
+    return require("obsidian.builtin").zettel_id()
+  end,
+  ui = {
+    ignore_conceal_warn = true,
+  },
   legacy_commands = false,
   workspaces = {
     {
