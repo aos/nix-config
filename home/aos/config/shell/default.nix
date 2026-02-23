@@ -46,7 +46,7 @@
       qq = ''
         set -l extra_args $argv[1..-2]
         set -l prompt $argv[-1]
-        pi --model anthropic/claude-haiku-4-5 $extra_args -p "$prompt"
+        pi --model anthropic/claude-sonnet-4-6 $extra_args -p "$prompt"
       '';
       t = ''
         if test -z $argv[1]
