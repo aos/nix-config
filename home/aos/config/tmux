@@ -57,6 +57,9 @@ bind C command-prompt "new-window -n '%%'"
 set -g allow-rename off
 # Re-number windows automatically
 set -g renumber-windows on
+# Allow other programs to request modifiers
+set -g extended-keys on
+set -g extended-keys-format csi-u
 
 # Increase the history limit scrollback buffer
 set -g history-limit 10000
