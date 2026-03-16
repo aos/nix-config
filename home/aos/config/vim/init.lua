@@ -167,6 +167,17 @@ vim.api.nvim_create_user_command(
   { range = true, desc = 'Copy permalink to clipboard' }
 )
 
+-- :CopyPath — copy full file path to clipboard
+vim.api.nvim_create_user_command(
+  'CopyPath',
+  function()
+    local path = vim.fn.expand('%:p')
+    vim.fn.setreg('+', path)
+    vim.notify(path, vim.log.levels.INFO)
+  end,
+  { desc = 'Copy full file path to clipboard' }
+)
+
 -- :Theme
 vim.api.nvim_create_user_command(
   'Theme',
@@ -400,25 +411,23 @@ local lsp_defaults = {
   silent = true,
 }
 
-local rust_analyzer_config = {
-  settings = {
-    ["rust-analyzer"] = {
-      cargo = {
-        allFeatures = true,
-      },
-      procMacro = {
-        enable = true,
-      },
-      rustfmt = {
-        enableRangeFormatting = true,
-      },
-    }
-  }
-}
-
 local lsp_servers = {
   ['pyright'] = {},
-  ['rust_analyzer'] = rust_analyzer_config,
+  ['rust_analyzer'] = {
+    settings = {
+      ["rust-analyzer"] = {
+        cargo = {
+          allFeatures = true,
+        },
+        procMacro = {
+          enable = true,
+        },
+        rustfmt = {
+          enableRangeFormatting = true,
+        },
+      }
+    }
+  },
   ['terraformls'] = {},
   ['gopls'] = {
     imports_command = true,
