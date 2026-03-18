@@ -27,7 +27,7 @@
     ./nixos/configuration.nix
   ];
 
-  services.flatpak.enable = false;
+  services.flatpak.enable = true;
   programs.localsend.enable = true;
   programs._1password.enable = true;
 

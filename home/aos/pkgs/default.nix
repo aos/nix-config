@@ -48,8 +48,8 @@ in
 
     llm-pkgs.pi
     qalculate-gtk
-    mypaint
     lorien
+    # mypaint
 
     berkeley-mono
 
