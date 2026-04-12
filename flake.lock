@@ -52,11 +52,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1771437256,
-        "narHash": "sha256-bLqwib+rtyBRRVBWhMuBXPCL/OThfokA+j6+uH7jDGU=",
+        "lastModified": 1776249299,
+        "narHash": "sha256-Dt9t1TGRmJFc0xVYhttNBD6QsAgHOHCArqGa0AyjrJY=",
         "owner": "numtide",
         "repo": "blueprint",
-        "rev": "06ee7190dc2620ea98af9eb225aa9627b68b0e33",
+        "rev": "56131e8628f173d24a27f6d27c0215eff57e40dd",
         "type": "github"
       },
       "original": {
@@ -86,15 +86,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1770895533,
-        "narHash": "sha256-v3QaK9ugy9bN9RXDnjw0i2OifKmz2NnKM82agtqm/UY=",
-        "owner": "nix-community",
+        "lastModified": 1776182890,
+        "narHash": "sha256-+/VOe8XGq5klpU+I19D+3TcaR7o+Cwbq67KNF7mcFak=",
+        "owner": "Mic92",
         "repo": "bun2nix",
-        "rev": "c843f477b15f51151f8c6bcc886954699440a6e1",
+        "rev": "648d293c51e981aec9cb07ba4268bc19e7a8c575",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "Mic92",
+        "ref": "catalog-support",
         "repo": "bun2nix",
         "type": "github"
       }
@@ -114,22 +115,6 @@
       "original": {
         "owner": "catppuccin",
         "repo": "nix",
-        "type": "github"
-      }
-    },
-    "chrome-cdp-skill": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1773855684,
-        "narHash": "sha256-NkMP9b1cFfPx+T9+ddHEzwNoNR87ARHgz2K8eHB5hIE=",
-        "owner": "pasky",
-        "repo": "chrome-cdp-skill",
-        "rev": "1fd55c777125eff23e6ad3a972e694999a3a5bfb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "pasky",
-        "repo": "chrome-cdp-skill",
         "type": "github"
       }
     },
@@ -503,11 +488,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1775918228,
-        "narHash": "sha256-w8Uvzd1qDzckig8moJspCbyZSYs4Rm1iQ/ZRxMf4gXA=",
+        "lastModified": 1776609084,
+        "narHash": "sha256-wDuBab4zJZIMDBSDAJR7P7cX7WXIiC5bnBk1E2wixAw=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "d74530c8c4bbccf64664725fa747cba732b4f6b8",
+        "rev": "680eb21182e45eb647eb1e64144ffcd484707321",
         "type": "github"
       },
       "original": {
@@ -756,17 +741,16 @@
     },
     "pi-config": {
       "inputs": {
-        "chrome-cdp-skill": "chrome-cdp-skill",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1775916307,
-        "narHash": "sha256-f0R1Ux4yo/GKz6ks3c8LVrMHI8/RxZFZbpduCZcqHBs=",
+        "lastModified": 1776613971,
+        "narHash": "sha256-x1lFK587L9uB2dOf+NWUS0Xfc5xLoA5EdL+ecyQL7/M=",
         "owner": "aos",
         "repo": "pi-config",
-        "rev": "7be820dee1ad85d9d965f02f28c6a54321b8e421",
+        "rev": "7b814bb7bd18539daca67178b979919c5d8fe87c",
         "type": "github"
       },
       "original": {

@@ -30,6 +30,10 @@
   services.flatpak.enable = true;
   programs.localsend.enable = true;
   programs._1password.enable = true;
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true;
+  };
 
   floofs.nfs.enable = true;
 
