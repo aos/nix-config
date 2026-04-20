@@ -41,5 +41,6 @@ in
     vagrant
 
     et # simple cli pomodoro timer
+    nodejs
   ];
 }

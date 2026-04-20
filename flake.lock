@@ -743,14 +743,15 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ]
+        ],
+        "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1776613971,
-        "narHash": "sha256-x1lFK587L9uB2dOf+NWUS0Xfc5xLoA5EdL+ecyQL7/M=",
+        "lastModified": 1776655825,
+        "narHash": "sha256-36jm7AgNMevETQ3q9WwB8U6No5WMrFkyJG2gN0AYz18=",
         "owner": "aos",
         "repo": "pi-config",
-        "rev": "7b814bb7bd18539daca67178b979919c5d8fe87c",
+        "rev": "84dd5e6f7dab5527672da1b8f9174eddb0c06518",
         "type": "github"
       },
       "original": {
@@ -966,6 +967,27 @@
       "inputs": {
         "nixpkgs": [
           "llm-agents",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1775636079,
+        "narHash": "sha256-pc20NRoMdiar8oPQceQT47UUZMBTiMdUuWrYu2obUP0=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "790751ff7fd3801feeaf96d7dc416a8d581265ba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "treefmt-nix_3": {
+      "inputs": {
+        "nixpkgs": [
+          "pi-config",
           "nixpkgs"
         ]
       },

@@ -78,7 +78,6 @@
           overlays = [
             inputs.gotoz.overlays.default
             inputs.atools.overlays.default
-            inputs.pi-config.overlays.default
             inputs.custom-fonts.overlays.default
             # Custom packages
             (import ./pkgs { inherit inputs; })

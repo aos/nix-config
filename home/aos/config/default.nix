@@ -10,8 +10,10 @@
     ./vim
     ./shell
     ./jujutsu.nix
-    inputs.pi-config.homeManagerModules.default
+    inputs.pi-config.homeModules.default
   ];
+
+  programs.pi-config.enable = true;
 
   home.packages = with pkgs; [
     tmux
