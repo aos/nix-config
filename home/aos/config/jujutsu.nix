@@ -81,6 +81,8 @@ in
           "-c"
           "DiffEditor $left $right $output"
         ];
+        merge-editor = "meld";
+        # merge-editor = ["meld" "$left" "$base" "$right" "-o" "$output"];
       };
       template-aliases = {
         "colored(color, txt)" =

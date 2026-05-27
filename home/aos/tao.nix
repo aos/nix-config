@@ -43,7 +43,18 @@
     gh
     cloudflared
 
-    (google-cloud-sdk.withExtraComponents ([ google-cloud-sdk.components.gke-gcloud-auth-plugin ]))
+    # Pinned to nixpkgs-stable: google-cloud-sdk 570.0.0 on unstable has a
+    # broken bundled-python3 auto-patchelf step (libpython3.14.so.1.0,
+    # libtcl9.0.so). Upstream fix: NixOS/nixpkgs#527528.
+    (let
+      pkgsStable = import inputs.nixpkgs-stable {
+        system = pkgs.stdenv.hostPlatform.system;
+        config.allowUnfree = true;
+      };
+    in
+    pkgsStable.google-cloud-sdk.withExtraComponents [
+      pkgsStable.google-cloud-sdk.components.gke-gcloud-auth-plugin
+    ])
     awscli2
     ssm-session-manager-plugin
 

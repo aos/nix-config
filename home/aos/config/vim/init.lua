@@ -60,8 +60,8 @@ require("lazy").setup({
   },
   spec = {
     'neovim/nvim-lspconfig',
-    'nvim-treesitter/nvim-treesitter',
-    'nvim-treesitter/nvim-treesitter-textobjects',
+    { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
+    { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
     'folke/snacks.nvim',
     'justinmk/vim-dirvish',
     'tpope/vim-fugitive',
@@ -71,7 +71,9 @@ require("lazy").setup({
     {
       'obsidian-nvim/obsidian.nvim',
       ft = "markdown",
-      dependencies = { 'saghen/blink.cmp' },
+      dependencies = {
+        { 'saghen/blink.cmp', dependencies = { 'saghen/blink.lib' } },
+      },
     },
 
     'aos/vim-ascetic',
@@ -134,7 +136,6 @@ vim.api.nvim_create_autocmd({ 'InsertLeave', 'CompleteDone' }, {
 vim.opt.foldenable = false -- start file unfolded
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 
 -- Fold mappings
 vim.keymap.set('n', '<Space>', 'za', { noremap = true })
@@ -278,42 +279,45 @@ vim.keymap.set('n', '<leader>fg', function() Snacks.picker.grep() end, pick_opts
 vim.keymap.set('n', '<leader>fc', function() Snacks.picker.git_log() end, pick_opts)
 vim.keymap.set('n', '<leader>fb', function() Snacks.picker.git_log_file() end, pick_opts)
 
--- Treesitter configs
-require('nvim-treesitter.configs').setup({
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = 'gnn',
-      node_incremental = 'grn',
-      scope_incremental = 'grc',
-      node_decremental = 'grm',
-    },
-  },
-  indent = {
-    enable = true,
-    disable = { "yaml", "elixir" },
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true, -- auto jump forward to textobj
-      keymaps = {
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
-      },
-    },
-    move = {
-      enable = true,
-      set_jumps = true,
-    },
-  },
+-- Treesitter: install parsers + enable per-filetype features (main branch API)
+local ts_ensure = {
+  'bash', 'c', 'cpp', 'css', 'diff', 'dockerfile', 'elixir', 'fish', 'go',
+  'gomod', 'gosum', 'html', 'javascript', 'json', 'jsonc', 'lua', 'luadoc',
+  'make', 'markdown', 'markdown_inline', 'nix', 'python', 'query', 'regex',
+  'ruby', 'rust', 'svelte', 'terraform', 'toml', 'tsx', 'typescript', 'vim',
+  'vimdoc', 'yaml',
+}
+do
+  local ok, ts = pcall(require, 'nvim-treesitter')
+  if ok then
+    local installed = require('nvim-treesitter.config').get_installed()
+    local missing = vim.iter(ts_ensure)
+      :filter(function(p) return not vim.tbl_contains(installed, p) end)
+      :totable()
+    if #missing > 0 then ts.install(missing) end
+  end
+end
+
+local ts_indent_disable = { yaml = true, elixir = true }
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args)
+    pcall(vim.treesitter.start)
+    if not ts_indent_disable[args.match] then
+      vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+  end,
 })
+
+-- Textobjects (main branch API)
+require('nvim-treesitter-textobjects').setup({
+  select = { lookahead = true },
+  move = { set_jumps = true },
+})
+local sel = require('nvim-treesitter-textobjects.select').select_textobject
+vim.keymap.set({ 'x', 'o' }, 'af', function() sel('@function.outer', 'textobjects') end)
+vim.keymap.set({ 'x', 'o' }, 'if', function() sel('@function.inner', 'textobjects') end)
+vim.keymap.set({ 'x', 'o' }, 'ac', function() sel('@class.outer', 'textobjects') end)
+vim.keymap.set({ 'x', 'o' }, 'ic', function() sel('@class.inner', 'textobjects') end)
 
 -- LSP global
 -- Remove sign column for Lsp diagnostics and recolor the number instead
@@ -364,11 +368,12 @@ local lsp_on_attach = function(client, bufnr)
 
   vim.api.nvim_create_user_command('Fmt', function() vim.lsp.buf.format() end, {})
 
-  -- LSP-based folding
-  local win = vim.api.nvim_get_current_win()
-  vim.wo[win][0].foldtext = 'v:lua.vim.lsp.foldtext()'
+  -- LSP-based folding (only when the server actually supports folding ranges,
+  -- otherwise lsp.foldtext() renders garbage over treesitter folds)
   if client:supports_method('textDocument/foldingRange') then
+    local win = vim.api.nvim_get_current_win()
     vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+    vim.wo[win][0].foldtext = 'v:lua.vim.lsp.foldtext()'
   end
 
   -- Only create Imports command if server supports it
@@ -429,6 +434,8 @@ local lsp_servers = {
     }
   },
   ['terraformls'] = {},
+  ['ts_ls'] = {},
+  ['svelte'] = {},
   ['gopls'] = {
     imports_command = true,
   },
