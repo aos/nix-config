@@ -30,6 +30,7 @@
               content = {
                 type = "luks";
                 name = "cryptkey";
+                initrdUnlock = false;
                 extraFormatArgs = [ "--type luks1" ];
                 postCreateHook = ''
                   dd if=/dev/urandom of=/dev/mapper/cryptkey count=32 bs=1024 status=progress
@@ -43,10 +44,10 @@
                 type = "luks";
                 name = "cryptswap";
                 extraFormatArgs = [ "--type luks1" ];
-                settings = {
-                  keyFile = "/dev/mapper/cryptkey";
-                  keyFileSize = 8192;
-                };
+                # settings = {
+                #   keyFile = "/dev/mapper/cryptkey";
+                #   keyFileSize = 8192;
+                # };
                 content = {
                   type = "swap";
                 };
@@ -58,17 +59,17 @@
                 type = "luks";
                 name = "cryptroot";
                 extraFormatArgs = [ "--type luks1" ];
-                settings = {
-                  allowDiscards = true;
-                  keyFile = "/dev/mapper/cryptkey";
-                  keyFileSize = 8192;
-                };
-                postCreateHook = ''
-                    cryptsetup luksAddKey --type luks1 \
-                  			--key-file ''${settings[keyFile]} \
-                  			--keyfile-size ''${settings[keyFileSize]} \
-                  			''$device /tmp/disk.key
-                '';
+                # settings = {
+                #   allowDiscards = true;
+                #   keyFile = "/dev/mapper/cryptkey";
+                #   keyFileSize = 8192;
+                # };
+                # postCreateHook = ''
+                #     cryptsetup luksAddKey --type luks1 \
+                #   			--key-file ''${settings[keyFile]} \
+                #   			--keyfile-size ''${settings[keyFileSize]} \
+                #   			''$device /tmp/disk.key
+                # '';
                 content = {
                   type = "btrfs";
                   extraArgs = [ "-f" ];

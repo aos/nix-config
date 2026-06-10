@@ -2,7 +2,14 @@
 
 {
   virtualisation = {
-    libvirtd.enable = true;
+    libvirtd = {
+      enable = true;
+
+      # TPM emulation for W11
+      qemu.swtpm.enable = true;
+    };
+
+    spiceUSBRedirection.enable = true;
 
     containers.enable = true;
 
@@ -24,8 +31,11 @@
 
   programs.virt-manager.enable = true;
 
-  environment.systemPackages = [
-    pkgs.podman-compose
-    pkgs.podman-tui
+  environment.systemPackages = with pkgs; [
+    podman-compose
+    podman-tui
+    gnome-boxes # VM management
+    dnsmasq # VM networking
+    phodav # (optional) Share files with guest VMs
   ];
 }
