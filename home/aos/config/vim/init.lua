@@ -322,7 +322,12 @@ vim.keymap.set({ 'x', 'o' }, 'ic', function() sel('@class.inner', 'textobjects')
 -- LSP global
 -- Remove sign column for Lsp diagnostics and recolor the number instead
 vim.opt.signcolumn = "no"
+vim.o.winborder = 'rounded'
+
 vim.diagnostic.config({
+  virtual_text = false,
+  update_in_insert = false,
+  float = { border = 'rounded' },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = 'E',
@@ -348,23 +353,20 @@ vim.diagnostic.config({
 local lsp_on_attach = function(client, bufnr)
   -- Mappings
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-  buf_set_option('formatexpr', 'v:lua.vim.lsp.formatexpr()')
+  -- omnifunc/formatexpr are set automatically by Nvim on LSP attach (0.11+).
+  -- Default keymaps (K hover, grr references, grn rename, gra code action,
+  -- gri implementation, gO document symbols, <C-s> signature) are built in.
 
   -- Mappings
   local opts = { noremap = true, silent = true }
 
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua Snacks.picker.lsp_definitions()<CR>', opts)
   buf_set_keymap('n', 'gr', '<Cmd>lua Snacks.picker.lsp_references()<CR>', opts)
-  buf_set_keymap('n', 'gs', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
-  buf_set_keymap('n', 'gk', "<Cmd>lua vim.diagnostic.open_float(bufnr, {border='single',scope='line'})<CR>", opts)
-  buf_set_keymap('n', '<C-k>', "<Cmd>lua vim.diagnostic.goto_prev({float = {border='single'}})<CR>", opts)
-  buf_set_keymap('n', '<C-j>', "<Cmd>lua vim.diagnostic.goto_next({float = {border='single'}})<CR>", opts)
+  buf_set_keymap('n', 'gk', "<Cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", opts)
+  buf_set_keymap('n', '<C-k>', "<Cmd>lua vim.diagnostic.jump({count=-1})<CR>", opts)
+  buf_set_keymap('n', '<C-j>', "<Cmd>lua vim.diagnostic.jump({count=1})<CR>", opts)
 
   vim.api.nvim_create_user_command('Fmt', function() vim.lsp.buf.format() end, {})
 
@@ -390,28 +392,10 @@ local lsp_on_attach = function(client, bufnr)
   end
 end
 
--- override LSP floating windows
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-  opts = opts or {}
-  opts.border = 'rounded'
-  return orig_util_open_floating_preview(contents, syntax, opts, ...)
-end
-
 local lsp_defaults = {
   on_attach = lsp_on_attach,
   flags = {
     debounce_text_changes = 200,
-  },
-  handlers = {
-    ['textDocument/publishDiagnostics'] = vim.lsp.with(
-      vim.lsp.diagnostic.on_publish_diagnostics, {
-        -- enable signs
-        signs = true,
-        virtual_text = false,
-        update_in_insert = false,
-      }
-    ),
   },
   silent = true,
 }
