@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 
@@ -40,6 +41,7 @@
       set -x FZF_CTRL_T_COMMAND '${lib.getExe pkgs.ripgrep} --files --hidden --follow --no-require-git'
 
       set -x MANPAGER '${lib.getExe pkgs.neovim} +Man!'
+      set -x CLAUDE_CODE_EXECUTABLE ${lib.getExe inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code}
     '';
     functions = {
       qr = "${lib.getExe pkgs.qrencode} -t ansiutf8 ''$argv";

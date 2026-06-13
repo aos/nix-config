@@ -27,6 +27,10 @@
     ./nixos/configuration.nix
   ];
 
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
   services.flatpak.enable = true;
   programs.localsend.enable = true;
   programs._1password.enable = true;

@@ -282,10 +282,10 @@ vim.keymap.set('n', '<leader>fb', function() Snacks.picker.git_log_file() end, p
 -- Treesitter: install parsers + enable per-filetype features (main branch API)
 local ts_ensure = {
   'bash', 'c', 'cpp', 'css', 'diff', 'dockerfile', 'elixir', 'fish', 'go',
-  'gomod', 'gosum', 'html', 'javascript', 'json', 'jsonc', 'lua', 'luadoc',
+  'gomod', 'gosum', 'html', 'javascript', 'json', 'lua', 'luadoc',
   'make', 'markdown', 'markdown_inline', 'nix', 'python', 'query', 'regex',
   'ruby', 'rust', 'svelte', 'terraform', 'toml', 'tsx', 'typescript', 'vim',
-  'vimdoc', 'yaml',
+  'vimdoc', 'yaml', 'zig'
 }
 do
   local ok, ts = pcall(require, 'nvim-treesitter')
