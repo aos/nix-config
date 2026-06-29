@@ -26,6 +26,9 @@
 
     [commit]
     gpgsign = true
+
+    [url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
   '';
 
   programs.jujutsu.settings.signing = {
