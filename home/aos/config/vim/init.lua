@@ -374,8 +374,8 @@ local lsp_on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gr', '<Cmd>lua Snacks.picker.lsp_references()<CR>', opts)
 
   buf_set_keymap('n', 'gk', "<Cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", opts)
-  buf_set_keymap('n', '<C-k>', "<Cmd>lua vim.diagnostic.jump({count=-1})<CR>", opts)
-  buf_set_keymap('n', '<C-j>', "<Cmd>lua vim.diagnostic.jump({count=1})<CR>", opts)
+  buf_set_keymap('n', '<C-k>', "<Cmd>lua vim.diagnostic.jump({count=-1, float=true})<CR>", opts)
+  buf_set_keymap('n', '<C-j>', "<Cmd>lua vim.diagnostic.jump({count=1, float=true})<CR>", opts)
 
   vim.api.nvim_create_user_command('Fmt', function() vim.lsp.buf.format() end, {})
 
