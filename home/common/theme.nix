@@ -10,6 +10,7 @@
   imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
   catppuccin = {
+    autoEnable = true;
     enable = true;
     flavor = "macchiato";
     accent = "blue";
@@ -48,6 +49,7 @@
   };
 
   home.pointerCursor = {
+    enable = true;
     name = "Bibata-Modern-Ice";
     package = pkgs.bibata-cursors;
     size = 32;
