@@ -394,7 +394,7 @@ local lsp_defaults = {
 }
 
 local lsp_servers = {
-  ['pyright'] = {},
+  ['ty'] = {},
   ['rust_analyzer'] = {
     settings = {
       ["rust-analyzer"] = {
