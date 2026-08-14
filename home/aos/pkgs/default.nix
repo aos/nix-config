@@ -49,7 +49,7 @@ in
 
     llm-pkgs.pi
     qalculate-gtk
-    lorien
+    rnote
     # mypaint
 
     berkeley-mono
