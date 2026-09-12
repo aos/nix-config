@@ -63,19 +63,11 @@ require("lazy").setup({
     { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
     { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
     'folke/snacks.nvim',
-    'justinmk/vim-dirvish',
     'tpope/vim-fugitive',
     'tpope/vim-surround',
     'tpope/vim-unimpaired',
     { 'julienvincent/hunk.nvim', cmd = { 'DiffEditor' }, dependencies = { 'MunifTanjim/nui.nvim' }, opts = {} },
-    {
-      'obsidian-nvim/obsidian.nvim',
-      ft = "markdown",
-      dependencies = {
-        { 'saghen/blink.cmp', dependencies = { 'saghen/blink.lib' } },
-      },
-    },
-
+    -- colorscheme
     'aos/vim-ascetic',
   },
 })
@@ -89,6 +81,7 @@ vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
 vim.keymap.set('n', 'H', '^', { noremap = true })
 vim.keymap.set('n', 'L', '$', { noremap = true })
 vim.keymap.set('o', 'L', '$', { noremap = true })
+vim.keymap.set('v', 'H', '^', { noremap = true })
 vim.keymap.set('v', 'L', 'g_', { noremap = true })
 
 vim.keymap.set(
@@ -142,16 +135,6 @@ vim.keymap.set('n', '<Space>', 'za', { noremap = true })
 vim.keymap.set('n', '<Leader><Space>', function()
   return vim.opt.foldlevel:get() > 0 and 'zM' or 'zR'
 end, { expr = true, noremap = true })
-
--- Disable Dirvish <C-p>
-vim.api.nvim_create_augroup('dirvish_config', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'dirvish',
-  group = 'dirvish_config',
-  callback = function()
-    pcall(vim.keymap.del, 'n', '<C-p>', { buffer = true })
-  end
-})
 
 -- :RepoLink — copy permalink to clipboard via snacks.gitbrowse
 vim.api.nvim_create_user_command(
@@ -282,6 +265,7 @@ end
 
 -- Picker shortcuts
 local pick_opts = { noremap = true, silent = true }
+vim.keymap.set('n', '-', function() Snacks.picker.explorer() end, pick_opts)
 vim.keymap.set('n', '<Tab>', function() Snacks.picker.buffers() end, pick_opts)
 vim.keymap.set('n', '<leader>ff', vcs_picker, pick_opts)
 vim.keymap.set('n', '<leader>fg', function() Snacks.picker.grep() end, pick_opts)
@@ -458,27 +442,3 @@ for server, config in pairs(lsp_servers) do
 end
 
 vim.lsp.enable(auto_enabled)
-
--- Enable obsidian
-require("obsidian").setup({
-  note_id_func = function(title)
-    if title then
-      return title
-    end
-    return require("obsidian.builtin").zettel_id()
-  end,
-  ui = {
-    ignore_conceal_warn = true,
-  },
-  legacy_commands = false,
-  workspaces = {
-    {
-      name = "personal",
-      path = "~/vaults/personal",
-    },
-    {
-      name = "work",
-      path = "~/vaults/work",
-    },
-  },
-})
