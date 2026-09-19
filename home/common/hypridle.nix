@@ -101,7 +101,7 @@ in
       listener = [
         {
           timeout = 420; # 7min
-          on-timeout = "notify-send -u critical -i ${lockIcon} -t 59000 'system will be locking soon!'";
+          on-timeout = "notify-send -u normal -i ${lockIcon} -t 59000 'system will be locking soon!'";
         }
         {
           timeout = 480; # 8min
