@@ -43,6 +43,10 @@
 
   services.tailscale.extraSetFlags = [ "--accept-routes" ];
 
+  # test to fix issue where TLP doesn't switch to laptop profile when unplugged
+  # during suspend
+  services.tlp.settings.RUNTIME_PM_ON_AC = "auto";
+
   services.resolved = {
     enable = true;
     settings.Resolve.FallbackDNS = [
