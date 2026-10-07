@@ -686,11 +686,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1791340916,
-        "narHash": "sha256-JabXyLiXx2XBE0qZodJUTX0jJg5qssxiQ0nOx0mp+bA=",
+        "lastModified": 1791345205,
+        "narHash": "sha256-gnw8LWY+ZtqmDPWK2Ph2exUazaSk8yJS6hjxOa4paKU=",
         "owner": "aos",
         "repo": "pi-config",
-        "rev": "750892f13b62befb8c6d359255af1c2597ef2efd",
+        "rev": "c0e07102d2a36cf0bd21986f916ebe1c8576dc92",
         "type": "github"
       },
       "original": {
