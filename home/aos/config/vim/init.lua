@@ -191,6 +191,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "Comment" })
 
 require('snacks').setup({
+  explorer = { enabled = true },
   picker = {
     sources = {
       files = {
