@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ neovim tree-sitter ];
+  home.packages = with pkgs; [ neovim tree-sitter fd ripgrep];
   home.sessionVariables = {
     EDITOR = "nvim";
   };

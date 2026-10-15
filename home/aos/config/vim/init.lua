@@ -76,13 +76,13 @@ vim.opt.termguicolors = true
 vim.opt.background = 'dark'
 vim.cmd.colorscheme('ascetic')
 
-vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
+vim.keymap.set('i', 'jk', '<Esc>')
 
-vim.keymap.set('n', 'H', '^', { noremap = true })
-vim.keymap.set('n', 'L', '$', { noremap = true })
-vim.keymap.set('o', 'L', '$', { noremap = true })
-vim.keymap.set('v', 'H', '^', { noremap = true })
-vim.keymap.set('v', 'L', 'g_', { noremap = true })
+vim.keymap.set('n', 'H', '^')
+vim.keymap.set('n', 'L', '$')
+vim.keymap.set('o', 'L', '$')
+vim.keymap.set('v', 'H', '^')
+vim.keymap.set('v', 'L', 'g_')
 
 vim.keymap.set(
   'n', 'k',
@@ -96,17 +96,17 @@ vim.keymap.set(
 )
 
 vim.keymap.set('n', '<Esc>', ':noh<CR><Esc>', { silent = true })
-vim.keymap.set('n', '<BS>', '<C-^>', { noremap = true })
-vim.keymap.set('n', '<C-p>', '<Tab>', { noremap = true })
+vim.keymap.set('n', '<BS>', '<C-^>')
+vim.keymap.set('n', '<C-p>', '<Tab>')
 
 -- Copy/paste to/from system clipboard
-vim.keymap.set('n', '<Leader>y', '"+y', { noremap = true })
-vim.keymap.set('v', '<Leader>y', '"+y', { noremap = true })
-vim.keymap.set('n', '<Leader>p', '"+p', { noremap = true })
-vim.keymap.set('v', '<Leader>p', '"+p', { noremap = true })
+vim.keymap.set('n', '<Leader>y', '"+y')
+vim.keymap.set('v', '<Leader>y', '"+y')
+vim.keymap.set('n', '<Leader>p', '"+p')
+vim.keymap.set('v', '<Leader>p', '"+p')
 
 -- Delete trailing whitespace
-vim.keymap.set('n', '<Leader>wd', ':%s/\\s\\+$//e<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', '<Leader>wd', ':%s/\\s\\+$//e<CR>', { silent = true })
 
 -- Use <Tab> and <S-Tab> to navigate through popup menu
 vim.keymap.set('i', '<Tab>', function() return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>' end, { expr = true })
@@ -131,10 +131,10 @@ vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 -- Fold mappings
-vim.keymap.set('n', '<Space>', 'za', { noremap = true })
+vim.keymap.set('n', '<Space>', 'za')
 vim.keymap.set('n', '<Leader><Space>', function()
   return vim.opt.foldlevel:get() > 0 and 'zM' or 'zR'
-end, { expr = true, noremap = true })
+end, { expr = true })
 
 -- :RepoLink — copy permalink to clipboard via snacks.gitbrowse
 vim.api.nvim_create_user_command(
@@ -264,7 +264,7 @@ local function vcs_picker()
 end
 
 -- Picker shortcuts
-local pick_opts = { noremap = true, silent = true }
+local pick_opts = { silent = true }
 vim.keymap.set('n', '-', function() Snacks.picker.explorer() end, pick_opts)
 vim.keymap.set('n', '<Tab>', function() Snacks.picker.buffers() end, pick_opts)
 vim.keymap.set('n', '<leader>ff', vcs_picker, pick_opts)
@@ -318,9 +318,6 @@ vim.opt.signcolumn = "no"
 vim.o.winborder = 'rounded'
 
 vim.diagnostic.config({
-  virtual_text = false,
-  update_in_insert = false,
-  float = { border = 'rounded' },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = 'E',
@@ -390,7 +387,6 @@ local lsp_defaults = {
   flags = {
     debounce_text_changes = 200,
   },
-  silent = true,
 }
 
 local lsp_servers = {
@@ -430,7 +426,6 @@ local lsp_servers = {
 
 for server, config in pairs(lsp_servers) do
   local full_config = vim.tbl_deep_extend("force", lsp_defaults, config)
-  full_config.name = server
   vim.lsp.config(server, full_config)
 end
 
