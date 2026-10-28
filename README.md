@@ -66,9 +66,15 @@ nix-inspect -p .
 
 ### Deploy
 
+Use Colmena for biggie, temple, pylon, samira, soraya, and sakina. Select hosts explicitly.
+
+```sh
+colmena build --on soraya
+colmena apply test --on soraya
+colmena apply switch --on soraya
 ```
-nixos-rebuild --flake .#pylon --target-host <host> switch
-```
+
+For the k3s hosts, deploy soraya and sakina one at a time, check cluster health, then deploy samira.
 
 ### Tower TPM2 migration notes
 

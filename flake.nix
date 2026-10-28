@@ -21,12 +21,6 @@
       url = "github:nix-community/srvos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    clan-core = {
-      url = "github:clan-lol/clan-core";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.sops-nix.follows = "sops-nix";
-      inputs.disko.follows = "disko";
-    };
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -65,7 +59,6 @@
       self,
       nixpkgs,
       home-manager,
-      clan-core,
       colmena,
       ...
     }@inputs:
@@ -95,32 +88,6 @@
           };
           inherit modules;
         };
-
-      clan = clan-core.lib.clan {
-        meta.name = "floofs";
-        directory = ./.;
-        specialArgs = {
-          inherit inputs;
-        };
-        machines = {
-          samira = {
-            nixpkgs.pkgs = defaultPackages;
-            imports = [ ./hosts/samira ];
-          };
-
-          soraya = {
-            nixpkgs.pkgs = defaultPackages;
-            imports = [ ./hosts/soraya ];
-          };
-
-          sakina = {
-            nixpkgs.pkgs = defaultPackages;
-            imports = [
-              ./hosts/sakina
-            ];
-          };
-        };
-      };
     in
     {
       colmenaHive = colmena.lib.makeHive {
@@ -167,6 +134,24 @@
           {
             imports = [ ./hosts/pylon ];
           };
+
+        samira =
+          { ... }:
+          {
+            imports = [ ./hosts/samira ];
+          };
+
+        soraya =
+          { ... }:
+          {
+            imports = [ ./hosts/soraya ];
+          };
+
+        sakina =
+          { ... }:
+          {
+            imports = [ ./hosts/sakina ];
+          };
       };
 
       nixosConfigurations = {
@@ -193,11 +178,7 @@
             inherit inputs;
           };
         };
-      }
-      // clan.config.nixosConfigurations;
-
-      inherit (clan.config) clanInternals;
-      clan = clan.config;
+      };
 
       homeConfigurations = {
         aos = mkHomeConfiguration {
@@ -265,7 +246,6 @@
               self.packages.${defaultSystem}.nrs
 
               nixos-anywhere
-              inputs.clan-core.packages.${defaultSystem}.clan-cli
               inputs.colmena.packages.${defaultSystem}.colmena
 
               nix-inspect # Run with: nix-inspect -p .

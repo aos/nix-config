@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   pkgs,
   lib,
@@ -10,6 +11,9 @@
     inputs.disko.nixosModules.default
     inputs.srvos.nixosModules.server
   ];
+
+  # srvos uses a dix flag removed in dix 3.
+  srvos.update-diff.command = "${lib.getExe pkgs.nvd} --nix-bin-dir=${config.nix.package}/bin diff";
 
   boot.kernelModules = [ "nvme_tcp" ];
 

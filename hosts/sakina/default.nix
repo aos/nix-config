@@ -23,8 +23,8 @@
     enable = true;
   };
 
-  clan.core.networking.targetHost = "root@${config.networking.hostName}";
-  clan.core.deployment.requireExplicitUpdate = true;
+  deployment.targetHost = config.networking.hostName;
+  deployment.targetUser = "root";
 
   # Disable usb1 autosuspend because HW failure causes 100% CPU usage
   services.udev.extraRules = ''
