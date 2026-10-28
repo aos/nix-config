@@ -38,7 +38,7 @@ in
     # prusa-slicer
     # betaflight-configurator
 
-    vagrant
+    # vagrant # broken
 
     et # simple cli pomodoro timer
     nodejs

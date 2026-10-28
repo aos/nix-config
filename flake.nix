@@ -135,6 +135,7 @@
             imports = [ ./hosts/pylon ];
           };
 
+        # k3s nodes
         samira =
           { ... }:
           {

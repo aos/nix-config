@@ -21,6 +21,8 @@
     ../../modules/nixos/virt.nix
     ../../modules/nixos/sops.nix
     ../../modules/nixos/upgrade-diff.nix
+    # TODO: make remote building work, requires SSH key without passphrase
+    # ../../modules/nixos/remote.nix
 
     ../../modules/nixos/nfs.nix
 
