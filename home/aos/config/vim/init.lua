@@ -129,6 +129,16 @@ vim.api.nvim_create_autocmd({ 'InsertLeave', 'CompleteDone' }, {
 vim.opt.foldenable = false -- start file unfolded
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- Prefer LSP folding if server supports it
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client:supports_method('textDocument/foldingRange') then
+      local win = vim.api.nvim_get_current_win()
+      vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+    end
+  end,
+})
 
 -- Fold mappings
 vim.keymap.set('n', '<Space>', 'za')
@@ -341,34 +351,29 @@ vim.diagnostic.config({
   }
 })
 
-local lsp_on_attach = function(client, bufnr)
-  -- Mappings
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+-- omnifunc/formatexpr are set automatically by Nvim on LSP attach (0.11+).
+-- Default keymaps (K hover, grr references, grn rename, gra code action,
+-- gri implementation, gO document symbols, <C-s> signature) are built in.
 
-  -- omnifunc/formatexpr are set automatically by Nvim on LSP attach (0.11+).
-  -- Default keymaps (K hover, grr references, grn rename, gra code action,
-  -- gri implementation, gO document symbols, <C-s> signature) are built in.
+-- LSP keymaps
+Snacks.keymap.set('n', 'gd', function() Snacks.picker.lsp_definitions() end, {
+  lsp = { method = 'textDocument/definition' }, desc = 'Go to definition',
+})
+Snacks.keymap.set('n', 'gr', function() Snacks.picker.lsp_references() end, {
+  lsp = { method = 'textDocument/references' }, desc = 'References',
+})
+Snacks.keymap.set('n', 'gk', function() vim.diagnostic.open_float({ scope = 'line' }) end, {
+  lsp = {}, desc = 'Line diagnostics',
+})
+Snacks.keymap.set('n', '<C-k>', function() vim.diagnostic.jump({ count = -1, float = true }) end, {
+  lsp = {}, desc = 'Previous diagnostic',
+})
+Snacks.keymap.set('n', '<C-j>', function() vim.diagnostic.jump({ count = 1, float = true }) end, {
+  lsp = {}, desc = 'Next diagnostic',
+})
 
-  -- Mappings
-  local opts = { noremap = true, silent = true }
-
-  buf_set_keymap('n', 'gd', '<Cmd>lua Snacks.picker.lsp_definitions()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<Cmd>lua Snacks.picker.lsp_references()<CR>', opts)
-
-  buf_set_keymap('n', 'gk', "<Cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", opts)
-  buf_set_keymap('n', '<C-k>', "<Cmd>lua vim.diagnostic.jump({count=-1, float=true})<CR>", opts)
-  buf_set_keymap('n', '<C-j>', "<Cmd>lua vim.diagnostic.jump({count=1, float=true})<CR>", opts)
-
+local lsp_on_attach = function(client)
   vim.api.nvim_create_user_command('Fmt', function() vim.lsp.buf.format() end, {})
-
-  -- LSP-based folding (only when the server actually supports folding ranges,
-  -- otherwise lsp.foldtext() renders garbage over treesitter folds)
-  if client:supports_method('textDocument/foldingRange') then
-    local win = vim.api.nvim_get_current_win()
-    vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
-    vim.wo[win][0].foldtext = 'v:lua.vim.lsp.foldtext()'
-  end
-
   -- Only create Imports command if server supports it
   if client.config.imports_command then
     vim.api.nvim_create_user_command(
