@@ -14,6 +14,5 @@
     extraSetFlags = [ "--accept-routes" ];
   };
 
-  deployment.targetHost = config.networking.hostName;
-  deployment.buildOnTarget = true;
+  deployment.buildOnTarget = false;
 }

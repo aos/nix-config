@@ -76,6 +76,22 @@ colmena apply switch --on soraya
 
 For the k3s hosts, deploy soraya and sakina one at a time, check cluster health, then deploy samira.
 
+### Remote building
+
+Currently, `biggie` is set up as a remote builder (see [modules/nixos/remote.nix](modules/nixos/remote.nix)) for `tower`. To opt-out of remote building:
+- using `colmena`:
+```
+colmena --nix-option builders '' ...
+```
+- home-manager:
+```
+NIX_CONFIG='builders = ' home-manager switch ...
+```
+- normal nix:
+```
+nix build --builders ''
+```
+
 ### Tower TPM2 migration notes
 
 Current `tower` state:

@@ -53,5 +53,5 @@
 
   networking.firewall.allowedTCPPorts = [ 443 ];
 
-  deployment.buildOnTarget = true;
+  deployment.buildOnTarget = false;
 }

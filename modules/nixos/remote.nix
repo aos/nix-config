@@ -17,4 +17,8 @@
     ]; 
     settings.builders-use-substitutes = true;
   };
+  programs.ssh.knownHosts.biggie = {
+    hostNames = [ "biggie" ];
+    publicKeyFile = ../../sops/keys/hosts/biggie_ssh_host_ed25519_key.pub;
+  };
 }

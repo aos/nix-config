@@ -14,5 +14,5 @@
     extraSetFlags = [ "--accept-routes" ];
   };
 
-  deployment.buildOnTarget = true;
+  deployment.buildOnTarget = false;
 }

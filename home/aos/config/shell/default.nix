@@ -45,10 +45,11 @@
     '';
     functions = {
       qr = "${lib.getExe pkgs.qrencode} -t ansiutf8 ''$argv";
-      qq = ''
-        set -l extra_args $argv[1..-2]
-        set -l prompt $argv[-1]
-        pi --model 'anthropic/claude-haiku-4-5:off' $extra_args -p "$prompt"
+      rgv = ''
+        set -l results (${lib.getExe pkgs.ripgrep} --vimgrep $argv)
+        or return
+
+        ${lib.getExe pkgs.neovim} -q (printf '%s\n' $results | psub) -c copen
       '';
       t = ''
         if test -z $argv[1]
