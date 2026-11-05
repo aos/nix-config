@@ -34,6 +34,8 @@ in
     vlc
     obsidian
 
+    katrain
+
     # freecad # missing from nixos cache
     # prusa-slicer
     # betaflight-configurator

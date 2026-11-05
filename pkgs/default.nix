@@ -6,4 +6,6 @@ final: prev: {
   };
 
   mdts = prev.callPackage ./mdts { };
+
+  katrain = prev.callPackage ./katrain { };
 }
